@@ -20,10 +20,41 @@ public class ClaseUML {
     public ClaseUML() {
     }
 
-    public ClaseUML(ClaseUML padre) {
-        this.clasePadre = padre;
+    public ClaseUML(String nombre, ClaseUML clasePadre) {
+        this.nombre = nombre;
+        this.clasePadre = clasePadre;
     }
     
+    public ClaseUML(String nombre) {
+        this.nombre = nombre;
+    }
     
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public ClaseUML getClasePadre() {
+        return clasePadre;
+    }
+
+    public void setClasePadre(ClaseUML clasePadre) {
+        this.clasePadre = clasePadre;
+    }
+
+    public ArrayList<Propiedad> getPropiedades() {
+        return propiedades;
+    }
+
+    public ArrayList<Metodo> getMetodos() {
+        return metodos;
+    }
+    
+    @Override public String toString() {
+        return nombre;
+    }
     
 }

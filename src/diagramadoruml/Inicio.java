@@ -14,4 +14,7 @@ public class Inicio extends Operacion{
         super(mtd);
     }
     
+    public void logica() {
+    }
+    
 }

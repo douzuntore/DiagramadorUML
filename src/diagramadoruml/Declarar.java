@@ -13,9 +13,15 @@ public class Declarar extends Operacion{
     private int propID;
     private boolean esNuevo;
     private Object nuevoValor;
+
+    public Declarar(int propID, boolean esNuevo, Object nuevoValor, Metodo mtd) {
+        super(mtd);
+        this.propID = propID;
+        this.esNuevo = esNuevo;
+        this.nuevoValor = nuevoValor;
+    }
     
     public void logica() {
-        
     }
     
 }

@@ -14,4 +14,7 @@ public class Fin extends Operacion{
         super(mtd);
     }
     
+    public void logica() {
+    }
+    
 }

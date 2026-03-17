@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/samuelzun/NetBeansProjects/DiagramadorUML/src/diagramadoruml/ClaseUML.java</file>
-            <file>file:/Users/samuelzun/NetBeansProjects/DiagramadorUML/src/diagramadoruml/Propiedad.java</file>
-            <file>file:/Users/samuelzun/NetBeansProjects/DiagramadorUML/src/diagramadoruml/Int.java</file>
-            <file>file:/Users/samuelzun/NetBeansProjects/DiagramadorUML/src/diagramadoruml/Metodo.java</file>
-            <file>file:/Users/samuelzun/NetBeansProjects/DiagramadorUML/src/diagramadoruml/Operacion.java</file>
-            <file>file:/Users/samuelzun/NetBeansProjects/DiagramadorUML/src/diagramadoruml/Inicio.java</file>
-            <file>file:/Users/samuelzun/NetBeansProjects/DiagramadorUML/src/diagramadoruml/Fin.java</file>
-            <file>file:/Users/samuelzun/NetBeansProjects/DiagramadorUML/src/diagramadoruml/Str.java</file>
-            <file>file:/Users/samuelzun/NetBeansProjects/DiagramadorUML/src/diagramadoruml/Declarar.java</file>
-            <file>file:/Users/samuelzun/NetBeansProjects/DiagramadorUML/src/diagramadoruml/Doub.java</file>
-            <file>file:/Users/samuelzun/NetBeansProjects/DiagramadorUML/src/diagramadoruml/GUI.java</file>
+            <file>file:/E:/NetBeans/projects/DiagramadorUML/DiagramadorUML/src/diagramadoruml/ClaseUML.java</file>
+            <file>file:/E:/NetBeans/projects/DiagramadorUML/DiagramadorUML/src/diagramadoruml/Declarar.java</file>
+            <file>file:/E:/NetBeans/projects/DiagramadorUML/DiagramadorUML/src/diagramadoruml/frm_Main.java</file>
+            <file>file:/E:/NetBeans/projects/DiagramadorUML/DiagramadorUML/src/diagramadoruml/Inicio.java</file>
+            <file>file:/E:/NetBeans/projects/DiagramadorUML/DiagramadorUML/src/diagramadoruml/Operacion.java</file>
+            <file>file:/E:/NetBeans/projects/DiagramadorUML/DiagramadorUML/src/diagramadoruml/Fin.java</file>
+            <file>file:/E:/NetBeans/projects/DiagramadorUML/DiagramadorUML/src/diagramadoruml/Propiedad.java</file>
+            <file>file:/E:/NetBeans/projects/DiagramadorUML/DiagramadorUML/src/diagramadoruml/Tipo.java</file>
         </group>
     </open-files>
 </project-private>
