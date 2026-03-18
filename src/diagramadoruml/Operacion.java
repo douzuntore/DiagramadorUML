@@ -13,7 +13,7 @@ public abstract class Operacion {
     protected ClaseUML claseReferencia;
     
     public Operacion(Metodo mtd) {
-        this.claseReferencia = mtd.getClasePadre();
+        this.claseReferencia = mtd.getClase();
     }
 
     public abstract void logica();

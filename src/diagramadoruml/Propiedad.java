@@ -8,17 +8,21 @@ package diagramadoruml;
  *
  * @author samuelzun
  */
-public abstract class Propiedad {
+public class Propiedad {
     
     private String nombre;
     private Tipo tipo;
+    private Acceso acceso;
+    private ClaseUML clase;
 
     public Propiedad() {
     }
 
-    public Propiedad(String nombre, Tipo tipo) {
+    public Propiedad(String nombre, Tipo tipo, Acceso acceso, ClaseUML clase) {
         this.nombre = nombre;
         this.tipo = tipo;
+        this.acceso = acceso;
+        this.clase = clase;
     }
 
     public String getNombre() {
@@ -33,6 +37,18 @@ public abstract class Propiedad {
     }
     public void setTipo(Tipo tipo) {
         this.tipo = tipo;
+    }
+
+    public Acceso getAcceso() {
+        return acceso;
+    }
+    public void setAcceso(Acceso acceso) {
+        this.acceso = acceso;
+    }
+
+    @Override
+    public String toString() {
+        return "["+acceso.getNombre()+"] ("+tipo.getNombre()+") "+nombre;
     }
     
 }

@@ -8,21 +8,15 @@ package diagramadoruml;
  *
  * @author Ryzen Gaming
  */
-public enum Tipo{
+public enum Acceso{
     
-    VOID("void"),
-    BYTE("byte"),
-    SHORT("short"),
-    INT("int"),
-    FLOAT("float"),
-    CHAR("char"),
-    LONG("long"),
-    DOUBLE("double"),
-    STRING("String");
+    PUBLIC("public"),
+    PRIVATE("private"),
+    PROTECTED("protected");
     
     private final String nombre;
 
-    private Tipo(String nombre) {
+    private Acceso(String nombre) {
         this.nombre = nombre;
     }
 

@@ -4,11 +4,11 @@
  */
 package diagramadoruml;
 
+import java.awt.Component;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
@@ -24,7 +24,23 @@ public class frm_Main extends javax.swing.JFrame {
      * Creates new form GUI
      */
     public frm_Main() {
+        
+        this.clases.add(new ClaseUML("Test", null));
+        
         initComponents();
+        
+        DefaultComboBoxModel modeloTipo = (DefaultComboBoxModel) this.cbox_CrearPropTipo.getModel();
+        modeloTipo.removeAllElements();
+        for (Tipo tipo: Tipo.values()) {
+            modeloTipo.addElement(tipo);
+        }
+        
+        DefaultComboBoxModel modeloAcceso = (DefaultComboBoxModel) this.cbox_CrearPropAcceso.getModel();
+        modeloAcceso.removeAllElements();
+        for (Acceso acceso: Acceso.values()) {
+            modeloAcceso.addElement(acceso);
+        }
+        
     }
     
     /**
@@ -72,6 +88,7 @@ public class frm_Main extends javax.swing.JFrame {
         popmi_ClaseCambiarPadre = new javax.swing.JMenuItem();
         popmi_ClaseAgregarPropiedad = new javax.swing.JMenuItem();
         popmi_ClaseAgregarMetodo = new javax.swing.JMenuItem();
+        popmi_ClaseEliminar = new javax.swing.JMenuItem();
         diag_ClaseCambiarNombre = new javax.swing.JDialog();
         jLabel7 = new javax.swing.JLabel();
         txt_ClaseCambiarNombre = new javax.swing.JTextField();
@@ -82,6 +99,14 @@ public class frm_Main extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         txt_PropCambiarNombre = new javax.swing.JTextField();
         btn_PropNombre = new javax.swing.JToggleButton();
+        diag_CrearProp = new javax.swing.JDialog();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        txt_CrearPropNombre = new javax.swing.JTextField();
+        cbox_CrearPropTipo = new javax.swing.JComboBox<>();
+        btn_CrearProp = new javax.swing.JToggleButton();
+        jLabel10 = new javax.swing.JLabel();
+        cbox_CrearPropAcceso = new javax.swing.JComboBox<>();
         mnb_Principal = new javax.swing.JMenuBar();
         mn_PrincipalFunciones = new javax.swing.JMenu();
         mni_PrincipalFlujo = new javax.swing.JMenuItem();
@@ -102,7 +127,7 @@ public class frm_Main extends javax.swing.JFrame {
         lbl_Clases.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         lbl_Clases.setText("Clases");
 
-        pnl_ClasesDiagrama.setBackground(new java.awt.Color(102, 102, 102));
+        pnl_ClasesDiagrama.setBackground(new java.awt.Color(153, 153, 153));
 
         javax.swing.GroupLayout pnl_ClasesDiagramaLayout = new javax.swing.GroupLayout(pnl_ClasesDiagrama);
         pnl_ClasesDiagrama.setLayout(pnl_ClasesDiagramaLayout);
@@ -351,16 +376,24 @@ public class frm_Main extends javax.swing.JFrame {
         popmi_ClaseCambiarPadre.setText("Cambiar padre");
         pop_Clases.add(popmi_ClaseCambiarPadre);
 
-        popmi_ClaseAgregarPropiedad.setText("jMenuItem1");
+        popmi_ClaseAgregarPropiedad.setText("Agregar propiedad");
+        popmi_ClaseAgregarPropiedad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmi_ClaseAgregarPropiedadActionPerformed(evt);
+            }
+        });
         pop_Clases.add(popmi_ClaseAgregarPropiedad);
 
-        popmi_ClaseAgregarMetodo.setText("jMenuItem1");
+        popmi_ClaseAgregarMetodo.setText("Agregar método");
         popmi_ClaseAgregarMetodo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 popmi_ClaseAgregarMetodoActionPerformed(evt);
             }
         });
         pop_Clases.add(popmi_ClaseAgregarMetodo);
+
+        popmi_ClaseEliminar.setText("Eliminar esta clase");
+        pop_Clases.add(popmi_ClaseEliminar);
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel7.setText("Nombre:");
@@ -446,6 +479,68 @@ public class frm_Main extends javax.swing.JFrame {
                 .addGap(40, 40, 40))
         );
 
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel6.setText("Tipo:");
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel9.setText("Nombre:");
+
+        cbox_CrearPropTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sin padre" }));
+
+        btn_CrearProp.setText("Crear propiedad");
+        btn_CrearProp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_CrearPropActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel10.setText("Acceso:");
+
+        cbox_CrearPropAcceso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sin padre" }));
+
+        javax.swing.GroupLayout diag_CrearPropLayout = new javax.swing.GroupLayout(diag_CrearProp.getContentPane());
+        diag_CrearProp.getContentPane().setLayout(diag_CrearPropLayout);
+        diag_CrearPropLayout.setHorizontalGroup(
+            diag_CrearPropLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(diag_CrearPropLayout.createSequentialGroup()
+                .addGroup(diag_CrearPropLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(diag_CrearPropLayout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addGroup(diag_CrearPropLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel10))
+                        .addGap(35, 35, 35)
+                        .addGroup(diag_CrearPropLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cbox_CrearPropAcceso, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txt_CrearPropNombre)
+                            .addComponent(cbox_CrearPropTipo, 0, 145, Short.MAX_VALUE)))
+                    .addGroup(diag_CrearPropLayout.createSequentialGroup()
+                        .addGap(103, 103, 103)
+                        .addComponent(btn_CrearProp)))
+                .addContainerGap(38, Short.MAX_VALUE))
+        );
+        diag_CrearPropLayout.setVerticalGroup(
+            diag_CrearPropLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(diag_CrearPropLayout.createSequentialGroup()
+                .addGap(100, 100, 100)
+                .addGroup(diag_CrearPropLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9)
+                    .addComponent(txt_CrearPropNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(80, 80, 80)
+                .addGroup(diag_CrearPropLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(cbox_CrearPropTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(61, 61, 61)
+                .addGroup(diag_CrearPropLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(cbox_CrearPropAcceso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
+                .addComponent(btn_CrearProp)
+                .addGap(31, 31, 31))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
@@ -528,13 +623,11 @@ public class frm_Main extends javax.swing.JFrame {
                 );
                 this.tree_Clases.setModel(crearTreeModelClases());
                 this.diag_CrearClase.dispose();
+                limpiar(this.txt_CrearClaseNombre);
                 enviarMensaje(this.diag_Clases, "Clase creada.");
-            } else  {
-                return;
             }
         } catch (Exception e)  {
             imprimirError(e, evt);
-            return;
         }
     }//GEN-LAST:event_btn_CrearClaseActionPerformed
 
@@ -563,9 +656,12 @@ public class frm_Main extends javax.swing.JFrame {
     private void popmi_ClaseCambiarNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmi_ClaseCambiarNombreActionPerformed
         // TODO add your handling code here:
         
-        if (((DefaultMutableTreeNode)this.tree_Clases.getSelectionPath().getLastPathComponent()).getUserObject() instanceof ClaseUML) {
-            mostrarJDialog(this.diag_ClaseCambiarNombre);
+        if (((DefaultMutableTreeNode)this.tree_Clases.getSelectionPath().getLastPathComponent()).getUserObject() instanceof ClaseUML clase) {
+            
+            this.txt_ClaseCambiarNombre.setText(clase.getNombre());
+            
         }
+        mostrarJDialog(this.diag_ClaseCambiarNombre);
         
     }//GEN-LAST:event_popmi_ClaseCambiarNombreActionPerformed
 
@@ -586,11 +682,19 @@ public class frm_Main extends javax.swing.JFrame {
 
     private void btn_ClaseCambiarNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ClaseCambiarNombreActionPerformed
         // TODO add your handling code here:
-        if (((DefaultMutableTreeNode)this.tree_Clases.getSelectionPath().getLastPathComponent()).getUserObject() instanceof ClaseUML) {
+        Object objetoSeleccionado = ((DefaultMutableTreeNode)this.tree_Clases.getSelectionPath().getLastPathComponent()).getUserObject();
+        if (objetoSeleccionado instanceof ClaseUML clase) {
             
-            ClaseUML clase = (ClaseUML) ((DefaultMutableTreeNode)this.tree_Clases.getSelectionPath().getLastPathComponent()).getUserObject();
             if (!this.txt_ClaseCambiarNombre.getText().trim().isEmpty())  {
                 clase.setNombre(this.txt_ClaseCambiarNombre.getText());
+                this.diag_ClaseCambiarNombre.dispose();
+                enviarMensaje(this.diag_ClaseCambiarNombre, "Nombre cambiado.");
+            }
+            
+        } else if (objetoSeleccionado instanceof Propiedad prop) {
+            
+            if (!this.txt_ClaseCambiarNombre.getText().trim().isEmpty())  {
+                prop.setNombre(this.txt_ClaseCambiarNombre.getText());
                 this.diag_ClaseCambiarNombre.dispose();
                 enviarMensaje(this.diag_ClaseCambiarNombre, "Nombre cambiado.");
             }
@@ -600,27 +704,62 @@ public class frm_Main extends javax.swing.JFrame {
 
     private void popmi_PropCambiarNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmi_PropCambiarNombreActionPerformed
         // TODO add your handling code here:
+        if (((DefaultMutableTreeNode)this.tree_Clases.getSelectionPath().getLastPathComponent()).getUserObject() instanceof Propiedad prop) {
+            
+            this.txt_ClaseCambiarNombre.setText(prop.getNombre());
+            
+        }
+        mostrarJDialog(this.diag_ClaseCambiarNombre);
+        
     }//GEN-LAST:event_popmi_PropCambiarNombreActionPerformed
 
     private void popmi_ClaseAgregarMetodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmi_ClaseAgregarMetodoActionPerformed
         // TODO add your handling code here:
-        Object objetoSeleccionado = ((DefaultMutableTreeNode)this.tree_Clases.getSelectionPath().getLastPathComponent()).getUserObject();
-        if (objetoSeleccionado instanceof ClaseUML) {
-            
-            ClaseUML clase = (ClaseUML) objetoSeleccionado;
-            if (!this.txt_PropCambiarNombre.getText().trim().isEmpty())  {
-                clase.setNombre(this.txt_PropCambiarNombre.getText());
-                this.diag_PropCambiarNombre.dispose();
-                enviarMensaje(this.diag_PropCambiarNombre, "Nombre cambiado.");
-            }
-            
-        }
-        
     }//GEN-LAST:event_popmi_ClaseAgregarMetodoActionPerformed
 
     private void btn_PropNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_PropNombreActionPerformed
         // TODO add your handling code here:
+        if (((DefaultMutableTreeNode)this.tree_Clases.getSelectionPath().getLastPathComponent()).getUserObject() instanceof Propiedad prop) {
+            
+            
+            
+        }
+        
     }//GEN-LAST:event_btn_PropNombreActionPerformed
+
+    private void popmi_ClaseAgregarPropiedadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmi_ClaseAgregarPropiedadActionPerformed
+        // TODO add your handling code here:
+        mostrarJDialog(this.diag_CrearProp);
+        
+    }//GEN-LAST:event_popmi_ClaseAgregarPropiedadActionPerformed
+
+    private void btn_CrearPropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CrearPropActionPerformed
+        // TODO add your handling code here:
+        if (((DefaultMutableTreeNode)this.tree_Clases.getSelectionPath().getLastPathComponent()).getUserObject() instanceof ClaseUML clase) {
+            
+            try {
+                if (!this.txt_CrearPropNombre.getText().trim().isEmpty()) {
+
+                    clase.getPropiedades().add(
+                            new Propiedad(
+                                    this.txt_CrearPropNombre.getText(),
+                                    (Tipo) this.cbox_CrearPropTipo.getSelectedItem(),
+                                    (Acceso) this.cbox_CrearPropAcceso.getSelectedItem(),
+                                    clase
+                            )
+                    );
+                    this.tree_Clases.setModel(crearTreeModelClases());
+                    this.diag_CrearProp.dispose();
+                    enviarMensaje(this.diag_Clases, "Clase creada.");
+
+                }
+            } catch (Exception e) {
+                imprimirError(e, evt);
+            }
+            
+        }
+        
+    }//GEN-LAST:event_btn_CrearPropActionPerformed
     
     private DefaultTreeModel crearTreeModelClases() {
         
@@ -655,6 +794,10 @@ public class frm_Main extends javax.swing.JFrame {
     private void mostrarJDialog(javax.swing.JDialog diag) {
         diag.pack();
         diag.setVisible(true);
+    }
+    
+    private void limpiar(javax.swing.JTextField txt) {
+        txt.setText("");
     }
     
     private void enviarMensaje(java.awt.Component comp, String msg) {
@@ -707,23 +850,30 @@ public class frm_Main extends javax.swing.JFrame {
     private javax.swing.JButton btn_ClasesHerencia;
     private javax.swing.JButton btn_ClasesHerencia1;
     private javax.swing.JToggleButton btn_CrearClase;
+    private javax.swing.JToggleButton btn_CrearProp;
     private javax.swing.JToggleButton btn_PropNombre;
     private javax.swing.JComboBox<String> cbox_CrearClasePadre;
+    private javax.swing.JComboBox<String> cbox_CrearPropAcceso;
+    private javax.swing.JComboBox<String> cbox_CrearPropTipo;
     private javax.swing.JDialog diag_ClaseCambiarNombre;
     private javax.swing.JDialog diag_Clases;
     private javax.swing.JDialog diag_CrearClase;
+    private javax.swing.JDialog diag_CrearProp;
     private javax.swing.JDialog diag_CrearVariable;
     private javax.swing.JDialog diag_Flujo;
     private javax.swing.JDialog diag_PropCambiarNombre;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JToggleButton jToggleButton1;
@@ -747,11 +897,13 @@ public class frm_Main extends javax.swing.JFrame {
     private javax.swing.JMenuItem popmi_ClaseAgregarPropiedad;
     private javax.swing.JMenuItem popmi_ClaseCambiarNombre;
     private javax.swing.JMenuItem popmi_ClaseCambiarPadre;
+    private javax.swing.JMenuItem popmi_ClaseEliminar;
     private javax.swing.JMenuItem popmi_PropCambiarNombre;
     private javax.swing.JTabbedPane tab_Clases;
     private javax.swing.JTree tree_Clases;
     private javax.swing.JTextField txt_ClaseCambiarNombre;
     private javax.swing.JTextField txt_CrearClaseNombre;
+    private javax.swing.JTextField txt_CrearPropNombre;
     private javax.swing.JTextField txt_PropCambiarNombre;
     // End of variables declaration//GEN-END:variables
 

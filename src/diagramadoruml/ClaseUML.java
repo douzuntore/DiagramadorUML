@@ -13,8 +13,9 @@ import java.util.ArrayList;
 public class ClaseUML {
     
     private String nombre;
-    private final ArrayList<Propiedad> propiedades = new ArrayList<Propiedad>();
-    private final ArrayList<Metodo> metodos = new ArrayList<Metodo>();
+    private final ArrayList<Propiedad> propiedades = new ArrayList();
+    private final ArrayList<Metodo> metodos = new ArrayList();
+    private final ArrayList<ClaseUML> hijos = new ArrayList();
     private ClaseUML clasePadre;
 
     public ClaseUML() {

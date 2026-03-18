@@ -14,8 +14,20 @@ import java.util.ArrayList;
 public class Metodo {
     
     private String nombre;
-    protected ClaseUML clasePadre;
-    private final ArrayList<Operacion> secuencia = new ArrayList<Operacion>();
+    private Tipo tipoRetorno;
+    private Acceso acceso;
+    private final ArrayList<Propiedad> parametros = new ArrayList();
+    private ClaseUML clase;
+
+    public Metodo() {
+    }
+
+    public Metodo(String nombre, Tipo tipoRetorno, Acceso acceso, ClaseUML clase) {
+        this.nombre = nombre;
+        this.tipoRetorno = tipoRetorno;
+        this.acceso = acceso;
+        this.clase = clase;
+    }
 
     public String getNombre() {
         return nombre;
@@ -25,21 +37,12 @@ public class Metodo {
         this.nombre = nombre;
     }
 
-    public ClaseUML getClasePadre() {
-        return clasePadre;
+    public ClaseUML getClase() {
+        return clase;
     }
 
-    public void setClasePadre(ClaseUML clasePadre) {
-        this.clasePadre = clasePadre;
-    }
-    
-    public Metodo() {
-        init();
-    }
-    
-    private void init() {
-        secuencia.add(new Inicio(this));
-        secuencia.add(new Fin(this));
+    public void setClase(ClaseUML clase) {
+        this.clase = clase;
     }
     
 }
