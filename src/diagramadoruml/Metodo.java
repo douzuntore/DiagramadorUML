@@ -17,16 +17,22 @@ public class Metodo {
     private Tipo tipoRetorno;
     private Acceso acceso;
     private final ArrayList<Propiedad> parametros = new ArrayList();
-    private ClaseUML clase;
+    private ClaseUML claseOrigen;
 
     public Metodo() {
+    }
+    
+    public Metodo(String nombre, Tipo tipoRetorno, Acceso acceso) {
+        this.nombre = nombre;
+        this.tipoRetorno = tipoRetorno;
+        this.acceso = acceso;
     }
 
     public Metodo(String nombre, Tipo tipoRetorno, Acceso acceso, ClaseUML clase) {
         this.nombre = nombre;
         this.tipoRetorno = tipoRetorno;
         this.acceso = acceso;
-        this.clase = clase;
+        this.claseOrigen = clase;
     }
 
     public String getNombre() {
@@ -37,12 +43,37 @@ public class Metodo {
         this.nombre = nombre;
     }
 
-    public ClaseUML getClase() {
-        return clase;
+    public Tipo getTipoRetorno() {
+        return tipoRetorno;
     }
 
-    public void setClase(ClaseUML clase) {
-        this.clase = clase;
+    public void setTipoRetorno(Tipo tipoRetorno) {
+        this.tipoRetorno = tipoRetorno;
+    }
+
+    public Acceso getAcceso() {
+        return acceso;
+    }
+
+    public void setAcceso(Acceso acceso) {
+        this.acceso = acceso;
+    }
+
+    public ClaseUML getClaseOrigen() {
+        return claseOrigen;
+    }
+
+    public void setClaseOrigen(ClaseUML clase) {
+        this.claseOrigen = clase;
+    }
+
+    public ArrayList<Propiedad> getParametros() {
+        return parametros;
+    }
+
+    @Override
+    public String toString() {
+        return acceso.getNombre()+" "+tipoRetorno.getNombre()+" "+nombre;
     }
     
 }

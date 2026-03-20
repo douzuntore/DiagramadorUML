@@ -25,21 +25,78 @@ public class frm_Main extends javax.swing.JFrame {
      */
     public frm_Main() {
         
-        this.clases.add(new ClaseUML("Test", null));
+        ClaseUML claseTest = new ClaseUML("Test", null);
+        claseTest.getPropiedades().add(new Propiedad("propPrivado", Tipo.STRING, Acceso.PRIVATE, claseTest));
+        claseTest.getPropiedades().add(new Propiedad("propProtegido", Tipo.STRING, Acceso.PROTECTED, claseTest));
+        this.clases.add(claseTest);
         
         initComponents();
         
-        DefaultComboBoxModel modeloTipo = (DefaultComboBoxModel) this.cbox_CrearPropTipo.getModel();
-        modeloTipo.removeAllElements();
-        for (Tipo tipo: Tipo.values()) {
-            modeloTipo.addElement(tipo);
+        DefaultComboBoxModel paramModeloTipo = (DefaultComboBoxModel) this.cbox_CrearParamTipo.getModel();
+        paramModeloTipo.removeAllElements();
+        for (int i = 1; i < Tipo.values().length; i++) {
+            paramModeloTipo.addElement(
+                    Tipo.values()[i]
+            );
         }
         
-        DefaultComboBoxModel modeloAcceso = (DefaultComboBoxModel) this.cbox_CrearPropAcceso.getModel();
-        modeloAcceso.removeAllElements();
-        for (Acceso acceso: Acceso.values()) {
-            modeloAcceso.addElement(acceso);
+        DefaultComboBoxModel propModeloTipo = (DefaultComboBoxModel) this.cbox_CrearPropTipo.getModel();
+        propModeloTipo.removeAllElements();
+        for (int i = 1; i < Tipo.values().length; i++) {
+            propModeloTipo.addElement(
+                    Tipo.values()[i]
+            );
         }
+        
+        DefaultComboBoxModel propModeloAcceso = (DefaultComboBoxModel) this.cbox_CrearPropAcceso.getModel();
+        propModeloAcceso.removeAllElements();
+        for (Acceso acceso: Acceso.values()) {
+            propModeloAcceso.addElement(
+                    acceso
+            );
+        }
+        
+        DefaultComboBoxModel metModeloTipo = (DefaultComboBoxModel) this.cbox_CrearMetTipo.getModel();
+        metModeloTipo.removeAllElements();
+        for (int i = 0; i < Tipo.values().length; i++) {
+            metModeloTipo.addElement(
+                    Tipo.values()[i]
+            );
+        }
+        
+        DefaultComboBoxModel metModeloAcceso = (DefaultComboBoxModel) this.cbox_CrearMetAcceso.getModel();
+        metModeloAcceso.removeAllElements();
+        for (Acceso acceso: Acceso.values()) {
+            metModeloAcceso.addElement(
+                    acceso
+            );
+        }
+        
+        this.list_CrearMetParametros.setModel(new DefaultListModel());
+        this.list_HerenciaClaseHija.setModel(new DefaultListModel());
+        this.list_HerenciaClasePadre.setModel(new DefaultListModel());
+        
+        
+        DefaultListModel hernModeloHijo = (DefaultListModel) this.list_HerenciaClaseHija.getModel();
+        hernModeloHijo.removeAllElements();
+        for (ClaseUML clase: clases) {
+            hernModeloHijo.addElement(
+                    clase
+            );
+        }
+        
+        DefaultListModel hernModeloPadre = (DefaultListModel) this.list_HerenciaClasePadre.getModel();
+        hernModeloPadre.removeAllElements();
+        hernModeloPadre.addElement("Sin padre");
+        for (ClaseUML clase: clases) {
+            hernModeloPadre.addElement(
+                    clase
+            );
+        }
+        
+        this.cbox_CrearClasePadre.setModel(
+                crearCBoxModelParaClasesPadre()
+        );
         
     }
     
@@ -58,6 +115,8 @@ public class frm_Main extends javax.swing.JFrame {
         tab_Clases = new javax.swing.JTabbedPane();
         pnl_ClasesDiagrama = new javax.swing.JPanel();
         pnl_ClasesCodigo = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        txta_CodigoClases = new javax.swing.JTextArea();
         jScrollPane1 = new javax.swing.JScrollPane();
         tree_Clases = new javax.swing.JTree();
         btn_ClasesHerencia = new javax.swing.JButton();
@@ -85,20 +144,16 @@ public class frm_Main extends javax.swing.JFrame {
         btn_CrearClase = new javax.swing.JToggleButton();
         pop_Clases = new javax.swing.JPopupMenu();
         popmi_ClaseCambiarNombre = new javax.swing.JMenuItem();
-        popmi_ClaseCambiarPadre = new javax.swing.JMenuItem();
         popmi_ClaseAgregarPropiedad = new javax.swing.JMenuItem();
         popmi_ClaseAgregarMetodo = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
         popmi_ClaseEliminar = new javax.swing.JMenuItem();
-        diag_ClaseCambiarNombre = new javax.swing.JDialog();
+        diag_CambiarNombre = new javax.swing.JDialog();
         jLabel7 = new javax.swing.JLabel();
         txt_ClaseCambiarNombre = new javax.swing.JTextField();
         btn_ClaseCambiarNombre = new javax.swing.JToggleButton();
         pop_Propiedades = new javax.swing.JPopupMenu();
         popmi_PropCambiarNombre = new javax.swing.JMenuItem();
-        diag_PropCambiarNombre = new javax.swing.JDialog();
-        jLabel8 = new javax.swing.JLabel();
-        txt_PropCambiarNombre = new javax.swing.JTextField();
-        btn_PropNombre = new javax.swing.JToggleButton();
         diag_CrearProp = new javax.swing.JDialog();
         jLabel6 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -107,6 +162,30 @@ public class frm_Main extends javax.swing.JFrame {
         btn_CrearProp = new javax.swing.JToggleButton();
         jLabel10 = new javax.swing.JLabel();
         cbox_CrearPropAcceso = new javax.swing.JComboBox<>();
+        diag_CrearMetodo = new javax.swing.JDialog();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        txt_CrearMetNombre = new javax.swing.JTextField();
+        cbox_CrearMetTipo = new javax.swing.JComboBox<>();
+        btn_CrearMet = new javax.swing.JToggleButton();
+        jLabel12 = new javax.swing.JLabel();
+        cbox_CrearMetAcceso = new javax.swing.JComboBox<>();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        list_CrearMetParametros = new javax.swing.JList<>();
+        btn_CrearMetAgregarParametro = new javax.swing.JToggleButton();
+        diag_CrearParametro = new javax.swing.JDialog();
+        jLabel13 = new javax.swing.JLabel();
+        txt_CrearParamNombre = new javax.swing.JTextField();
+        btn_CrearParam = new javax.swing.JToggleButton();
+        jLabel14 = new javax.swing.JLabel();
+        cbox_CrearParamTipo = new javax.swing.JComboBox<>();
+        diag_Herencia = new javax.swing.JDialog();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        list_HerenciaClasePadre = new javax.swing.JList<>();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        list_HerenciaClaseHija = new javax.swing.JList<>();
+        jLabel15 = new javax.swing.JLabel();
+        btn_EstablecerHerencia = new javax.swing.JButton();
         mnb_Principal = new javax.swing.JMenuBar();
         mn_PrincipalFunciones = new javax.swing.JMenu();
         mni_PrincipalFlujo = new javax.swing.JMenuItem();
@@ -127,6 +206,12 @@ public class frm_Main extends javax.swing.JFrame {
         lbl_Clases.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         lbl_Clases.setText("Clases");
 
+        tab_Clases.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tab_ClasesMouseClicked(evt);
+            }
+        });
+
         pnl_ClasesDiagrama.setBackground(new java.awt.Color(153, 153, 153));
 
         javax.swing.GroupLayout pnl_ClasesDiagramaLayout = new javax.swing.GroupLayout(pnl_ClasesDiagrama);
@@ -142,15 +227,25 @@ public class frm_Main extends javax.swing.JFrame {
 
         tab_Clases.addTab("Diagrama", pnl_ClasesDiagrama);
 
+        txta_CodigoClases.setColumns(20);
+        txta_CodigoClases.setRows(5);
+        jScrollPane5.setViewportView(txta_CodigoClases);
+
         javax.swing.GroupLayout pnl_ClasesCodigoLayout = new javax.swing.GroupLayout(pnl_ClasesCodigo);
         pnl_ClasesCodigo.setLayout(pnl_ClasesCodigoLayout);
         pnl_ClasesCodigoLayout.setHorizontalGroup(
             pnl_ClasesCodigoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 742, Short.MAX_VALUE)
+            .addGroup(pnl_ClasesCodigoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 730, Short.MAX_VALUE)
+                .addContainerGap())
         );
         pnl_ClasesCodigoLayout.setVerticalGroup(
             pnl_ClasesCodigoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 522, Short.MAX_VALUE)
+            .addGroup(pnl_ClasesCodigoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 510, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         tab_Clases.addTab("Código", pnl_ClasesCodigo);
@@ -165,6 +260,11 @@ public class frm_Main extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tree_Clases);
 
         btn_ClasesHerencia.setText("Herencia");
+        btn_ClasesHerencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ClasesHerenciaActionPerformed(evt);
+            }
+        });
 
         btn_ClasesHerencia1.setText("Nueva Clase");
         btn_ClasesHerencia1.addActionListener(new java.awt.event.ActionListener() {
@@ -373,9 +473,6 @@ public class frm_Main extends javax.swing.JFrame {
         });
         pop_Clases.add(popmi_ClaseCambiarNombre);
 
-        popmi_ClaseCambiarPadre.setText("Cambiar padre");
-        pop_Clases.add(popmi_ClaseCambiarPadre);
-
         popmi_ClaseAgregarPropiedad.setText("Agregar propiedad");
         popmi_ClaseAgregarPropiedad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -384,15 +481,21 @@ public class frm_Main extends javax.swing.JFrame {
         });
         pop_Clases.add(popmi_ClaseAgregarPropiedad);
 
-        popmi_ClaseAgregarMetodo.setText("Agregar método");
+        popmi_ClaseAgregarMetodo.setText("Crear método");
         popmi_ClaseAgregarMetodo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 popmi_ClaseAgregarMetodoActionPerformed(evt);
             }
         });
         pop_Clases.add(popmi_ClaseAgregarMetodo);
+        pop_Clases.add(jSeparator1);
 
         popmi_ClaseEliminar.setText("Eliminar esta clase");
+        popmi_ClaseEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmi_ClaseEliminarActionPerformed(evt);
+            }
+        });
         pop_Clases.add(popmi_ClaseEliminar);
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -405,27 +508,27 @@ public class frm_Main extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout diag_ClaseCambiarNombreLayout = new javax.swing.GroupLayout(diag_ClaseCambiarNombre.getContentPane());
-        diag_ClaseCambiarNombre.getContentPane().setLayout(diag_ClaseCambiarNombreLayout);
-        diag_ClaseCambiarNombreLayout.setHorizontalGroup(
-            diag_ClaseCambiarNombreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(diag_ClaseCambiarNombreLayout.createSequentialGroup()
-                .addGroup(diag_ClaseCambiarNombreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(diag_ClaseCambiarNombreLayout.createSequentialGroup()
+        javax.swing.GroupLayout diag_CambiarNombreLayout = new javax.swing.GroupLayout(diag_CambiarNombre.getContentPane());
+        diag_CambiarNombre.getContentPane().setLayout(diag_CambiarNombreLayout);
+        diag_CambiarNombreLayout.setHorizontalGroup(
+            diag_CambiarNombreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(diag_CambiarNombreLayout.createSequentialGroup()
+                .addGroup(diag_CambiarNombreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(diag_CambiarNombreLayout.createSequentialGroup()
                         .addGap(36, 36, 36)
                         .addComponent(jLabel7)
                         .addGap(35, 35, 35)
                         .addComponent(txt_ClaseCambiarNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(diag_ClaseCambiarNombreLayout.createSequentialGroup()
+                    .addGroup(diag_CambiarNombreLayout.createSequentialGroup()
                         .addGap(101, 101, 101)
                         .addComponent(btn_ClaseCambiarNombre)))
                 .addContainerGap(38, Short.MAX_VALUE))
         );
-        diag_ClaseCambiarNombreLayout.setVerticalGroup(
-            diag_ClaseCambiarNombreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(diag_ClaseCambiarNombreLayout.createSequentialGroup()
+        diag_CambiarNombreLayout.setVerticalGroup(
+            diag_CambiarNombreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(diag_CambiarNombreLayout.createSequentialGroup()
                 .addGap(100, 100, 100)
-                .addGroup(diag_ClaseCambiarNombreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(diag_CambiarNombreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
                     .addComponent(txt_ClaseCambiarNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
@@ -440,44 +543,6 @@ public class frm_Main extends javax.swing.JFrame {
             }
         });
         pop_Propiedades.add(popmi_PropCambiarNombre);
-
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel8.setText("Nombre:");
-
-        btn_PropNombre.setText("Cambiar nombre");
-        btn_PropNombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_PropNombreActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout diag_PropCambiarNombreLayout = new javax.swing.GroupLayout(diag_PropCambiarNombre.getContentPane());
-        diag_PropCambiarNombre.getContentPane().setLayout(diag_PropCambiarNombreLayout);
-        diag_PropCambiarNombreLayout.setHorizontalGroup(
-            diag_PropCambiarNombreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(diag_PropCambiarNombreLayout.createSequentialGroup()
-                .addGroup(diag_PropCambiarNombreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(diag_PropCambiarNombreLayout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(jLabel8)
-                        .addGap(35, 35, 35)
-                        .addComponent(txt_PropCambiarNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(diag_PropCambiarNombreLayout.createSequentialGroup()
-                        .addGap(101, 101, 101)
-                        .addComponent(btn_PropNombre)))
-                .addContainerGap(38, Short.MAX_VALUE))
-        );
-        diag_PropCambiarNombreLayout.setVerticalGroup(
-            diag_PropCambiarNombreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(diag_PropCambiarNombreLayout.createSequentialGroup()
-                .addGap(100, 100, 100)
-                .addGroup(diag_PropCambiarNombreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8)
-                    .addComponent(txt_PropCambiarNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
-                .addComponent(btn_PropNombre)
-                .addGap(40, 40, 40))
-        );
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel6.setText("Tipo:");
@@ -539,6 +604,189 @@ public class frm_Main extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
                 .addComponent(btn_CrearProp)
                 .addGap(31, 31, 31))
+        );
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel8.setText("Retorno:");
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel11.setText("Nombre:");
+
+        cbox_CrearMetTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sin padre" }));
+
+        btn_CrearMet.setText("Crear método");
+        btn_CrearMet.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_CrearMetActionPerformed(evt);
+            }
+        });
+
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel12.setText("Acceso:");
+
+        cbox_CrearMetAcceso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sin padre" }));
+
+        list_CrearMetParametros.setModel(new DefaultListModel());
+        jScrollPane2.setViewportView(list_CrearMetParametros);
+
+        btn_CrearMetAgregarParametro.setText("Agregar\nparámetro");
+        btn_CrearMetAgregarParametro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_CrearMetAgregarParametroActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout diag_CrearMetodoLayout = new javax.swing.GroupLayout(diag_CrearMetodo.getContentPane());
+        diag_CrearMetodo.getContentPane().setLayout(diag_CrearMetodoLayout);
+        diag_CrearMetodoLayout.setHorizontalGroup(
+            diag_CrearMetodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(diag_CrearMetodoLayout.createSequentialGroup()
+                .addGroup(diag_CrearMetodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(diag_CrearMetodoLayout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addGroup(diag_CrearMetodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel12)
+                            .addComponent(btn_CrearMetAgregarParametro, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(diag_CrearMetodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(diag_CrearMetodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(cbox_CrearMetAcceso, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txt_CrearMetNombre)
+                                .addComponent(cbox_CrearMetTipo, 0, 145, Short.MAX_VALUE))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(diag_CrearMetodoLayout.createSequentialGroup()
+                        .addGap(103, 103, 103)
+                        .addComponent(btn_CrearMet)))
+                .addContainerGap(48, Short.MAX_VALUE))
+        );
+        diag_CrearMetodoLayout.setVerticalGroup(
+            diag_CrearMetodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(diag_CrearMetodoLayout.createSequentialGroup()
+                .addGap(100, 100, 100)
+                .addGroup(diag_CrearMetodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel11)
+                    .addComponent(txt_CrearMetNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(diag_CrearMetodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8)
+                    .addComponent(cbox_CrearMetTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(diag_CrearMetodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(cbox_CrearMetAcceso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addGroup(diag_CrearMetodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(diag_CrearMetodoLayout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, diag_CrearMetodoLayout.createSequentialGroup()
+                        .addComponent(btn_CrearMetAgregarParametro, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)))
+                .addComponent(btn_CrearMet)
+                .addGap(39, 39, 39))
+        );
+
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel13.setText("Nombre:");
+
+        btn_CrearParam.setText("Crear parametro");
+        btn_CrearParam.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_CrearParamActionPerformed(evt);
+            }
+        });
+
+        jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel14.setText("Tipo:");
+
+        cbox_CrearParamTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        javax.swing.GroupLayout diag_CrearParametroLayout = new javax.swing.GroupLayout(diag_CrearParametro.getContentPane());
+        diag_CrearParametro.getContentPane().setLayout(diag_CrearParametroLayout);
+        diag_CrearParametroLayout.setHorizontalGroup(
+            diag_CrearParametroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(diag_CrearParametroLayout.createSequentialGroup()
+                .addGroup(diag_CrearParametroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(diag_CrearParametroLayout.createSequentialGroup()
+                        .addGap(101, 101, 101)
+                        .addComponent(btn_CrearParam))
+                    .addGroup(diag_CrearParametroLayout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addGroup(diag_CrearParametroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel14)
+                            .addComponent(jLabel13))
+                        .addGap(35, 35, 35)
+                        .addGroup(diag_CrearParametroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txt_CrearParamNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbox_CrearParamTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(38, Short.MAX_VALUE))
+        );
+        diag_CrearParametroLayout.setVerticalGroup(
+            diag_CrearParametroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(diag_CrearParametroLayout.createSequentialGroup()
+                .addGap(100, 100, 100)
+                .addGroup(diag_CrearParametroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel13)
+                    .addComponent(txt_CrearParamNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
+                .addGroup(diag_CrearParametroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14)
+                    .addComponent(cbox_CrearParamTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                .addComponent(btn_CrearParam)
+                .addGap(40, 40, 40))
+        );
+
+        list_HerenciaClasePadre.setModel(new DefaultListModel());
+        jScrollPane3.setViewportView(list_HerenciaClasePadre);
+
+        list_HerenciaClaseHija.setModel(new DefaultListModel());
+        jScrollPane4.setViewportView(list_HerenciaClaseHija);
+
+        jLabel15.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        jLabel15.setText("Sera padre de:");
+
+        btn_EstablecerHerencia.setText("Establecer herencia");
+        btn_EstablecerHerencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_EstablecerHerenciaActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout diag_HerenciaLayout = new javax.swing.GroupLayout(diag_Herencia.getContentPane());
+        diag_Herencia.getContentPane().setLayout(diag_HerenciaLayout);
+        diag_HerenciaLayout.setHorizontalGroup(
+            diag_HerenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, diag_HerenciaLayout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
+                .addComponent(jLabel15)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, diag_HerenciaLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_EstablecerHerencia)
+                .addGap(170, 170, 170))
+        );
+        diag_HerenciaLayout.setVerticalGroup(
+            diag_HerenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(diag_HerenciaLayout.createSequentialGroup()
+                .addGroup(diag_HerenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(diag_HerenciaLayout.createSequentialGroup()
+                        .addGap(49, 49, 49)
+                        .addGroup(diag_HerenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(diag_HerenciaLayout.createSequentialGroup()
+                        .addGap(110, 110, 110)
+                        .addComponent(jLabel15)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addComponent(btn_EstablecerHerencia)
+                .addGap(36, 36, 36))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -612,10 +860,11 @@ public class frm_Main extends javax.swing.JFrame {
                         );
                     }
                     default -> {
-                        crearClaseUML(
+                        ClaseUML clasePadre =  (ClaseUML) this.cbox_CrearClasePadre.getSelectedItem();
+                        clasePadre.getHijos().add(new ClaseUML(
                             this.txt_CrearClaseNombre.getText(),
-                            (ClaseUML) this.cbox_CrearClasePadre.getSelectedItem()
-                        );
+                            clasePadre
+                        ));
                     }
                 }
                 this.cbox_CrearClasePadre.setModel(
@@ -633,9 +882,7 @@ public class frm_Main extends javax.swing.JFrame {
 
     private void diag_ClasesFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_diag_ClasesFocusGained
         // TODO add your handling code here:
-        this.tree_Clases.setModel(
-                crearTreeModelClases()
-        );
+        refrescarModelosClase();
         
     }//GEN-LAST:event_diag_ClasesFocusGained
 
@@ -647,9 +894,7 @@ public class frm_Main extends javax.swing.JFrame {
 
     private void diag_ClasesComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_diag_ClasesComponentShown
         // TODO add your handling code here:
-        this.tree_Clases.setModel(
-                crearTreeModelClases()
-        );
+        refrescarModelosClase();
         
     }//GEN-LAST:event_diag_ClasesComponentShown
 
@@ -661,7 +906,7 @@ public class frm_Main extends javax.swing.JFrame {
             this.txt_ClaseCambiarNombre.setText(clase.getNombre());
             
         }
-        mostrarJDialog(this.diag_ClaseCambiarNombre);
+        mostrarJDialog(this.diag_CambiarNombre);
         
     }//GEN-LAST:event_popmi_ClaseCambiarNombreActionPerformed
 
@@ -687,16 +932,16 @@ public class frm_Main extends javax.swing.JFrame {
             
             if (!this.txt_ClaseCambiarNombre.getText().trim().isEmpty())  {
                 clase.setNombre(this.txt_ClaseCambiarNombre.getText());
-                this.diag_ClaseCambiarNombre.dispose();
-                enviarMensaje(this.diag_ClaseCambiarNombre, "Nombre cambiado.");
+                this.diag_CambiarNombre.dispose();
+                enviarMensaje(this.diag_Clases, "Nombre cambiado.");
             }
             
         } else if (objetoSeleccionado instanceof Propiedad prop) {
             
             if (!this.txt_ClaseCambiarNombre.getText().trim().isEmpty())  {
                 prop.setNombre(this.txt_ClaseCambiarNombre.getText());
-                this.diag_ClaseCambiarNombre.dispose();
-                enviarMensaje(this.diag_ClaseCambiarNombre, "Nombre cambiado.");
+                this.diag_CambiarNombre.dispose();
+                enviarMensaje(this.diag_Clases, "Nombre cambiado.");
             }
             
         }
@@ -709,23 +954,9 @@ public class frm_Main extends javax.swing.JFrame {
             this.txt_ClaseCambiarNombre.setText(prop.getNombre());
             
         }
-        mostrarJDialog(this.diag_ClaseCambiarNombre);
+        mostrarJDialog(this.diag_CambiarNombre);
         
     }//GEN-LAST:event_popmi_PropCambiarNombreActionPerformed
-
-    private void popmi_ClaseAgregarMetodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmi_ClaseAgregarMetodoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_popmi_ClaseAgregarMetodoActionPerformed
-
-    private void btn_PropNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_PropNombreActionPerformed
-        // TODO add your handling code here:
-        if (((DefaultMutableTreeNode)this.tree_Clases.getSelectionPath().getLastPathComponent()).getUserObject() instanceof Propiedad prop) {
-            
-            
-            
-        }
-        
-    }//GEN-LAST:event_btn_PropNombreActionPerformed
 
     private void popmi_ClaseAgregarPropiedadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmi_ClaseAgregarPropiedadActionPerformed
         // TODO add your handling code here:
@@ -744,12 +975,11 @@ public class frm_Main extends javax.swing.JFrame {
                             new Propiedad(
                                     this.txt_CrearPropNombre.getText(),
                                     (Tipo) this.cbox_CrearPropTipo.getSelectedItem(),
-                                    (Acceso) this.cbox_CrearPropAcceso.getSelectedItem(),
-                                    clase
+                                    (Acceso) this.cbox_CrearPropAcceso.getSelectedItem()
                             )
                     );
-                    this.tree_Clases.setModel(crearTreeModelClases());
                     this.diag_CrearProp.dispose();
+                    refrescarModelosClase();
                     enviarMensaje(this.diag_Clases, "Clase creada.");
 
                 }
@@ -760,35 +990,228 @@ public class frm_Main extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_btn_CrearPropActionPerformed
+
+    private void popmi_ClaseEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmi_ClaseEliminarActionPerformed
+        // TODO add your handling code here:
+        Object objetoSeleccionado = ((DefaultMutableTreeNode)this.tree_Clases.getSelectionPath().getLastPathComponent()).getUserObject();
+        if (objetoSeleccionado instanceof ClaseUML clase) {
+            
+            clases.remove(clase);
+            refrescarModelosClase();
+            enviarMensaje(this.diag_Clases, "Clase removida");
+            
+        }
+        
+    }//GEN-LAST:event_popmi_ClaseEliminarActionPerformed
+
+    private void btn_CrearMetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CrearMetActionPerformed
+        // TODO add your handling code here:
+        if (((DefaultMutableTreeNode)this.tree_Clases.getSelectionPath().getLastPathComponent()).getUserObject() instanceof ClaseUML clase) {
+            
+            try {
+                if (!this.txt_CrearMetNombre.getText().trim().isEmpty()) {
+                    
+                    Metodo nuevoMetodo = new Metodo(
+                            this.txt_CrearMetNombre.getText(),
+                            (Tipo) this.cbox_CrearMetTipo.getSelectedItem(),
+                            (Acceso) this.cbox_CrearMetAcceso.getSelectedItem()
+                    );
+                    
+                    if (this.list_CrearMetParametros.getModel().getSize() != 0) {
+                        for (int i = 0; i < this.list_CrearMetParametros.getModel().getSize(); i++) {
+                            nuevoMetodo.getParametros().add(
+                                    (Propiedad) ( (DefaultListModel) this.list_CrearMetParametros.getModel() ).get(i)
+                            );
+                        }
+                        ( (DefaultListModel) this.list_CrearMetParametros.getModel() ).removeAllElements();
+                    }
+                    
+                    clase.getMetodos().add(
+                            nuevoMetodo
+                    );
+                    
+                    refrescarModelosClase();
+                    this.diag_CrearMetodo.dispose();
+                    limpiar(this.txt_CrearMetNombre);
+                    enviarMensaje(this.diag_Clases, "Método creado.");
+
+                }
+            } catch (Exception e) {
+                imprimirError(e, evt);
+            }
+            
+        } else {
+            System.out.println("hola");
+        }
+        
+    }//GEN-LAST:event_btn_CrearMetActionPerformed
+
+    private void btn_CrearParamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CrearParamActionPerformed
+        // TODO add your handling code here:
+        DefaultListModel modeloLista = (DefaultListModel) this.list_CrearMetParametros.getModel();
+        Propiedad param = new Propiedad(
+                this.txt_CrearParamNombre.getText(),
+                (Tipo) this.cbox_CrearParamTipo.getSelectedItem()
+        );
+        modeloLista.addElement(param);
+        this.diag_CrearParametro.dispose();
+        
+    }//GEN-LAST:event_btn_CrearParamActionPerformed
+
+    private void btn_CrearMetAgregarParametroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CrearMetAgregarParametroActionPerformed
+        // TODO add your handling code here:
+        mostrarJDialog(this.diag_CrearParametro);
+        
+    }//GEN-LAST:event_btn_CrearMetAgregarParametroActionPerformed
+
+    private void popmi_ClaseAgregarMetodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmi_ClaseAgregarMetodoActionPerformed
+        // TODO add your handling code here:
+        mostrarJDialog(this.diag_CrearMetodo);
+        
+    }//GEN-LAST:event_popmi_ClaseAgregarMetodoActionPerformed
+
+    private void btn_EstablecerHerenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EstablecerHerenciaActionPerformed
+        // TODO add your handling code here:
+        if (this.list_HerenciaClaseHija.getSelectedIndex() != this.list_HerenciaClasePadre.getSelectedIndex()-1) {
+            
+            ClaseUML claseHija = (ClaseUML) ( (DefaultListModel) this.list_HerenciaClaseHija.getModel() ).get(
+                    this.list_HerenciaClaseHija.getSelectedIndex()
+            );
+            ClaseUML clasePadre;
+            
+            switch (this.list_HerenciaClasePadre.getSelectedIndex()) {
+                case 0 -> {
+                    clasePadre = null;
+                }
+                default -> {
+                    clasePadre = (ClaseUML) ( (DefaultListModel) this.list_HerenciaClasePadre.getModel() ).get(
+                            this.list_HerenciaClasePadre.getSelectedIndex()
+                    );
+                }
+            }
+            
+            if (clasePadre == null) {
+                claseHija.getClasePadre().getHijos().remove(claseHija);
+                claseHija.setClasePadre(clasePadre);
+            } else {
+                claseHija.getClasePadre().getHijos().remove(claseHija);
+                claseHija.setClasePadre(clasePadre);
+                claseHija.getClasePadre().getHijos().add(claseHija);
+            }
+            
+            this.diag_Herencia.dispose();
+            refrescarModelosClase();
+            enviarMensaje(this.diag_Clases, "Herencia establecida.");
+            
+        } else {
+            
+        }
+        
+    }//GEN-LAST:event_btn_EstablecerHerenciaActionPerformed
+
+    private void btn_ClasesHerenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ClasesHerenciaActionPerformed
+        // TODO add your handling code here:
+        mostrarJDialog(this.diag_Herencia);
+        
+    }//GEN-LAST:event_btn_ClasesHerenciaActionPerformed
+
+    private void tab_ClasesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tab_ClasesMouseClicked
+        // TODO add your handling code here:
+        if (this.tab_Clases.getSelectedIndex() == 1 && !this.clases.isEmpty()) {
+            
+            this.txta_CodigoClases.setText(clasesACodigo());
+            
+        }
+                
+    }//GEN-LAST:event_tab_ClasesMouseClicked
+    
+    private String clasesACodigo() {
+        return clasesACodigo("", this.clases);
+    }
+    
+    private String clasesACodigo(String str, ArrayList<ClaseUML> clases) {
+        for (ClaseUML clase: clases) {
+            str += clase.claseEnCodigo()+"\n\n";
+            if (!clase.getHijos().isEmpty()) {
+                str += clasesACodigo(str, clase.getHijos());
+            }
+        }
+        return str;
+    }
     
     private DefaultTreeModel crearTreeModelClases() {
         
         DefaultMutableTreeNode nodoRaiz = new DefaultMutableTreeNode("Clases");
         for (ClaseUML clase: clases) {
-            DefaultMutableTreeNode nodoClase = new DefaultMutableTreeNode(clase);
-            DefaultMutableTreeNode nodoPropiedades = new DefaultMutableTreeNode("Propiedades");
-            DefaultMutableTreeNode nodoMetodos = new DefaultMutableTreeNode("Métodos");
-            for (Propiedad prop: clase.getPropiedades()) {
-                nodoPropiedades.add(new DefaultMutableTreeNode(prop));
+            nodoRaiz.add(clase.formaNodo());
+            for (ClaseUML claseHija: clase.getHijos()) {
+                nodoRaiz.add(claseHija.formaNodo());
             }
-            for (Metodo met: clase.getMetodos()) {
-                nodoMetodos.add(new DefaultMutableTreeNode(met));
-            }
-            nodoClase.add(nodoPropiedades); nodoClase.add(nodoMetodos);
-            nodoRaiz.add(nodoClase);
         }
         
         return new DefaultTreeModel(nodoRaiz);
         
     }
     
+    private DefaultListModel crearListModelClases() {
+        return crearListModelClases(this.clases);
+    }
+    
+    private DefaultListModel crearListModelClases(ArrayList<ClaseUML> clases) {
+        
+        DefaultListModel modelo = new DefaultListModel();
+        for (ClaseUML clase: clases) {
+            
+            modelo.addElement(clase);
+            if (!clase.getHijos().isEmpty()) {
+                crearListModelClases(
+                        clase.getHijos()
+                );
+            }
+                    
+        }
+        return modelo;
+        
+    }
+    
+    private DefaultListModel crearListModelClases(DefaultListModel modelo) {
+        
+        DefaultListModel elementos = crearListModelClases();
+        for (int i = 0; i < elementos.getSize(); i++) {
+            modelo.addElement(
+                    (ClaseUML) elementos.get(i)
+            );
+        }
+        return modelo;
+        
+    }
+    
+    private void refrescarModelosClase() {
+        
+        this.tree_Clases.setModel(crearTreeModelClases());
+        this.list_HerenciaClaseHija.setModel(
+                crearListModelClases()
+        );
+        DefaultListModel modeloPadre = new DefaultListModel();
+        modeloPadre.addElement("Sin padre");
+        this.list_HerenciaClasePadre.setModel(
+                crearListModelClases(modeloPadre)
+        );
+        this.cbox_CrearClasePadre.setModel(
+                crearCBoxModelParaClasesPadre()
+        );
+        
+    }
+    
     private DefaultComboBoxModel crearCBoxModelParaClasesPadre() {
+        
         DefaultComboBoxModel modelo = new DefaultComboBoxModel();
         modelo.addElement("Sin clase");
         for (ClaseUML clase: this.clases) {
             modelo.addElement(clase);
         }
         return modelo;
+        
     }
     
     private void mostrarJDialog(javax.swing.JDialog diag) {
@@ -800,7 +1223,7 @@ public class frm_Main extends javax.swing.JFrame {
         txt.setText("");
     }
     
-    private void enviarMensaje(java.awt.Component comp, String msg) {
+    private void enviarMensaje(Component comp, String msg) {
         JOptionPane.showMessageDialog(comp, msg, "", -1);
     }
     
@@ -850,22 +1273,35 @@ public class frm_Main extends javax.swing.JFrame {
     private javax.swing.JButton btn_ClasesHerencia;
     private javax.swing.JButton btn_ClasesHerencia1;
     private javax.swing.JToggleButton btn_CrearClase;
+    private javax.swing.JToggleButton btn_CrearMet;
+    private javax.swing.JToggleButton btn_CrearMetAgregarParametro;
+    private javax.swing.JToggleButton btn_CrearParam;
     private javax.swing.JToggleButton btn_CrearProp;
-    private javax.swing.JToggleButton btn_PropNombre;
+    private javax.swing.JButton btn_EstablecerHerencia;
     private javax.swing.JComboBox<String> cbox_CrearClasePadre;
+    private javax.swing.JComboBox<String> cbox_CrearMetAcceso;
+    private javax.swing.JComboBox<String> cbox_CrearMetTipo;
+    private javax.swing.JComboBox<String> cbox_CrearParamTipo;
     private javax.swing.JComboBox<String> cbox_CrearPropAcceso;
     private javax.swing.JComboBox<String> cbox_CrearPropTipo;
-    private javax.swing.JDialog diag_ClaseCambiarNombre;
+    private javax.swing.JDialog diag_CambiarNombre;
     private javax.swing.JDialog diag_Clases;
     private javax.swing.JDialog diag_CrearClase;
+    private javax.swing.JDialog diag_CrearMetodo;
+    private javax.swing.JDialog diag_CrearParametro;
     private javax.swing.JDialog diag_CrearProp;
     private javax.swing.JDialog diag_CrearVariable;
     private javax.swing.JDialog diag_Flujo;
-    private javax.swing.JDialog diag_PropCambiarNombre;
+    private javax.swing.JDialog diag_Herencia;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -875,9 +1311,17 @@ public class frm_Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JLabel lbl_Clases;
+    private javax.swing.JList<String> list_CrearMetParametros;
+    private javax.swing.JList<String> list_HerenciaClaseHija;
+    private javax.swing.JList<String> list_HerenciaClasePadre;
     private javax.swing.JMenu mn_PrincipalFunciones;
     private javax.swing.JMenuBar mnb_Clases;
     private javax.swing.JMenuItem mnb_ClasesAbrir;
@@ -896,17 +1340,20 @@ public class frm_Main extends javax.swing.JFrame {
     private javax.swing.JMenuItem popmi_ClaseAgregarMetodo;
     private javax.swing.JMenuItem popmi_ClaseAgregarPropiedad;
     private javax.swing.JMenuItem popmi_ClaseCambiarNombre;
-    private javax.swing.JMenuItem popmi_ClaseCambiarPadre;
     private javax.swing.JMenuItem popmi_ClaseEliminar;
     private javax.swing.JMenuItem popmi_PropCambiarNombre;
     private javax.swing.JTabbedPane tab_Clases;
     private javax.swing.JTree tree_Clases;
     private javax.swing.JTextField txt_ClaseCambiarNombre;
     private javax.swing.JTextField txt_CrearClaseNombre;
+    private javax.swing.JTextField txt_CrearMetNombre;
+    private javax.swing.JTextField txt_CrearParamNombre;
     private javax.swing.JTextField txt_CrearPropNombre;
-    private javax.swing.JTextField txt_PropCambiarNombre;
+    private javax.swing.JTextArea txta_CodigoClases;
     // End of variables declaration//GEN-END:variables
 
     private final ArrayList<ClaseUML> clases = new ArrayList<ClaseUML>();
+    
+    // mostrarJDialog(this.diag_CrearMetodo);
     
 }

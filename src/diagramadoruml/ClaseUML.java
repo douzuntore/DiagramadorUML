@@ -5,6 +5,7 @@
 package diagramadoruml;
 
 import java.util.ArrayList;
+import javax.swing.tree.DefaultMutableTreeNode;
 
 /**
  *
@@ -23,7 +24,7 @@ public class ClaseUML {
 
     public ClaseUML(String nombre, ClaseUML clasePadre) {
         this.nombre = nombre;
-        this.clasePadre = clasePadre;
+        this.setClasePadre(clasePadre);
     }
     
     public ClaseUML(String nombre) {
@@ -44,6 +45,34 @@ public class ClaseUML {
 
     public void setClasePadre(ClaseUML clasePadre) {
         this.clasePadre = clasePadre;
+        if (this.clasePadre != null) {
+            for (int i = 0; i < this.propiedades.size(); i++) {
+                if (this.propiedades.get(i).getClaseOrigen() != null) {
+                    this.propiedades.remove(i);
+                    i--;
+                }
+            }
+            for (int i = 0; i < this.metodos.size(); i++) {
+                if (this.metodos.get(i).getClaseOrigen() != null) {
+                    this.metodos.remove(i);
+                    i--;
+                }
+            }
+            agregarElementosHeredados(this.clasePadre);
+        } else {
+            for (int i = 0; i < this.propiedades.size(); i++) {
+                if (this.propiedades.get(i).getClaseOrigen() != null) {
+                    this.propiedades.remove(i);
+                    i--;
+                }
+            }
+            for (int i = 0; i < this.metodos.size(); i++) {
+                if (this.metodos.get(i).getClaseOrigen() != null) {
+                    this.metodos.remove(i);
+                    i--;
+                }
+            }
+        }
     }
 
     public ArrayList<Propiedad> getPropiedades() {
@@ -52,6 +81,92 @@ public class ClaseUML {
 
     public ArrayList<Metodo> getMetodos() {
         return metodos;
+    }
+
+    public ArrayList<ClaseUML> getHijos() {
+        return hijos;
+    }
+    
+    public DefaultMutableTreeNode formaNodo() {
+        
+        DefaultMutableTreeNode nodoClase = new DefaultMutableTreeNode(this);
+        DefaultMutableTreeNode nodoPropiedades = new DefaultMutableTreeNode("Propiedades");
+        DefaultMutableTreeNode nodoMetodos = new DefaultMutableTreeNode("Métodos");
+        
+        for (Propiedad prop: this.getPropiedades()) {
+            nodoPropiedades.add(new DefaultMutableTreeNode(prop));
+        }
+        for (Metodo met: this.getMetodos()) {
+            nodoMetodos.add(new DefaultMutableTreeNode(met));
+        }
+        
+        nodoClase.add(nodoPropiedades); nodoClase.add(nodoMetodos);
+        
+        return nodoClase;
+        
+    }
+    
+    private void agregarElementosHeredados(ClaseUML clasePadre) {
+        for (int i = clasePadre.getPropiedades().size()-1; i >= 0; i--) {
+                Propiedad prop = clasePadre.getPropiedades().get(i);
+                if (prop.getAcceso() != Acceso.PRIVATE) {
+                    this.propiedades.add(0, prop);
+                    this.propiedades.get(0).setClaseOrigen(clasePadre);
+                }
+            }
+            for (int i = clasePadre.getMetodos().size()-1; i >= 0; i--) {
+                Metodo metodo = clasePadre.getMetodos().get(i);
+                if (metodo.getAcceso() != Acceso.PRIVATE) {
+                    this.metodos.add(0, metodo);
+                    this.metodos.get(0).setClaseOrigen(clasePadre);
+                }
+            }
+        if (clasePadre.getClasePadre() != null) {
+            agregarElementosHeredados(clasePadre.getClasePadre());
+        }
+    }
+    
+    public String claseEnCodigo() {
+        String str = "";
+        
+        str += ""
+                + "public class "+this.nombre+" ";
+        if (this.clasePadre != null) {
+            str += ""
+                    + "extends "+this.clasePadre.getNombre()+" ";
+        }
+        str += ""
+                + "{\n"
+                + "\n";
+        for (Propiedad prop: this.propiedades) {
+            if (prop.getClaseOrigen() == null) {
+                str += "    " //tab
+                    + prop.getAcceso().getNombre()+" "+prop.getTipo().getNombre()+" "+prop.getNombre()+";\n";
+            }
+        }
+        for (Metodo mtd: this.metodos) {
+            if (mtd.getClaseOrigen() == null) {
+                str += "    " //tab
+                    + mtd.getAcceso().getNombre()+" "+mtd.getTipoRetorno().getNombre()+" "+mtd.getNombre()+" (";
+                for (int i = 0; i < mtd.getParametros().size(); i++) {
+                    Propiedad param = mtd.getParametros().get(i);
+                    str += ""
+                            + param.getTipo()+" "+param.getNombre();
+                    if (i != mtd.getParametros().size()) {
+                        str += ""
+                                + ", ";
+                    } else {
+                        str += ""
+                                + ") ";
+                    }
+                }
+                str += "{\n}\n";
+            }
+        }
+        str += ""
+                + "\n}\n";
+        
+        return str;
     }
     
     @Override public String toString() {
