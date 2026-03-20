@@ -26,8 +26,8 @@ public class frm_Main extends javax.swing.JFrame {
     public frm_Main() {
         
         ClaseUML claseTest = new ClaseUML("Test", null);
-        claseTest.getPropiedades().add(new Propiedad("propPrivado", Tipo.STRING, Acceso.PRIVATE, claseTest));
-        claseTest.getPropiedades().add(new Propiedad("propProtegido", Tipo.STRING, Acceso.PROTECTED, claseTest));
+        claseTest.getPropiedades().add(new Propiedad("propPrivado", Tipo.STRING, Acceso.PRIVATE));
+        claseTest.getPropiedades().add(new Propiedad("propProtegido", Tipo.STRING, Acceso.PROTECTED));
         this.clases.add(claseTest);
         
         initComponents();
@@ -870,7 +870,7 @@ public class frm_Main extends javax.swing.JFrame {
                 this.cbox_CrearClasePadre.setModel(
                         crearCBoxModelParaClasesPadre()
                 );
-                this.tree_Clases.setModel(crearTreeModelClases());
+                refrescarModelosClase();
                 this.diag_CrearClase.dispose();
                 limpiar(this.txt_CrearClaseNombre);
                 enviarMensaje(this.diag_Clases, "Clase creada.");
@@ -1117,15 +1117,16 @@ public class frm_Main extends javax.swing.JFrame {
 
     private void tab_ClasesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tab_ClasesMouseClicked
         // TODO add your handling code here:
-        if (this.tab_Clases.getSelectedIndex() == 1 && !this.clases.isEmpty()) {
-            
-            this.txta_CodigoClases.setText(clasesACodigo());
-            
-        }
+//        if (this.tab_Clases.getSelectedIndex() == 1 && !this.clases.isEmpty()) {
+//            
+//            this.txta_CodigoClases.setText(clasesACodigo())
+//            
+//        }
                 
     }//GEN-LAST:event_tab_ClasesMouseClicked
     
     private String clasesACodigo() {
+        System.out.println(clasesACodigo("", this.clases));
         return clasesACodigo("", this.clases);
     }
     
@@ -1133,7 +1134,7 @@ public class frm_Main extends javax.swing.JFrame {
         for (ClaseUML clase: clases) {
             str += clase.claseEnCodigo()+"\n\n";
             if (!clase.getHijos().isEmpty()) {
-                str += clasesACodigo(str, clase.getHijos());
+                str = clasesACodigo(str, clase.getHijos());
             }
         }
         return str;
@@ -1154,17 +1155,17 @@ public class frm_Main extends javax.swing.JFrame {
     }
     
     private DefaultListModel crearListModelClases() {
-        return crearListModelClases(this.clases);
+        return crearListModelClases(new DefaultListModel(), this.clases);
     }
     
-    private DefaultListModel crearListModelClases(ArrayList<ClaseUML> clases) {
+    private DefaultListModel crearListModelClases(DefaultListModel modelo, ArrayList<ClaseUML> clases) {
         
-        DefaultListModel modelo = new DefaultListModel();
         for (ClaseUML clase: clases) {
             
             modelo.addElement(clase);
             if (!clase.getHijos().isEmpty()) {
                 crearListModelClases(
+                        modelo,
                         clase.getHijos()
                 );
             }
@@ -1197,21 +1198,45 @@ public class frm_Main extends javax.swing.JFrame {
         this.list_HerenciaClasePadre.setModel(
                 crearListModelClases(modeloPadre)
         );
+        DefaultComboBoxModel modeloPadreCBox = new DefaultComboBoxModel();
+        modeloPadreCBox.addElement("Sin padre");
         this.cbox_CrearClasePadre.setModel(
-                crearCBoxModelParaClasesPadre()
+                crearCBoxModelParaClasesPadre(modeloPadreCBox)
         );
+        this.txta_CodigoClases.setText(clasesACodigo());
         
     }
     
     private DefaultComboBoxModel crearCBoxModelParaClasesPadre() {
+        return crearCBoxModelParaClasesPadre(new DefaultComboBoxModel(), this.clases);
+    }
+    
+    private DefaultComboBoxModel crearCBoxModelParaClasesPadre(DefaultComboBoxModel modelo) {
         
-        DefaultComboBoxModel modelo = new DefaultComboBoxModel();
-        modelo.addElement("Sin clase");
-        for (ClaseUML clase: this.clases) {
-            modelo.addElement(clase);
+        DefaultComboBoxModel elementos = crearCBoxModelParaClasesPadre();
+        for (int i = 0; i < elementos.getSize(); i++) {
+            modelo.addElement(
+                    (ClaseUML) elementos.getElementAt(i)
+            );
         }
         return modelo;
         
+    }
+    
+    private DefaultComboBoxModel crearCBoxModelParaClasesPadre(DefaultComboBoxModel modelo, ArrayList<ClaseUML> clases) {
+        
+        for (ClaseUML clase: clases) {
+            
+            modelo.addElement(clase);
+            if (!clase.getHijos().isEmpty()) {
+                crearCBoxModelParaClasesPadre(
+                        modelo,
+                        clase.getHijos()
+                );
+            }
+                    
+        }
+        return modelo;
     }
     
     private void mostrarJDialog(javax.swing.JDialog diag) {

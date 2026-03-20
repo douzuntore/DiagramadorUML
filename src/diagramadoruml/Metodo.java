@@ -16,7 +16,7 @@ public class Metodo {
     private String nombre;
     private Tipo tipoRetorno;
     private Acceso acceso;
-    private final ArrayList<Propiedad> parametros = new ArrayList();
+    private ArrayList<Propiedad> parametros = new ArrayList();
     private ClaseUML claseOrigen;
 
     public Metodo() {
@@ -33,6 +33,14 @@ public class Metodo {
         this.tipoRetorno = tipoRetorno;
         this.acceso = acceso;
         this.claseOrigen = clase;
+    }
+
+    public Metodo(Metodo mtd, ClaseUML claseOrigen) {
+        this.nombre = mtd.getNombre();
+        this.tipoRetorno = mtd.getTipoRetorno();
+        this.acceso = mtd.getAcceso();
+        this.parametros = mtd.getParametros();
+        this.claseOrigen = claseOrigen;
     }
 
     public String getNombre() {

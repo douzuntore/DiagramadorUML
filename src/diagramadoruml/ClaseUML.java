@@ -108,19 +108,17 @@ public class ClaseUML {
     
     private void agregarElementosHeredados(ClaseUML clasePadre) {
         for (int i = clasePadre.getPropiedades().size()-1; i >= 0; i--) {
-                Propiedad prop = clasePadre.getPropiedades().get(i);
-                if (prop.getAcceso() != Acceso.PRIVATE) {
-                    this.propiedades.add(0, prop);
-                    this.propiedades.get(0).setClaseOrigen(clasePadre);
-                }
+            Propiedad prop = clasePadre.getPropiedades().get(i);
+            if (prop.getAcceso() != Acceso.PRIVATE) {
+                this.propiedades.add(0, new Propiedad(prop, clasePadre));
             }
-            for (int i = clasePadre.getMetodos().size()-1; i >= 0; i--) {
-                Metodo metodo = clasePadre.getMetodos().get(i);
-                if (metodo.getAcceso() != Acceso.PRIVATE) {
-                    this.metodos.add(0, metodo);
-                    this.metodos.get(0).setClaseOrigen(clasePadre);
-                }
+        }
+        for (int i = clasePadre.getMetodos().size()-1; i >= 0; i--) {
+            Metodo metodo = clasePadre.getMetodos().get(i);
+            if (metodo.getAcceso() != Acceso.PRIVATE) {
+                this.metodos.add(0, new Metodo(metodo, clasePadre));
             }
+        }
         if (clasePadre.getClasePadre() != null) {
             agregarElementosHeredados(clasePadre.getClasePadre());
         }
