@@ -142,6 +142,8 @@ public class ClaseUML {
                     + prop.getAcceso().getNombre()+" "+prop.getTipo().getNombre()+" "+prop.getNombre()+";\n";
             }
         }
+        str += ""
+                + "\n";
         for (Metodo mtd: this.metodos) {
             if (mtd.getClaseOrigen() == null) {
                 str += "    " //tab
@@ -153,12 +155,9 @@ public class ClaseUML {
                     if (i != mtd.getParametros().size()) {
                         str += ""
                                 + ", ";
-                    } else {
-                        str += ""
-                                + ") ";
                     }
                 }
-                str += "{\n}\n";
+                str += ") {\n    }\n";
             }
         }
         str += ""

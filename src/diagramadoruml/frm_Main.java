@@ -1141,12 +1141,21 @@ public class frm_Main extends javax.swing.JFrame {
     }
     
     private DefaultTreeModel crearTreeModelClases() {
+        return crearTreeModelClases(
+                new DefaultMutableTreeNode("Clases"),
+                this.clases
+        );
+    }
+    
+    private DefaultTreeModel crearTreeModelClases(DefaultMutableTreeNode nodoRaiz, ArrayList<ClaseUML> clases) {
         
-        DefaultMutableTreeNode nodoRaiz = new DefaultMutableTreeNode("Clases");
         for (ClaseUML clase: clases) {
             nodoRaiz.add(clase.formaNodo());
-            for (ClaseUML claseHija: clase.getHijos()) {
-                nodoRaiz.add(claseHija.formaNodo());
+            if (!clase.getHijos().isEmpty()) {
+                crearTreeModelClases(
+                        nodoRaiz
+                        ,clase.getHijos()
+                );
             }
         }
         
