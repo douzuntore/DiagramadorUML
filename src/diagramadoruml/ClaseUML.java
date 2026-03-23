@@ -4,6 +4,7 @@
  */
 package diagramadoruml;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import javax.swing.tree.DefaultMutableTreeNode;
 
@@ -11,7 +12,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
  *
  * @author samuelzun
  */
-public class ClaseUML {
+public class ClaseUML implements Serializable{
     
     private String nombre;
     private final ArrayList<Propiedad> propiedades = new ArrayList();
@@ -110,13 +111,21 @@ public class ClaseUML {
         for (int i = clasePadre.getPropiedades().size()-1; i >= 0; i--) {
             Propiedad prop = clasePadre.getPropiedades().get(i);
             if (prop.getAcceso() != Acceso.PRIVATE) {
-                this.propiedades.add(0, new Propiedad(prop, clasePadre));
+                if (this.propiedades.contains(prop)) {
+                    this.propiedades.remove(prop);
+                }
+                prop.setClaseOrigen(clasePadre);
+                this.propiedades.add(prop);
             }
         }
         for (int i = clasePadre.getMetodos().size()-1; i >= 0; i--) {
             Metodo metodo = clasePadre.getMetodos().get(i);
             if (metodo.getAcceso() != Acceso.PRIVATE) {
-                this.metodos.add(0, new Metodo(metodo, clasePadre));
+                if (this.metodos.contains(metodo)) {
+                    this.metodos.remove(metodo);
+                }
+                metodo.setClaseOrigen(clasePadre);
+                this.metodos.add(metodo);
             }
         }
         if (clasePadre.getClasePadre() != null) {
@@ -136,14 +145,77 @@ public class ClaseUML {
         str += ""
                 + "{\n"
                 + "\n";
+        //Propiedades
         for (Propiedad prop: this.propiedades) {
             if (prop.getClaseOrigen() == null) {
                 str += "    " //tab
                     + prop.getAcceso().getNombre()+" "+prop.getTipo().getNombre()+" "+prop.getNombre()+";\n";
             }
         }
+        //Constructor vacio
         str += ""
+                + "\n"
+                + "    public "+this.nombre+" () {\n"
+                + "    }\n"
                 + "\n";
+        //Constructor lleno
+        if (!this.propiedades.isEmpty()) {
+            str += ""
+                    + "    public "+this.nombre+" (";
+            for (int i = 0; i < propiedades.size(); i++) {
+                Propiedad prop = propiedades.get(i);
+                str += ""
+                        + prop.getTipo().getNombre()+" "+prop.getNombre();
+                if (i != propiedades.size()-1) {
+                    str += ""
+                            + ", ";
+                }
+            }
+            str += ""
+                    + ") {\n";
+            for (int i = 0; i < 2; i++) {
+                ArrayList<Propiedad> props = new ArrayList<>();
+                switch (i) {
+                    case 0 -> {
+                        for (Propiedad prop: propiedades) {
+                            if (prop.getClaseOrigen() != null) {
+                                props.add(prop);
+                            }
+                        }
+                        if (props.isEmpty()) {
+                            continue;
+                        }
+                        str += ""
+                                + "        super(";
+                        for (int j = 0; j < props.size(); j++) {
+                            Propiedad prop = props.get(j);
+                            str += ""
+                                    + prop.getNombre();
+                            if (j != props.size()-1) {
+                                str += ""
+                                        + ", ";
+                            }
+                        }
+                        str += ""
+                                + ");\n";
+                    }
+                    case 1 -> {
+                        for (Propiedad prop: propiedades) {
+                            if (prop.getClaseOrigen() == null) {
+                                props.add(prop);
+                            }
+                        }
+                        for (Propiedad prop: props) {
+                            str += ""
+                                    + "        this."+prop.getNombre()+" = "+prop.getNombre()+";\n";
+                        }
+                        str += ""
+                                + "    }\n";
+                    }
+                }
+            }
+        }
+        //Metodos
         for (Metodo mtd: this.metodos) {
             if (mtd.getClaseOrigen() == null) {
                 str += "    " //tab
@@ -151,7 +223,7 @@ public class ClaseUML {
                 for (int i = 0; i < mtd.getParametros().size(); i++) {
                     Propiedad param = mtd.getParametros().get(i);
                     str += ""
-                            + param.getTipo()+" "+param.getNombre();
+                            + param.getTipo().getNombre()+" "+param.getNombre();
                     if (i != mtd.getParametros().size()) {
                         str += ""
                                 + ", ";
@@ -164,6 +236,10 @@ public class ClaseUML {
                 + "\n}\n";
         
         return str;
+    }
+    
+    public pnl_TreeDeClase crearPanelTree(frm_Main frm) {
+        return new pnl_TreeDeClase(this, frm);
     }
     
     @Override public String toString() {

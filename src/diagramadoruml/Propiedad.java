@@ -4,11 +4,13 @@
  */
 package diagramadoruml;
 
+import java.io.Serializable;
+
 /**
  *
  * @author samuelzun
  */
-public class Propiedad {
+public class Propiedad implements Serializable {
     
     private String nombre;
     private Tipo tipo;
@@ -79,15 +81,6 @@ public class Propiedad {
             return "["+acceso.getNombre()+"] ("+tipo.getNombre()+") "+nombre;
         }
         
-    }
-    
-    public boolean esIgualA(Propiedad prop) {
-        return (
-                this.nombre.equals(prop.getNombre()) &&
-                this.tipo == prop.getTipo() &&
-                this.acceso == prop.getAcceso() //&&
-                //this.claseOrigen.esIgualA
-        );
     }
     
 }

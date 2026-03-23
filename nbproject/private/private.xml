@@ -3,12 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/samuelzun/NetBeansProjects/DiagramadorUML/src/diagramadoruml/frm_Main.java</file>
-            <file>file:/Users/samuelzun/NetBeansProjects/DiagramadorUML/src/diagramadoruml/Propiedad.java</file>
-            <file>file:/Users/samuelzun/NetBeansProjects/DiagramadorUML/src/diagramadoruml/ClaseUML.java</file>
-            <file>file:/Users/samuelzun/NetBeansProjects/DiagramadorUML/src/diagramadoruml/Metodo.java</file>
-            <file>file:/Users/samuelzun/NetBeansProjects/DiagramadorUML/src/diagramadoruml/Operacion.java</file>
-            <file>file:/Users/samuelzun/NetBeansProjects/DiagramadorUML/src/diagramadoruml/pnl_TreeDeCase.java</file>
+            <file>file:/E:/NetBeans/projects/DiagramadorUML/src/diagramadoruml/frm_Main.java</file>
+            <file>file:/E:/NetBeans/projects/DiagramadorUML/src/diagramadoruml/ClaseUML.java</file>
+            <file>file:/E:/NetBeans/projects/DiagramadorUML/src/diagramadoruml/Metodo.java</file>
+            <file>file:/E:/NetBeans/projects/DiagramadorUML/src/diagramadoruml/Propiedad.java</file>
+            <file>file:/E:/NetBeans/projects/DiagramadorUML/src/diagramadoruml/pnl_TreeDeClase.java</file>
         </group>
     </open-files>
 </project-private>

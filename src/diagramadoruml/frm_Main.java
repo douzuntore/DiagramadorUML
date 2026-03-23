@@ -5,12 +5,23 @@
 package diagramadoruml;
 
 import java.awt.Component;
+import java.awt.Point;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
+import javax.swing.JDialog;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreePath;
 
 /**
  *
@@ -28,7 +39,7 @@ public class frm_Main extends javax.swing.JFrame {
         ClaseUML claseTest = new ClaseUML("Test", null);
         claseTest.getPropiedades().add(new Propiedad("propPrivado", Tipo.STRING, Acceso.PRIVATE));
         claseTest.getPropiedades().add(new Propiedad("propProtegido", Tipo.STRING, Acceso.PROTECTED));
-        this.clases.add(claseTest);
+        Data.getClases().add(claseTest);
         
         initComponents();
         
@@ -79,7 +90,7 @@ public class frm_Main extends javax.swing.JFrame {
         
         DefaultListModel hernModeloHijo = (DefaultListModel) this.list_HerenciaClaseHija.getModel();
         hernModeloHijo.removeAllElements();
-        for (ClaseUML clase: clases) {
+        for (ClaseUML clase: Data.getClases()) {
             hernModeloHijo.addElement(
                     clase
             );
@@ -88,15 +99,16 @@ public class frm_Main extends javax.swing.JFrame {
         DefaultListModel hernModeloPadre = (DefaultListModel) this.list_HerenciaClasePadre.getModel();
         hernModeloPadre.removeAllElements();
         hernModeloPadre.addElement("Sin padre");
-        for (ClaseUML clase: clases) {
+        for (ClaseUML clase: Data.getClases()) {
             hernModeloPadre.addElement(
                     clase
             );
         }
         
-        this.cbox_CrearClasePadre.setModel(
-                crearCBoxModelParaClasesPadre()
-        );
+        refrescarModelosClase();
+        
+        this.fch_FileChooser.setFileFilter(new FileNameExtensionFilter("Clases", "cls"));
+        this.fch_FileChooser.setCurrentDirectory(new File("./"));
         
     }
     
@@ -120,7 +132,7 @@ public class frm_Main extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tree_Clases = new javax.swing.JTree();
         btn_ClasesHerencia = new javax.swing.JButton();
-        btn_ClasesHerencia1 = new javax.swing.JButton();
+        btn_CrearNuevaClase = new javax.swing.JButton();
         mnb_Clases = new javax.swing.JMenuBar();
         mnb_ClasesArchivo = new javax.swing.JMenu();
         mnb_ClasesAbrir = new javax.swing.JMenuItem();
@@ -152,8 +164,9 @@ public class frm_Main extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         txt_ClaseCambiarNombre = new javax.swing.JTextField();
         btn_ClaseCambiarNombre = new javax.swing.JToggleButton();
-        pop_Propiedades = new javax.swing.JPopupMenu();
-        popmi_PropCambiarNombre = new javax.swing.JMenuItem();
+        pop_PropMtd = new javax.swing.JPopupMenu();
+        popmi_PropMtdCambiarNombre = new javax.swing.JMenuItem();
+        popmi_PropMtdEliminar = new javax.swing.JMenuItem();
         diag_CrearProp = new javax.swing.JDialog();
         jLabel6 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -186,12 +199,12 @@ public class frm_Main extends javax.swing.JFrame {
         list_HerenciaClaseHija = new javax.swing.JList<>();
         jLabel15 = new javax.swing.JLabel();
         btn_EstablecerHerencia = new javax.swing.JButton();
+        fch_FileChooser = new javax.swing.JFileChooser();
         mnb_Principal = new javax.swing.JMenuBar();
         mn_PrincipalFunciones = new javax.swing.JMenu();
         mni_PrincipalFlujo = new javax.swing.JMenuItem();
         mni_PrincipalClases = new javax.swing.JMenuItem();
 
-        diag_Clases.setPreferredSize(new java.awt.Dimension(1280, 720));
         diag_Clases.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 diag_ClasesFocusGained(evt);
@@ -227,7 +240,9 @@ public class frm_Main extends javax.swing.JFrame {
 
         tab_Clases.addTab("Diagrama", pnl_ClasesDiagrama);
 
+        txta_CodigoClases.setEditable(false);
         txta_CodigoClases.setColumns(20);
+        txta_CodigoClases.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         txta_CodigoClases.setRows(5);
         jScrollPane5.setViewportView(txta_CodigoClases);
 
@@ -252,9 +267,20 @@ public class frm_Main extends javax.swing.JFrame {
 
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
         tree_Clases.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        tree_Clases.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                tree_ClasesMouseDragged(evt);
+            }
+        });
         tree_Clases.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tree_ClasesMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tree_ClasesMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tree_ClasesMouseReleased(evt);
             }
         });
         jScrollPane1.setViewportView(tree_Clases);
@@ -266,10 +292,10 @@ public class frm_Main extends javax.swing.JFrame {
             }
         });
 
-        btn_ClasesHerencia1.setText("Nueva Clase");
-        btn_ClasesHerencia1.addActionListener(new java.awt.event.ActionListener() {
+        btn_CrearNuevaClase.setText("Nueva Clase");
+        btn_CrearNuevaClase.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_ClasesHerencia1ActionPerformed(evt);
+                btn_CrearNuevaClaseActionPerformed(evt);
             }
         });
 
@@ -290,7 +316,7 @@ public class frm_Main extends javax.swing.JFrame {
                         .addComponent(btn_ClasesHerencia))
                     .addGroup(pnl_ClasesLayout.createSequentialGroup()
                         .addGap(160, 160, 160)
-                        .addComponent(btn_ClasesHerencia1)))
+                        .addComponent(btn_CrearNuevaClase)))
                 .addGap(97, 97, 97)
                 .addComponent(tab_Clases, javax.swing.GroupLayout.PREFERRED_SIZE, 742, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(82, Short.MAX_VALUE))
@@ -308,16 +334,31 @@ public class frm_Main extends javax.swing.JFrame {
                         .addGap(88, 88, 88)
                         .addComponent(btn_ClasesHerencia)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_ClasesHerencia1)))
+                        .addComponent(btn_CrearNuevaClase)))
                 .addContainerGap(69, Short.MAX_VALUE))
         );
 
         mnb_ClasesArchivo.setText("Archivo");
+        mnb_ClasesArchivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnb_ClasesArchivoActionPerformed(evt);
+            }
+        });
 
         mnb_ClasesAbrir.setText("Abrir");
+        mnb_ClasesAbrir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnb_ClasesAbrirActionPerformed(evt);
+            }
+        });
         mnb_ClasesArchivo.add(mnb_ClasesAbrir);
 
         mnb_ClasesGuardar.setText("Guardar");
+        mnb_ClasesGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnb_ClasesGuardarActionPerformed(evt);
+            }
+        });
         mnb_ClasesArchivo.add(mnb_ClasesGuardar);
 
         mnb_Clases.add(mnb_ClasesArchivo);
@@ -536,13 +577,21 @@ public class frm_Main extends javax.swing.JFrame {
                 .addGap(40, 40, 40))
         );
 
-        popmi_PropCambiarNombre.setText("Cambiar nombre");
-        popmi_PropCambiarNombre.addActionListener(new java.awt.event.ActionListener() {
+        popmi_PropMtdCambiarNombre.setText("Cambiar nombre");
+        popmi_PropMtdCambiarNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                popmi_PropCambiarNombreActionPerformed(evt);
+                popmi_PropMtdCambiarNombreActionPerformed(evt);
             }
         });
-        pop_Propiedades.add(popmi_PropCambiarNombre);
+        pop_PropMtd.add(popmi_PropMtdCambiarNombre);
+
+        popmi_PropMtdEliminar.setText("Borrar elemento");
+        popmi_PropMtdEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                popmi_PropMtdEliminarActionPerformed(evt);
+            }
+        });
+        pop_PropMtd.add(popmi_PropMtdEliminar);
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel6.setText("Tipo:");
@@ -855,9 +904,9 @@ public class frm_Main extends javax.swing.JFrame {
             if (!this.txt_CrearClaseNombre.getText().trim().isEmpty())  {
                 switch (this.cbox_CrearClasePadre.getSelectedIndex()) {
                     case 0 -> {
-                        crearClaseUML(
+                        Data.getClases().add(new ClaseUML(
                             this.txt_CrearClaseNombre.getText()
-                        );
+                        ));
                     }
                     default -> {
                         ClaseUML clasePadre =  (ClaseUML) this.cbox_CrearClasePadre.getSelectedItem();
@@ -867,9 +916,6 @@ public class frm_Main extends javax.swing.JFrame {
                         ));
                     }
                 }
-                this.cbox_CrearClasePadre.setModel(
-                        crearCBoxModelParaClasesPadre()
-                );
                 refrescarModelosClase();
                 this.diag_CrearClase.dispose();
                 limpiar(this.txt_CrearClaseNombre);
@@ -886,11 +932,11 @@ public class frm_Main extends javax.swing.JFrame {
         
     }//GEN-LAST:event_diag_ClasesFocusGained
 
-    private void btn_ClasesHerencia1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ClasesHerencia1ActionPerformed
+    private void btn_CrearNuevaClaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CrearNuevaClaseActionPerformed
         // TODO add your handling code here:
         mostrarJDialog(this.diag_CrearClase);
         
-    }//GEN-LAST:event_btn_ClasesHerencia1ActionPerformed
+    }//GEN-LAST:event_btn_CrearNuevaClaseActionPerformed
 
     private void diag_ClasesComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_diag_ClasesComponentShown
         // TODO add your handling code here:
@@ -912,13 +958,18 @@ public class frm_Main extends javax.swing.JFrame {
 
     private void tree_ClasesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tree_ClasesMouseClicked
         // TODO add your handling code here:
+        if (this.tree_Clases.getSelectionPath() == null) {
+            return;
+        }
         if (evt.getButton() == java.awt.event.MouseEvent.BUTTON3) {
             
             Object objetoSeleccionado = ((DefaultMutableTreeNode)this.tree_Clases.getSelectionPath().getLastPathComponent()).getUserObject();
             if (objetoSeleccionado instanceof ClaseUML) {
                 this.pop_Clases.show(this.tree_Clases, evt.getX(), evt.getY());
             } else if (objetoSeleccionado instanceof Propiedad) {
-                this.pop_Propiedades.show(this.tree_Clases, evt.getX(), evt.getY());
+                this.pop_PropMtd.show(this.tree_Clases, evt.getX(), evt.getY());
+            } else if (objetoSeleccionado instanceof Metodo) {
+                this.pop_PropMtd.show(this.tree_Clases, evt.getX(), evt.getY());
             }
             
         }
@@ -930,24 +981,82 @@ public class frm_Main extends javax.swing.JFrame {
         Object objetoSeleccionado = ((DefaultMutableTreeNode)this.tree_Clases.getSelectionPath().getLastPathComponent()).getUserObject();
         if (objetoSeleccionado instanceof ClaseUML clase) {
             
-            if (!this.txt_ClaseCambiarNombre.getText().trim().isEmpty())  {
+            if (!this.txt_ClaseCambiarNombre.getText().trim().isEmpty()) {
                 clase.setNombre(this.txt_ClaseCambiarNombre.getText());
                 this.diag_CambiarNombre.dispose();
+                refrescarModelosClase();
                 enviarMensaje(this.diag_Clases, "Nombre cambiado.");
             }
             
         } else if (objetoSeleccionado instanceof Propiedad prop) {
             
             if (!this.txt_ClaseCambiarNombre.getText().trim().isEmpty())  {
+                boolean tieneHijos = false;
+                for (ClaseUML clase: Data.todasLasClases()) {
+                    if (clase.getPropiedades().contains(prop)) {
+                        tieneHijos = !clase.getHijos().isEmpty();
+                    }
+                }
+                if (tieneHijos && prop.getAcceso() == Acceso.PROTECTED) {
+                    if (JOptionPane.showConfirmDialog(this, "Realizar este cambio eliminara todos los hijos de la clase, desea continuar?", "", -1) == JOptionPane.CANCEL_OPTION) {
+                        this.diag_CambiarNombre.dispose();
+                        return;
+                    }
+                }
                 prop.setNombre(this.txt_ClaseCambiarNombre.getText());
+                if (tieneHijos && prop.getAcceso() == Acceso.PROTECTED) {
+                    for (ClaseUML clase: Data.todasLasClases()) {
+                        if (clase.getPropiedades().contains(prop)) {
+                            for (ClaseUML claseHija: Data.todasLasClases(clase.getHijos())) {
+                                eliminarPanelEnDiagramador(claseHija);
+                            }
+                            clase.getHijos().clear();
+                            break;
+                        }
+                    }
+                }
                 this.diag_CambiarNombre.dispose();
+                refrescarModelosClase();
+                enviarMensaje(this.diag_Clases, "Nombre cambiado.");
+            }
+            
+        } else if (objetoSeleccionado instanceof Metodo mtd) {
+            
+            if (!this.txt_ClaseCambiarNombre.getText().trim().isEmpty())  {
+                boolean tieneHijos = false;
+                for (ClaseUML clase: Data.todasLasClases()) {
+                    if (clase.getMetodos().contains(mtd)) {
+                        tieneHijos = !clase.getHijos().isEmpty();
+                    }
+                }
+                if (tieneHijos && mtd.getAcceso() == Acceso.PROTECTED) {
+                    if (JOptionPane.showConfirmDialog(this, "Realizar este cambio eliminara todos los hijos de la clase, desea continuar?", "", -1) == JOptionPane.CANCEL_OPTION) {
+                        this.diag_CambiarNombre.dispose();
+                        return;
+                    }
+                }
+                mtd.setNombre(this.txt_ClaseCambiarNombre.getText());
+                if (tieneHijos && mtd.getAcceso() == Acceso.PROTECTED) {
+                    for (ClaseUML clase: Data.todasLasClases()) {
+                        if (clase.getMetodos().contains(mtd)) {
+                            for (ClaseUML claseHija: Data.todasLasClases(clase.getHijos())) {
+                                eliminarPanelEnDiagramador(claseHija);
+                            }
+                            clase.getHijos().clear();
+                            break;
+                        }
+                    }
+                }
+                this.diag_CambiarNombre.dispose();
+                refrescarModelosClase();
                 enviarMensaje(this.diag_Clases, "Nombre cambiado.");
             }
             
         }
+        
     }//GEN-LAST:event_btn_ClaseCambiarNombreActionPerformed
 
-    private void popmi_PropCambiarNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmi_PropCambiarNombreActionPerformed
+    private void popmi_PropMtdCambiarNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmi_PropMtdCambiarNombreActionPerformed
         // TODO add your handling code here:
         if (((DefaultMutableTreeNode)this.tree_Clases.getSelectionPath().getLastPathComponent()).getUserObject() instanceof Propiedad prop) {
             
@@ -956,7 +1065,7 @@ public class frm_Main extends javax.swing.JFrame {
         }
         mostrarJDialog(this.diag_CambiarNombre);
         
-    }//GEN-LAST:event_popmi_PropCambiarNombreActionPerformed
+    }//GEN-LAST:event_popmi_PropMtdCambiarNombreActionPerformed
 
     private void popmi_ClaseAgregarPropiedadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmi_ClaseAgregarPropiedadActionPerformed
         // TODO add your handling code here:
@@ -980,6 +1089,7 @@ public class frm_Main extends javax.swing.JFrame {
                     );
                     this.diag_CrearProp.dispose();
                     refrescarModelosClase();
+                    refrescarModeloEnDiagramador(clase);
                     enviarMensaje(this.diag_Clases, "Clase creada.");
 
                 }
@@ -996,7 +1106,7 @@ public class frm_Main extends javax.swing.JFrame {
         Object objetoSeleccionado = ((DefaultMutableTreeNode)this.tree_Clases.getSelectionPath().getLastPathComponent()).getUserObject();
         if (objetoSeleccionado instanceof ClaseUML clase) {
             
-            clases.remove(clase);
+            Data.getClases().remove(clase);
             refrescarModelosClase();
             enviarMensaje(this.diag_Clases, "Clase removida");
             
@@ -1031,6 +1141,7 @@ public class frm_Main extends javax.swing.JFrame {
                     );
                     
                     refrescarModelosClase();
+                    refrescarModeloEnDiagramador(clase);
                     this.diag_CrearMetodo.dispose();
                     limpiar(this.txt_CrearMetNombre);
                     enviarMensaje(this.diag_Clases, "Método creado.");
@@ -1090,17 +1201,26 @@ public class frm_Main extends javax.swing.JFrame {
                 }
             }
             
+            if (claseHija.getClasePadre().equals(clasePadre)) {
+                return;
+            }
+            
             if (clasePadre == null) {
-                claseHija.getClasePadre().getHijos().remove(claseHija);
-                claseHija.setClasePadre(clasePadre);
+                claseHija.setClasePadre(null);
+                if (claseHija.getClasePadre() != null) {
+                    claseHija.getClasePadre().getHijos().remove(claseHija);
+                }
             } else {
-                claseHija.getClasePadre().getHijos().remove(claseHija);
+                clasePadre.getHijos().add(claseHija);
                 claseHija.setClasePadre(clasePadre);
-                claseHija.getClasePadre().getHijos().add(claseHija);
+                if (claseHija.getClasePadre() != null) {
+                    claseHija.getClasePadre().getHijos().remove(claseHija);
+                }
             }
             
             this.diag_Herencia.dispose();
             refrescarModelosClase();
+            refrescarModeloEnDiagramador(claseHija);
             enviarMensaje(this.diag_Clases, "Herencia establecida.");
             
         } else {
@@ -1117,160 +1237,269 @@ public class frm_Main extends javax.swing.JFrame {
 
     private void tab_ClasesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tab_ClasesMouseClicked
         // TODO add your handling code here:
-//        if (this.tab_Clases.getSelectedIndex() == 1 && !this.clases.isEmpty()) {
+//        if (this.tab_Clases.getSelectedIndex() == 1 && !Data.getClases().isEmpty()) {
 //            
 //            this.txta_CodigoClases.setText(clasesACodigo())
 //            
 //        }
                 
     }//GEN-LAST:event_tab_ClasesMouseClicked
-    
-    private String clasesACodigo() {
-        System.out.println(clasesACodigo("", this.clases));
-        return clasesACodigo("", this.clases);
-    }
-    
-    private String clasesACodigo(String str, ArrayList<ClaseUML> clases) {
-        for (ClaseUML clase: clases) {
-            str += clase.claseEnCodigo()+"\n\n";
-            if (!clase.getHijos().isEmpty()) {
-                str = clasesACodigo(str, clase.getHijos());
-            }
-        }
-        return str;
-    }
-    
-    private DefaultTreeModel crearTreeModelClases() {
-        return crearTreeModelClases(
-                new DefaultMutableTreeNode("Clases"),
-                this.clases
+
+    private void tree_ClasesMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tree_ClasesMouseDragged
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_tree_ClasesMouseDragged
+
+    private void tree_ClasesMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tree_ClasesMouseReleased
+        // TODO add your handling code here:
+        Point punto = evt.getPoint();
+        punto.translate(
+                this.jScrollPane1.getX()
+                , 
+                this.jScrollPane1.getY()
         );
-    }
-    
-    private DefaultTreeModel crearTreeModelClases(DefaultMutableTreeNode nodoRaiz, ArrayList<ClaseUML> clases) {
-        
-        for (ClaseUML clase: clases) {
-            nodoRaiz.add(clase.formaNodo());
-            if (!clase.getHijos().isEmpty()) {
-                crearTreeModelClases(
-                        nodoRaiz
-                        ,clase.getHijos()
-                );
-            }
-        }
-        
-        return new DefaultTreeModel(nodoRaiz);
-        
-    }
-    
-    private DefaultListModel crearListModelClases() {
-        return crearListModelClases(new DefaultListModel(), this.clases);
-    }
-    
-    private DefaultListModel crearListModelClases(DefaultListModel modelo, ArrayList<ClaseUML> clases) {
-        
-        for (ClaseUML clase: clases) {
-            
-            modelo.addElement(clase);
-            if (!clase.getHijos().isEmpty()) {
-                crearListModelClases(
-                        modelo,
-                        clase.getHijos()
-                );
-            }
+        if (this.tree_Clases.getSelectionPath() != null) {
+            if (((DefaultMutableTreeNode)this.tree_Clases.getSelectionPath().getLastPathComponent()).getUserObject() instanceof ClaseUML clase) {
+                if (estaDentroDePanelClases(punto)) {
                     
+                    punto.translate(
+                            -(this.tab_Clases.getX() + this.pnl_ClasesDiagrama.getX())
+                            , 
+                            -(this.tab_Clases.getY() + this.pnl_ClasesDiagrama.getY())
+                    );
+                    
+                    ArrayList<pnl_TreeDeClase> paneles = new ArrayList();
+                    try {
+                        for (Component comp: this.pnl_ClasesDiagrama.getComponents()) {
+                            paneles.add(
+                                    (pnl_TreeDeClase) comp
+                            );
+                        }
+                        for (pnl_TreeDeClase panel: paneles) {
+                            if (panel.getClase().equals(clase)) {
+                                panel.setLocation(punto);
+                                return;
+                            }
+                        }
+                    } catch (Exception e) {System.out.println("no hay paneles");}
+                    
+                    pnl_TreeDeClase nuevoPanel = clase.crearPanelTree(this);
+                    nuevoPanel.setLocation(punto);
+                    nuevoPanel.setVisible(true);
+                    nuevoPanel.setSize(150, 150);
+                    nuevoPanel.setEsquina(punto);
+                    System.out.println(nuevoPanel.getLocation());
+                    this.pnl_ClasesDiagrama.add(nuevoPanel);
+                    this.pnl_ClasesDiagrama.revalidate();
+                    this.pnl_ClasesDiagrama.repaint();
+                }
+            }
         }
-        return modelo;
         
-    }
-    
-    private DefaultListModel crearListModelClases(DefaultListModel modelo) {
         
-        DefaultListModel elementos = crearListModelClases();
-        for (int i = 0; i < elementos.getSize(); i++) {
-            modelo.addElement(
-                    (ClaseUML) elementos.get(i)
+    }//GEN-LAST:event_tree_ClasesMouseReleased
+
+    private void tree_ClasesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tree_ClasesMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tree_ClasesMousePressed
+
+    private void popmi_PropMtdEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmi_PropMtdEliminarActionPerformed
+        // TODO add your handling code here:
+        Object objetoSeleccionado = ((DefaultMutableTreeNode)this.tree_Clases.getSelectionPath().getLastPathComponent()).getUserObject();
+        if (objetoSeleccionado instanceof Propiedad prop) {
+            
+            if (!this.txt_ClaseCambiarNombre.getText().trim().isEmpty())  {
+                boolean tieneHijos = false;
+                for (ClaseUML clase: Data.todasLasClases()) {
+                    if (clase.getPropiedades().contains(prop)) {
+                        tieneHijos = !clase.getHijos().isEmpty();
+                    }
+                }
+                if (tieneHijos && prop.getAcceso() == Acceso.PROTECTED) {
+                    if (JOptionPane.showConfirmDialog(this, "Borrar este elemento eliminara todos los hijos de la clase, desea continuar?", "", -1) == JOptionPane.CANCEL_OPTION) {
+                        return;
+                    }
+                }
+                if (tieneHijos && prop.getAcceso() == Acceso.PROTECTED) {
+                    for (ClaseUML clase: Data.todasLasClases()) {
+                        if (clase.getPropiedades().contains(prop)) {
+                            for (ClaseUML claseHija: Data.todasLasClases(clase.getHijos())) {
+                                eliminarPanelEnDiagramador(claseHija);
+                            }
+                            clase.getHijos().clear();
+                            break;
+                        }
+                    }
+                }
+                for (ClaseUML clase: Data.todasLasClases()) {
+                    clase.getPropiedades().remove(prop);
+                }
+                refrescarModelosClase();
+                enviarMensaje(this.diag_Clases, "Elemento borrado.");
+            }
+            
+        } else if (objetoSeleccionado instanceof Metodo mtd) {
+            
+            if (!this.txt_ClaseCambiarNombre.getText().trim().isEmpty())  {
+                boolean tieneHijos = false;
+                for (ClaseUML clase: Data.todasLasClases()) {
+                    if (clase.getMetodos().contains(mtd)) {
+                        tieneHijos = !clase.getHijos().isEmpty();
+                    }
+                }
+                if (tieneHijos && mtd.getAcceso() == Acceso.PROTECTED) {
+                    if (JOptionPane.showConfirmDialog(this, "Borrar este elemento eliminara todos los hijos de la clase, desea continuar?", "", -1) == JOptionPane.CANCEL_OPTION) {
+                        return;
+                    }
+                }
+                if (tieneHijos && mtd.getAcceso() == Acceso.PROTECTED) {
+                    for (ClaseUML clase: Data.todasLasClases()) {
+                        if (clase.getMetodos().contains(mtd)) {
+                            for (ClaseUML claseHija: Data.todasLasClases(clase.getHijos())) {
+                                eliminarPanelEnDiagramador(claseHija);
+                            }
+                            clase.getHijos().clear();
+                            break;
+                        }
+                    }
+                }
+                for (ClaseUML clase: Data.todasLasClases()) {
+                    clase.getMetodos().remove(mtd);
+                }
+                refrescarModelosClase();
+                enviarMensaje(this.diag_Clases, "Elemento borrado.");
+            }
+            
+        }
+        
+    }//GEN-LAST:event_popmi_PropMtdEliminarActionPerformed
+
+    private void mnb_ClasesArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnb_ClasesArchivoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mnb_ClasesArchivoActionPerformed
+
+    private void mnb_ClasesAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnb_ClasesAbrirActionPerformed
+        // TODO add your handling code here:
+        boolean archivoElegido = this.fch_FileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION;
+        if (archivoElegido) {
+            File archivo = this.fch_FileChooser.getSelectedFile();
+            try {
+                FileInputStream fis = new FileInputStream(archivo);
+                ObjectInputStream ois = new ObjectInputStream(fis);
+                ArrayList<ClaseUML> clasesAbiertas = (ArrayList<ClaseUML>) ois.readObject();
+                Data.getClases().clear();
+                for (ClaseUML clase: clasesAbiertas) {
+                    Data.getClases().add(clase);
+                }
+                ois.close();
+            } catch (IOException ioex) {
+                System.out.println(ioex);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+            
+        }
+        
+        refrescarModelosClase();
+        
+    }//GEN-LAST:event_mnb_ClasesAbrirActionPerformed
+
+    private void mnb_ClasesGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnb_ClasesGuardarActionPerformed
+        // TODO add your handling code here:
+        boolean archivoElegido = this.fch_FileChooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION;
+        
+        if (archivoElegido) {
+            System.out.println(this.fch_FileChooser.getSelectedFile().getPath());
+            File archivo = new File(
+                    this.fch_FileChooser.getSelectedFile().getPath()+".cls"
             );
+            try {
+                FileOutputStream fos = new FileOutputStream(archivo);
+                ObjectOutputStream oos = new ObjectOutputStream(fos);
+                oos.writeObject(Data.getClases());
+                oos.close();
+            } catch (IOException ioex) {
+                System.out.println(ioex);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+            
         }
-        return modelo;
         
-    }
+    }//GEN-LAST:event_mnb_ClasesGuardarActionPerformed
     
-    private void refrescarModelosClase() {
+    public void refrescarModelosClase() {
         
-        this.tree_Clases.setModel(crearTreeModelClases());
+        this.tree_Clases.setModel(Data.crearTreeModelClases());
         this.list_HerenciaClaseHija.setModel(
-                crearListModelClases()
+                Data.crearListModelClases()
         );
         DefaultListModel modeloPadre = new DefaultListModel();
         modeloPadre.addElement("Sin padre");
         this.list_HerenciaClasePadre.setModel(
-                crearListModelClases(modeloPadre)
+                Data.crearListModelClases(modeloPadre)
         );
         DefaultComboBoxModel modeloPadreCBox = new DefaultComboBoxModel();
         modeloPadreCBox.addElement("Sin padre");
         this.cbox_CrearClasePadre.setModel(
-                crearCBoxModelParaClasesPadre(modeloPadreCBox)
+                Data.crearCBoxModelParaClasesPadre(modeloPadreCBox)
         );
-        this.txta_CodigoClases.setText(clasesACodigo());
+        this.txta_CodigoClases.setText(Data.clasesACodigo());
         
     }
     
-    private DefaultComboBoxModel crearCBoxModelParaClasesPadre() {
-        return crearCBoxModelParaClasesPadre(new DefaultComboBoxModel(), this.clases);
-    }
-    
-    private DefaultComboBoxModel crearCBoxModelParaClasesPadre(DefaultComboBoxModel modelo) {
-        
-        DefaultComboBoxModel elementos = crearCBoxModelParaClasesPadre();
-        for (int i = 0; i < elementos.getSize(); i++) {
-            modelo.addElement(
-                    (ClaseUML) elementos.getElementAt(i)
-            );
-        }
-        return modelo;
-        
-    }
-    
-    private DefaultComboBoxModel crearCBoxModelParaClasesPadre(DefaultComboBoxModel modelo, ArrayList<ClaseUML> clases) {
-        
-        for (ClaseUML clase: clases) {
-            
-            modelo.addElement(clase);
-            if (!clase.getHijos().isEmpty()) {
-                crearCBoxModelParaClasesPadre(
-                        modelo,
-                        clase.getHijos()
-                );
+    private void refrescarModeloEnDiagramador(ClaseUML clase) {
+        for (Component comp: this.pnl_ClasesDiagrama.getComponents()) {
+            pnl_TreeDeClase panel = (pnl_TreeDeClase) comp;
+            if (panel.getClase().equals(clase)) {
+                panel.refrescarModeloClase();
             }
-                    
         }
-        return modelo;
     }
     
-    private void mostrarJDialog(javax.swing.JDialog diag) {
+    private void refrescarModeloEnDiagramador(TreePath pathSeleccionado) {
+        for (int i = pathSeleccionado.getPath().length; i >= 0; i++) {
+            DefaultMutableTreeNode nodo = (DefaultMutableTreeNode) pathSeleccionado.getPath()[i];
+            if (nodo.getUserObject() instanceof ClaseUML clase) {
+                refrescarModeloEnDiagramador(clase);
+                break;
+            }
+        }
+    }
+    
+    public void eliminarPanelEnDiagramador(ClaseUML clase) {
+        for (Component comp: this.pnl_ClasesDiagrama.getComponents()) {
+            pnl_TreeDeClase panel = (pnl_TreeDeClase) comp;
+            if (panel.getClase().equals(clase)) {
+                this.pnl_ClasesDiagrama.remove(comp);
+                this.pnl_ClasesDiagrama.revalidate();
+                this.pnl_ClasesDiagrama.repaint();
+            }
+        }
+    }
+    
+    public static void mostrarJDialog(javax.swing.JDialog diag) {
         diag.pack();
         diag.setVisible(true);
     }
     
-    private void limpiar(javax.swing.JTextField txt) {
+    public static void limpiar(javax.swing.JTextField txt) {
         txt.setText("");
     }
     
-    private void enviarMensaje(Component comp, String msg) {
+    public static void enviarMensaje(Component comp, String msg) {
         JOptionPane.showMessageDialog(comp, msg, "", -1);
     }
     
-    private void crearClaseUML(String nombre) {
-        clases.add(new ClaseUML(
-                nombre
-        ));
-    }
-    private void crearClaseUML(String nombre, ClaseUML padre) {
-        clases.add(new ClaseUML(
-                nombre,
-                padre
-        ));
+    private boolean estaDentroDePanelClases(Point punto) {
+        return (
+                (punto.getX() > this.tab_Clases.getX() + this.pnl_ClasesDiagrama.getX() && 
+                punto.getX() < (this.getWidth()) - ((this.getWidth() - (this.tab_Clases.getX() + this.pnl_ClasesDiagrama.getX())) - this.pnl_ClasesDiagrama.getWidth())
+                ) &&
+                (punto.getY() > this.tab_Clases.getY() + this.pnl_ClasesDiagrama.getY() && 
+                punto.getY() < (this.getHeight()) - ((this.getHeight() - (this.tab_Clases.getY() + this.pnl_ClasesDiagrama.getY())) - this.pnl_ClasesDiagrama.getHeight()))
+        );
     }
     
     private void imprimirError(Exception e, java.awt.event.ActionEvent evt) {
@@ -1305,10 +1534,10 @@ public class frm_Main extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton btn_ClaseCambiarNombre;
     private javax.swing.JButton btn_ClasesHerencia;
-    private javax.swing.JButton btn_ClasesHerencia1;
     private javax.swing.JToggleButton btn_CrearClase;
     private javax.swing.JToggleButton btn_CrearMet;
     private javax.swing.JToggleButton btn_CrearMetAgregarParametro;
+    private javax.swing.JButton btn_CrearNuevaClase;
     private javax.swing.JToggleButton btn_CrearParam;
     private javax.swing.JToggleButton btn_CrearProp;
     private javax.swing.JButton btn_EstablecerHerencia;
@@ -1327,6 +1556,7 @@ public class frm_Main extends javax.swing.JFrame {
     private javax.swing.JDialog diag_CrearVariable;
     private javax.swing.JDialog diag_Flujo;
     private javax.swing.JDialog diag_Herencia;
+    private javax.swing.JFileChooser fch_FileChooser;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
@@ -1370,12 +1600,13 @@ public class frm_Main extends javax.swing.JFrame {
     private javax.swing.JPanel pnl_ClasesCodigo;
     private javax.swing.JPanel pnl_ClasesDiagrama;
     private javax.swing.JPopupMenu pop_Clases;
-    private javax.swing.JPopupMenu pop_Propiedades;
+    private javax.swing.JPopupMenu pop_PropMtd;
     private javax.swing.JMenuItem popmi_ClaseAgregarMetodo;
     private javax.swing.JMenuItem popmi_ClaseAgregarPropiedad;
     private javax.swing.JMenuItem popmi_ClaseCambiarNombre;
     private javax.swing.JMenuItem popmi_ClaseEliminar;
-    private javax.swing.JMenuItem popmi_PropCambiarNombre;
+    private javax.swing.JMenuItem popmi_PropMtdCambiarNombre;
+    private javax.swing.JMenuItem popmi_PropMtdEliminar;
     private javax.swing.JTabbedPane tab_Clases;
     private javax.swing.JTree tree_Clases;
     private javax.swing.JTextField txt_ClaseCambiarNombre;
@@ -1386,8 +1617,4 @@ public class frm_Main extends javax.swing.JFrame {
     private javax.swing.JTextArea txta_CodigoClases;
     // End of variables declaration//GEN-END:variables
 
-    private final ArrayList<ClaseUML> clases = new ArrayList<ClaseUML>();
-    
-    // mostrarJDialog(this.diag_CrearMetodo);
-    
 }

@@ -1,5 +1,6 @@
 package diagramadoruml;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /*
@@ -11,7 +12,7 @@ import java.util.ArrayList;
  *
  * @author samuelzun
  */
-public class Metodo {
+public class Metodo implements Serializable {
     
     private String nombre;
     private Tipo tipoRetorno;
