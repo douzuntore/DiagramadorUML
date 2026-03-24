@@ -8,13 +8,11 @@ package diagramadoruml;
  *
  * @author samuelzun
  */
-public class Inicio extends Operacion{
+public class Inicio extends FlujoUML{
+    
+    public Inicio() {
+        super("Inicio");
+        this.panel.cambiarLblTipo("inicio");
+    }
 
-    public Inicio(Metodo mtd) {
-        super(mtd);
-    }
-    
-    public void logica() {
-    }
-    
 }

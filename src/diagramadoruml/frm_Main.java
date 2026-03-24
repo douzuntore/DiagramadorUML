@@ -140,6 +140,26 @@ public class frm_Main extends javax.swing.JFrame {
         mnb_ClasesExportar = new javax.swing.JMenu();
         mnb_ClasesExpPDF = new javax.swing.JMenuItem();
         diag_Flujo = new javax.swing.JDialog();
+        pnl_Flujo = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel8 = new javax.swing.JPanel();
+        jPanel9 = new javax.swing.JPanel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
+        jButton1 = new javax.swing.JButton();
+        mnb_Flujo = new javax.swing.JMenuBar();
+        mn_FlujoArchivo = new javax.swing.JMenu();
+        mni_FlujoAbrir = new javax.swing.JMenuItem();
+        mni_FlujoGuardar = new javax.swing.JMenuItem();
+        mn_FlujoExportar = new javax.swing.JMenu();
+        mni_FlujoExportarPDF = new javax.swing.JMenuItem();
         diag_CrearVariable = new javax.swing.JDialog();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -389,15 +409,229 @@ public class frm_Main extends javax.swing.JFrame {
                 .addGap(0, 6, Short.MAX_VALUE))
         );
 
+        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel1.setForeground(new java.awt.Color(51, 51, 51));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        jPanel2.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel2.setForeground(new java.awt.Color(51, 51, 51));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        jPanel3.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel3.setForeground(new java.awt.Color(51, 51, 51));
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        jPanel4.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel4.setForeground(new java.awt.Color(51, 51, 51));
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        jPanel5.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel5.setForeground(new java.awt.Color(51, 51, 51));
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        jPanel6.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel6.setForeground(new java.awt.Color(51, 51, 51));
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        jPanel7.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel7.setForeground(new java.awt.Color(51, 51, 51));
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 534, Short.MAX_VALUE)
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 444, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("tab1", jPanel8);
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 534, Short.MAX_VALUE)
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 444, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("tab2", jPanel9);
+
+        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane6.setViewportView(jList1);
+
+        jButton1.setText("Agregar variable");
+
+        javax.swing.GroupLayout pnl_FlujoLayout = new javax.swing.GroupLayout(pnl_Flujo);
+        pnl_Flujo.setLayout(pnl_FlujoLayout);
+        pnl_FlujoLayout.setHorizontalGroup(
+            pnl_FlujoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_FlujoLayout.createSequentialGroup()
+                .addGap(118, 118, 118)
+                .addGroup(pnl_FlujoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnl_FlujoLayout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(55, 55, 55)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnl_FlujoLayout.createSequentialGroup()
+                        .addGroup(pnl_FlujoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(55, 55, 55)
+                        .addGroup(pnl_FlujoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(pnl_FlujoLayout.createSequentialGroup()
+                        .addGap(80, 80, 80)
+                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(88, 88, 88)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 534, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnl_FlujoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnl_FlujoLayout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(42, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_FlujoLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(84, 84, 84))))
+        );
+        pnl_FlujoLayout.setVerticalGroup(
+            pnl_FlujoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_FlujoLayout.createSequentialGroup()
+                .addGap(113, 113, 113)
+                .addGroup(pnl_FlujoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnl_FlujoLayout.createSequentialGroup()
+                        .addGroup(pnl_FlujoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(38, 38, 38)
+                        .addGroup(pnl_FlujoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(39, 39, 39)
+                        .addGroup(pnl_FlujoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(31, 31, 31)
+                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnl_FlujoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnl_FlujoLayout.createSequentialGroup()
+                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(jButton1))
+                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(76, Short.MAX_VALUE))
+        );
+
+        mn_FlujoArchivo.setText("File");
+
+        mni_FlujoAbrir.setText("Abrir");
+        mn_FlujoArchivo.add(mni_FlujoAbrir);
+
+        mni_FlujoGuardar.setText("Guardar");
+        mn_FlujoArchivo.add(mni_FlujoGuardar);
+
+        mnb_Flujo.add(mn_FlujoArchivo);
+
+        mn_FlujoExportar.setText("Edit");
+
+        mni_FlujoExportarPDF.setText("Exportar como PDF");
+        mn_FlujoExportar.add(mni_FlujoExportarPDF);
+
+        mnb_Flujo.add(mn_FlujoExportar);
+
+        diag_Flujo.setJMenuBar(mnb_Flujo);
+
         javax.swing.GroupLayout diag_FlujoLayout = new javax.swing.GroupLayout(diag_Flujo.getContentPane());
         diag_Flujo.getContentPane().setLayout(diag_FlujoLayout);
         diag_FlujoLayout.setHorizontalGroup(
             diag_FlujoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(pnl_Flujo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         diag_FlujoLayout.setVerticalGroup(
             diag_FlujoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(pnl_Flujo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -1269,14 +1503,14 @@ public class frm_Main extends javax.swing.JFrame {
                             -(this.tab_Clases.getY() + this.pnl_ClasesDiagrama.getY())
                     );
                     
-                    ArrayList<pnl_TreeDeClase> paneles = new ArrayList();
+                    ArrayList<pnl_ClaseUML> paneles = new ArrayList();
                     try {
                         for (Component comp: this.pnl_ClasesDiagrama.getComponents()) {
                             paneles.add(
-                                    (pnl_TreeDeClase) comp
+                                    (pnl_ClaseUML) comp
                             );
                         }
-                        for (pnl_TreeDeClase panel: paneles) {
+                        for (pnl_ClaseUML panel: paneles) {
                             if (panel.getClase().equals(clase)) {
                                 panel.setLocation(punto);
                                 return;
@@ -1284,7 +1518,7 @@ public class frm_Main extends javax.swing.JFrame {
                         }
                     } catch (Exception e) {System.out.println("no hay paneles");}
                     
-                    pnl_TreeDeClase nuevoPanel = clase.crearPanelTree(this);
+                    pnl_ClaseUML nuevoPanel = clase.crearPanelTree(this);
                     nuevoPanel.setLocation(punto);
                     nuevoPanel.setVisible(true);
                     nuevoPanel.setSize(150, 150);
@@ -1451,7 +1685,7 @@ public class frm_Main extends javax.swing.JFrame {
     
     private void refrescarModeloEnDiagramador(ClaseUML clase) {
         for (Component comp: this.pnl_ClasesDiagrama.getComponents()) {
-            pnl_TreeDeClase panel = (pnl_TreeDeClase) comp;
+            pnl_ClaseUML panel = (pnl_ClaseUML) comp;
             if (panel.getClase().equals(clase)) {
                 panel.refrescarModeloClase();
             }
@@ -1470,7 +1704,7 @@ public class frm_Main extends javax.swing.JFrame {
     
     public void eliminarPanelEnDiagramador(ClaseUML clase) {
         for (Component comp: this.pnl_ClasesDiagrama.getComponents()) {
-            pnl_TreeDeClase panel = (pnl_TreeDeClase) comp;
+            pnl_ClaseUML panel = (pnl_ClaseUML) comp;
             if (panel.getClase().equals(clase)) {
                 this.pnl_ClasesDiagrama.remove(comp);
                 this.pnl_ClasesDiagrama.revalidate();
@@ -1557,6 +1791,7 @@ public class frm_Main extends javax.swing.JFrame {
     private javax.swing.JDialog diag_Flujo;
     private javax.swing.JDialog diag_Herencia;
     private javax.swing.JFileChooser fch_FileChooser;
+    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
@@ -1574,18 +1809,32 @@ public class frm_Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JList<String> jList1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JLabel lbl_Clases;
     private javax.swing.JList<String> list_CrearMetParametros;
     private javax.swing.JList<String> list_HerenciaClaseHija;
     private javax.swing.JList<String> list_HerenciaClasePadre;
+    private javax.swing.JMenu mn_FlujoArchivo;
+    private javax.swing.JMenu mn_FlujoExportar;
     private javax.swing.JMenu mn_PrincipalFunciones;
     private javax.swing.JMenuBar mnb_Clases;
     private javax.swing.JMenuItem mnb_ClasesAbrir;
@@ -1593,12 +1842,17 @@ public class frm_Main extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnb_ClasesExpPDF;
     private javax.swing.JMenu mnb_ClasesExportar;
     private javax.swing.JMenuItem mnb_ClasesGuardar;
+    private javax.swing.JMenuBar mnb_Flujo;
     private javax.swing.JMenuBar mnb_Principal;
+    private javax.swing.JMenuItem mni_FlujoAbrir;
+    private javax.swing.JMenuItem mni_FlujoExportarPDF;
+    private javax.swing.JMenuItem mni_FlujoGuardar;
     private javax.swing.JMenuItem mni_PrincipalClases;
     private javax.swing.JMenuItem mni_PrincipalFlujo;
     private javax.swing.JPanel pnl_Clases;
     private javax.swing.JPanel pnl_ClasesCodigo;
     private javax.swing.JPanel pnl_ClasesDiagrama;
+    private javax.swing.JPanel pnl_Flujo;
     private javax.swing.JPopupMenu pop_Clases;
     private javax.swing.JPopupMenu pop_PropMtd;
     private javax.swing.JMenuItem popmi_ClaseAgregarMetodo;

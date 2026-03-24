@@ -16,7 +16,7 @@ import javax.swing.tree.DefaultTreeModel;
  */
 public class Data {
     
-    private static Data data;
+    private static Data data; 
     
     private Data() {}
     
@@ -28,6 +28,7 @@ public class Data {
     }
     
     private static ArrayList<ClaseUML> clases = new ArrayList<>();
+    private static ArrayList<Variable> variables = new ArrayList<>();
 
     public static ArrayList<ClaseUML> getClases() {
         return clases;

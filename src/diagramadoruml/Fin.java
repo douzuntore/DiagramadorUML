@@ -8,13 +8,11 @@ package diagramadoruml;
  *
  * @author samuelzun
  */
-public class Fin extends Operacion{
+public class Fin extends FlujoUML{
 
-    public Fin(Metodo mtd) {
-        super(mtd);
-    }
-    
-    public void logica() {
+    public Fin() {
+        super("Fin");
+        this.panel.cambiarLblTipo("fin");
     }
     
 }

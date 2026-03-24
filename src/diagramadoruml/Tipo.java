@@ -11,6 +11,7 @@ package diagramadoruml;
 public enum Tipo{
     
     VOID("void"),
+    BOOLEAN("boolean"),
     BYTE("byte"),
     SHORT("short"),
     INT("int"),

@@ -238,8 +238,8 @@ public class ClaseUML implements Serializable{
         return str;
     }
     
-    public pnl_TreeDeClase crearPanelTree(frm_Main frm) {
-        return new pnl_TreeDeClase(this, frm);
+    public pnl_ClaseUML crearPanelTree(frm_Main frm) {
+        return new pnl_ClaseUML(this, frm);
     }
     
     @Override public String toString() {

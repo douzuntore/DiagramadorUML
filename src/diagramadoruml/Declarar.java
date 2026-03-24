@@ -8,20 +8,35 @@ package diagramadoruml;
  *
  * @author samuelzun
  */
-public class Declarar extends Operacion{
+public class Declarar extends FlujoUML{
     
-    private int propID;
-    private boolean esNuevo;
-    private Object nuevoValor;
+    private Variable variable;
+    private Variable valorCambio;
 
-    public Declarar(int propID, boolean esNuevo, Object nuevoValor, Metodo mtd) {
-        super(mtd);
-        this.propID = propID;
-        this.esNuevo = esNuevo;
-        this.nuevoValor = nuevoValor;
+    public Declarar() {
     }
-    
-    public void logica() {
+
+    public Declarar(String nombre, Variable variable, Variable valorCambio) {
+        super(nombre);
+        this.variable = variable;
+        this.valorCambio = valorCambio;
+        this.panel.cambiarLblTipo("declarar");
+    }
+
+    public Variable getVariable() {
+        return variable;
+    }
+
+    public void setVariable(Variable variable) {
+        this.variable = variable;
+    }
+
+    public Variable getValorCambio() {
+        return valorCambio;
+    }
+
+    public void setValorCambio(Variable valorCambio) {
+        this.valorCambio = valorCambio;
     }
     
 }

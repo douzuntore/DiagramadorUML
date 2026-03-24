@@ -18,14 +18,14 @@ import javax.swing.tree.DefaultMutableTreeNode;
  *
  * @author samuelzun
  */
-public class pnl_TreeDeClase extends JPanel {
+public class pnl_ClaseUML extends JPanel {
 
     /**
      * Creates new form TreeDeClase
      * @param clase
      * @param frm
      */
-    public pnl_TreeDeClase(ClaseUML clase, frm_Main frm) {
+    public pnl_ClaseUML(ClaseUML clase, frm_Main frm) {
         
         this.clase = clase;
         this.frm = frm;
