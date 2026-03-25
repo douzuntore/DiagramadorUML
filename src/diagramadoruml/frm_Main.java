@@ -142,18 +142,25 @@ public class frm_Main extends javax.swing.JFrame {
         diag_Flujo = new javax.swing.JDialog();
         pnl_Flujo = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
+        jLabel16 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
+        jLabel17 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
+        jLabel18 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
+        jLabel19 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
+        jLabel20 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
+        jLabel21 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel8 = new javax.swing.JPanel();
-        jPanel9 = new javax.swing.JPanel();
+        jLabel22 = new javax.swing.JLabel();
+        tab_Flujo = new javax.swing.JTabbedPane();
+        pnl_FlujoDiagrama = new javax.swing.JPanel();
+        pnl_FlujoCodigo = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
-        jButton1 = new javax.swing.JButton();
+        list_Variables = new javax.swing.JList<>();
+        btn_AgregarVariable = new javax.swing.JButton();
         mnb_Flujo = new javax.swing.JMenuBar();
         mn_FlujoArchivo = new javax.swing.JMenu();
         mni_FlujoAbrir = new javax.swing.JMenuItem();
@@ -409,171 +416,281 @@ public class frm_Main extends javax.swing.JFrame {
                 .addGap(0, 6, Short.MAX_VALUE))
         );
 
-        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
         jPanel1.setForeground(new java.awt.Color(51, 51, 51));
+        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jPanel1MouseReleased(evt);
+            }
+        });
+
+        jLabel16.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel16.setText("Inicio");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel16)
+                .addGap(34, 34, 34))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jLabel16)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel2.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel2.setBackground(new java.awt.Color(204, 204, 204));
         jPanel2.setForeground(new java.awt.Color(51, 51, 51));
+        jPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jPanel2MouseReleased(evt);
+            }
+        });
+
+        jLabel17.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel17.setText("Declarar");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel17)
+                .addGap(24, 24, 24))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jLabel17)
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
-        jPanel3.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel3.setBackground(new java.awt.Color(204, 204, 204));
         jPanel3.setForeground(new java.awt.Color(51, 51, 51));
+        jPanel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jPanel3MouseReleased(evt);
+            }
+        });
+
+        jLabel18.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel18.setText("If");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(46, 46, 46)
+                .addComponent(jLabel18)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jLabel18)
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
-        jPanel4.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel4.setBackground(new java.awt.Color(204, 204, 204));
         jPanel4.setForeground(new java.awt.Color(51, 51, 51));
+        jPanel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jPanel4MouseReleased(evt);
+            }
+        });
+
+        jLabel19.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel19.setText("While");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel19)
+                .addGap(33, 33, 33))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jLabel19)
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
-        jPanel5.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel5.setBackground(new java.awt.Color(204, 204, 204));
         jPanel5.setForeground(new java.awt.Color(51, 51, 51));
+        jPanel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jPanel5MouseReleased(evt);
+            }
+        });
+
+        jLabel20.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel20.setText("For");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 100, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel5Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel20)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGap(0, 66, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel5Layout.createSequentialGroup()
+                    .addGap(0, 24, Short.MAX_VALUE)
+                    .addComponent(jLabel20)
+                    .addGap(0, 25, Short.MAX_VALUE)))
         );
 
-        jPanel6.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel6.setBackground(new java.awt.Color(204, 204, 204));
         jPanel6.setForeground(new java.awt.Color(51, 51, 51));
+        jPanel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jPanel6MouseReleased(evt);
+            }
+        });
+
+        jLabel21.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel21.setText("Print");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 100, Short.MAX_VALUE)
+            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel6Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel21)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel6Layout.createSequentialGroup()
+                    .addGap(0, 24, Short.MAX_VALUE)
+                    .addComponent(jLabel21)
+                    .addGap(0, 25, Short.MAX_VALUE)))
         );
 
-        jPanel7.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel7.setBackground(new java.awt.Color(204, 204, 204));
         jPanel7.setForeground(new java.awt.Color(51, 51, 51));
+        jPanel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jPanel7MouseReleased(evt);
+            }
+        });
+
+        jLabel22.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel22.setText("Final");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 100, Short.MAX_VALUE)
+            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel7Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel22)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGap(0, 66, Short.MAX_VALUE)
+            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel7Layout.createSequentialGroup()
+                    .addGap(0, 24, Short.MAX_VALUE)
+                    .addComponent(jLabel22)
+                    .addGap(0, 25, Short.MAX_VALUE)))
         );
 
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 534, Short.MAX_VALUE)
+        pnl_FlujoDiagrama.setBackground(new java.awt.Color(153, 153, 153));
+
+        javax.swing.GroupLayout pnl_FlujoDiagramaLayout = new javax.swing.GroupLayout(pnl_FlujoDiagrama);
+        pnl_FlujoDiagrama.setLayout(pnl_FlujoDiagramaLayout);
+        pnl_FlujoDiagramaLayout.setHorizontalGroup(
+            pnl_FlujoDiagramaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 606, Short.MAX_VALUE)
         );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pnl_FlujoDiagramaLayout.setVerticalGroup(
+            pnl_FlujoDiagramaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 444, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("tab1", jPanel8);
+        tab_Flujo.addTab("Diagrama", pnl_FlujoDiagrama);
 
-        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
-        jPanel9.setLayout(jPanel9Layout);
-        jPanel9Layout.setHorizontalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 534, Short.MAX_VALUE)
+        javax.swing.GroupLayout pnl_FlujoCodigoLayout = new javax.swing.GroupLayout(pnl_FlujoCodigo);
+        pnl_FlujoCodigo.setLayout(pnl_FlujoCodigoLayout);
+        pnl_FlujoCodigoLayout.setHorizontalGroup(
+            pnl_FlujoCodigoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 606, Short.MAX_VALUE)
         );
-        jPanel9Layout.setVerticalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pnl_FlujoCodigoLayout.setVerticalGroup(
+            pnl_FlujoCodigoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 444, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("tab2", jPanel9);
+        tab_Flujo.addTab("Codigo", pnl_FlujoCodigo);
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+        list_Variables.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane6.setViewportView(jList1);
+        jScrollPane6.setViewportView(list_Variables);
 
-        jButton1.setText("Agregar variable");
+        btn_AgregarVariable.setText("Agregar variable");
 
         javax.swing.GroupLayout pnl_FlujoLayout = new javax.swing.GroupLayout(pnl_Flujo);
         pnl_Flujo.setLayout(pnl_FlujoLayout);
         pnl_FlujoLayout.setHorizontalGroup(
             pnl_FlujoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_FlujoLayout.createSequentialGroup()
-                .addGap(118, 118, 118)
                 .addGroup(pnl_FlujoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnl_FlujoLayout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(64, 64, 64)
+                        .addGroup(pnl_FlujoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(55, 55, 55)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(pnl_FlujoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(pnl_FlujoLayout.createSequentialGroup()
-                        .addGroup(pnl_FlujoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(55, 55, 55)
-                        .addGroup(pnl_FlujoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(pnl_FlujoLayout.createSequentialGroup()
-                        .addGap(80, 80, 80)
+                        .addGap(143, 143, 143)
                         .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(88, 88, 88)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 534, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(95, 95, 95)
+                .addComponent(tab_Flujo, javax.swing.GroupLayout.PREFERRED_SIZE, 606, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(pnl_FlujoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnl_FlujoLayout.createSequentialGroup()
                         .addGap(43, 43, 43)
                         .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(42, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_FlujoLayout.createSequentialGroup()
+                        .addContainerGap(17, Short.MAX_VALUE))
+                    .addGroup(pnl_FlujoLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)
+                        .addComponent(btn_AgregarVariable)
                         .addGap(84, 84, 84))))
         );
         pnl_FlujoLayout.setVerticalGroup(
@@ -582,26 +699,26 @@ public class frm_Main extends javax.swing.JFrame {
                 .addGap(113, 113, 113)
                 .addGroup(pnl_FlujoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnl_FlujoLayout.createSequentialGroup()
-                        .addGroup(pnl_FlujoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(pnl_FlujoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(38, 38, 38)
                         .addGroup(pnl_FlujoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(39, 39, 39)
-                        .addGroup(pnl_FlujoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(31, 31, 31)
+                        .addGroup(pnl_FlujoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(36, 36, 36)
                         .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnl_FlujoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnl_FlujoLayout.createSequentialGroup()
                             .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(18, 18, 18)
-                            .addComponent(jButton1))
-                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(76, Short.MAX_VALUE))
+                            .addComponent(btn_AgregarVariable))
+                        .addComponent(tab_Flujo, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(104, Short.MAX_VALUE))
         );
 
         mn_FlujoArchivo.setText("File");
@@ -1624,6 +1741,7 @@ public class frm_Main extends javax.swing.JFrame {
                 ArrayList<ClaseUML> clasesAbiertas = (ArrayList<ClaseUML>) ois.readObject();
                 Data.getClases().clear();
                 for (ClaseUML clase: clasesAbiertas) {
+                    System.out.println(clase.getNombre());
                     Data.getClases().add(clase);
                 }
                 ois.close();
@@ -1632,7 +1750,7 @@ public class frm_Main extends javax.swing.JFrame {
             } catch (Exception e) {
                 System.out.println(e);
             }
-            
+            mostrarJDialog(this.diag_Clases);
         }
         
         refrescarModelosClase();
@@ -1644,7 +1762,6 @@ public class frm_Main extends javax.swing.JFrame {
         boolean archivoElegido = this.fch_FileChooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION;
         
         if (archivoElegido) {
-            System.out.println(this.fch_FileChooser.getSelectedFile().getPath());
             File archivo = new File(
                     this.fch_FileChooser.getSelectedFile().getPath()+".cls"
             );
@@ -1658,10 +1775,78 @@ public class frm_Main extends javax.swing.JFrame {
             } catch (Exception e) {
                 System.out.println(e);
             }
-            
+            mostrarJDialog(this.diag_Clases);
         }
         
     }//GEN-LAST:event_mnb_ClasesGuardarActionPerformed
+
+    private void jPanel1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseReleased
+        // TODO add your handling code here:
+        Point punto = evt.getPoint();
+        punto.translate(
+                this.jScrollPane1.getX()
+                , 
+                this.jScrollPane1.getY()
+        );
+        if (estaDentroDePanelFlujo(punto)) {
+
+            punto.translate(
+                    -(this.tab_Flujo.getX() + this.pnl_FlujoDiagrama.getX())
+                    , 
+                    -(this.tab_Flujo.getY() + this.pnl_FlujoDiagrama.getY())
+            );
+            
+            Inicio nuevoInicio = new Inicio();
+            
+            nuevoInicio.getPanel().setLocation(punto);
+            nuevoInicio.getPanel().setVisible(true);
+            nuevoInicio.getPanel().setSize(102, 68);
+            //nuevoInicio.getPanel().setEsquina(punto);
+            System.out.println(nuevoInicio.getPanel().getLocation());
+            System.out.println(this.tab_Flujo.getX()+" "+this.tab_Flujo.getY());
+            System.out.println(this.pnl_FlujoDiagrama.getX()+" "+this.pnl_FlujoDiagrama.getY());
+            this.pnl_FlujoDiagrama.add(nuevoInicio.getPanel());
+            this.pnl_FlujoDiagrama.revalidate();
+            this.pnl_FlujoDiagrama.repaint();
+        }
+        
+    }//GEN-LAST:event_jPanel1MouseReleased
+
+    private void jPanel2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseReleased
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_jPanel2MouseReleased
+
+    private void jPanel3MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseReleased
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_jPanel3MouseReleased
+
+    private void jPanel4MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseReleased
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_jPanel4MouseReleased
+
+    private void jPanel5MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseReleased
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_jPanel5MouseReleased
+
+    private void jPanel6MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseReleased
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_jPanel6MouseReleased
+
+    private void jPanel7MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseReleased
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_jPanel7MouseReleased
     
     public void refrescarModelosClase() {
         
@@ -1736,6 +1921,16 @@ public class frm_Main extends javax.swing.JFrame {
         );
     }
     
+    private boolean estaDentroDePanelFlujo(Point punto) {
+        return (
+                (punto.getX() > this.tab_Flujo.getX() + this.pnl_FlujoDiagrama.getX() && 
+                punto.getX() < (this.getWidth()) - ((this.getWidth() - (this.tab_Flujo.getX() + this.pnl_FlujoDiagrama.getX())) - this.pnl_FlujoDiagrama.getWidth())
+                ) &&
+                (punto.getY() > this.tab_Flujo.getY() + this.pnl_FlujoDiagrama.getY() && 
+                punto.getY() < (this.getHeight()) - ((this.getHeight() - (this.tab_Flujo.getY() + this.pnl_FlujoDiagrama.getY())) - this.pnl_FlujoDiagrama.getHeight()))
+        );
+    }
+    
     private void imprimirError(Exception e, java.awt.event.ActionEvent evt) {
         System.out.println(e.getCause()+" en "+evt.getActionCommand());
     }
@@ -1766,6 +1961,7 @@ public class frm_Main extends javax.swing.JFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_AgregarVariable;
     private javax.swing.JToggleButton btn_ClaseCambiarNombre;
     private javax.swing.JButton btn_ClasesHerencia;
     private javax.swing.JToggleButton btn_CrearClase;
@@ -1791,7 +1987,6 @@ public class frm_Main extends javax.swing.JFrame {
     private javax.swing.JDialog diag_Flujo;
     private javax.swing.JDialog diag_Herencia;
     private javax.swing.JFileChooser fch_FileChooser;
-    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
@@ -1801,7 +1996,14 @@ public class frm_Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1809,7 +2011,6 @@ public class frm_Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -1817,8 +2018,6 @@ public class frm_Main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -1826,13 +2025,13 @@ public class frm_Main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JPopupMenu.Separator jSeparator1;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JLabel lbl_Clases;
     private javax.swing.JList<String> list_CrearMetParametros;
     private javax.swing.JList<String> list_HerenciaClaseHija;
     private javax.swing.JList<String> list_HerenciaClasePadre;
+    private javax.swing.JList<String> list_Variables;
     private javax.swing.JMenu mn_FlujoArchivo;
     private javax.swing.JMenu mn_FlujoExportar;
     private javax.swing.JMenu mn_PrincipalFunciones;
@@ -1853,6 +2052,8 @@ public class frm_Main extends javax.swing.JFrame {
     private javax.swing.JPanel pnl_ClasesCodigo;
     private javax.swing.JPanel pnl_ClasesDiagrama;
     private javax.swing.JPanel pnl_Flujo;
+    private javax.swing.JPanel pnl_FlujoCodigo;
+    private javax.swing.JPanel pnl_FlujoDiagrama;
     private javax.swing.JPopupMenu pop_Clases;
     private javax.swing.JPopupMenu pop_PropMtd;
     private javax.swing.JMenuItem popmi_ClaseAgregarMetodo;
@@ -1862,6 +2063,7 @@ public class frm_Main extends javax.swing.JFrame {
     private javax.swing.JMenuItem popmi_PropMtdCambiarNombre;
     private javax.swing.JMenuItem popmi_PropMtdEliminar;
     private javax.swing.JTabbedPane tab_Clases;
+    private javax.swing.JTabbedPane tab_Flujo;
     private javax.swing.JTree tree_Clases;
     private javax.swing.JTextField txt_ClaseCambiarNombre;
     private javax.swing.JTextField txt_CrearClaseNombre;

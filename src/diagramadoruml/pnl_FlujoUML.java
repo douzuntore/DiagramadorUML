@@ -16,8 +16,8 @@ public class pnl_FlujoUML extends javax.swing.JPanel {
     public pnl_FlujoUML(FlujoUML flujo) {
         
         this.flujo = flujo;
-        this.cambiarLblNombre(flujo.getNombre());
         initComponents();
+        this.cambiarLblNombre(flujo.getNombre());
         
     }
 
