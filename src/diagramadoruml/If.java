@@ -4,18 +4,24 @@
  */
 package diagramadoruml;
 
+import java.awt.Point;
+
 /**
  *
  * @author Ryzen Gaming
  */
 public class If extends FlujoUML{
     
-    private Variable condicion;
+    private Variable condicion; //tipo BOOLEAN
+    private CerrarLlave llaveDeCierre;
 
-    public If(Variable condicion, String nombre) {
-        super(nombre);
-        this.condicion = condicion;
-        this.panel.cambiarLblTipo("if");
+    public If(Point location) {
+        super("If", location);
+        this.panel.cambiarLblTipo("if {");
+        location.translate(0, 100);
+        this.llaveDeCierre = new CerrarLlave(
+                new Point(location.x, location.y)
+        );
     }
 
     public Variable getCondicion() {
@@ -24,6 +30,10 @@ public class If extends FlujoUML{
 
     public void setCondicion(Variable condicion) {
         this.condicion = condicion;
+    }
+
+    public CerrarLlave getLlaveDeCierre() {
+        return llaveDeCierre;
     }
     
 }

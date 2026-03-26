@@ -4,6 +4,10 @@
  */
 package diagramadoruml;
 
+import java.awt.Graphics;
+import java.awt.Point;
+import javax.swing.SwingUtilities;
+
 /**
  *
  * @author Ryzen Gaming
@@ -16,6 +20,11 @@ public class pnl_FlujoUML extends javax.swing.JPanel {
     public pnl_FlujoUML(FlujoUML flujo) {
         
         this.flujo = flujo;
+        if (this.flujo instanceof CerrarLlave) {
+            this.editable = false;
+        } else {
+            this.editable = true;
+        }
         initComponents();
         this.cambiarLblNombre(flujo.getNombre());
         
@@ -33,6 +42,21 @@ public class pnl_FlujoUML extends javax.swing.JPanel {
         lbl_TipoOperacion = new javax.swing.JLabel();
         lbl_NombreOperacion = new javax.swing.JLabel();
 
+        addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                formMouseDragged(evt);
+            }
+        });
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                formMouseReleased(evt);
+            }
+        });
+
+        lbl_TipoOperacion.setForeground(new java.awt.Color(153, 153, 153));
         lbl_TipoOperacion.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lbl_TipoOperacion.setText(" *opr*");
 
@@ -55,6 +79,62 @@ public class pnl_FlujoUML extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        // TODO add your handling code here:
+        if (evt.getButton() == java.awt.event.MouseEvent.BUTTON3) {
+            
+        }
+        esquinaAnterior = evt.getPoint();
+        
+    }//GEN-LAST:event_formMouseClicked
+
+    private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
+        // TODO add your handling code here:
+        Thread hilo = new Thread(
+                () -> {
+                    try {
+                        
+                        Point esquinaAhora = evt.getPoint();
+
+                        Thread.sleep(50);
+
+                        int x = (int)(evt.getXOnScreen() - getLocationOnScreen().x + getX() - esquinaAnterior.getX() - (getWidth()/2));
+                        int y = (int)(evt.getYOnScreen() - getLocationOnScreen().y + getY() - esquinaAnterior.getY() - (getHeight()/2));
+
+                        esquina.translate(
+                                x
+                                ,
+                                y
+                        );
+                        
+                        System.out.println(esquinaAhora);
+                        System.out.println(esquinaAnterior);
+                        System.out.println("");
+
+                        esquinaAnterior = esquina;
+                        SwingUtilities.invokeLater(
+                                () -> {
+                                    revalidate();
+                                    repaint();
+                                }
+                        );
+                    } catch (InterruptedException ex) {
+                        esquina = new Point(0, 0);
+                        esquinaAnterior = new Point(0, 0);
+                    }
+                }
+        );
+        hilo.start();
+        
+    }//GEN-LAST:event_formMouseDragged
+
+    private void formMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseReleased
+        // TODO add your handling code here:
+        // this.esquina = new Point(0, 0);
+        System.out.println("--------------");
+        
+    }//GEN-LAST:event_formMouseReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel lbl_NombreOperacion;
@@ -62,6 +142,14 @@ public class pnl_FlujoUML extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
     
     private FlujoUML flujo;
+    private boolean editable;
+    private Point esquina = new Point(0, 0);
+    private Point esquinaAnterior = esquina;
+    
+    public void paintComponent(Graphics g) {
+        this.setLocation(esquina);
+        super.paintComponent(g);
+    }
     
     public void cambiarLblTipo(String str) {
         this.lbl_TipoOperacion.setText(str);
@@ -69,6 +157,15 @@ public class pnl_FlujoUML extends javax.swing.JPanel {
     
     public void cambiarLblNombre(String str) {
         this.lbl_NombreOperacion.setText(str);
+    }
+
+    public Point getEsquina() {
+        return esquina;
+    }
+
+    public void setEsquina(Point esquina) {
+        this.esquina = esquina;
+        this.esquinaAnterior = esquina;
     }
     
 }

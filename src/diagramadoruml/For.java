@@ -4,6 +4,8 @@
  */
 package diagramadoruml;
 
+import java.awt.Point;
+
 /**
  *
  * @author Ryzen Gaming
@@ -11,11 +13,15 @@ package diagramadoruml;
 public class For extends FlujoUML{
     
     private Variable ciclosI; //tiene que ser tipo INT
+    private CerrarLlave llaveDeCierre;
 
-    public For(Variable ciclosI, String nombre) {
-        super(nombre);
-        this.ciclosI = ciclosI;
-        this.panel.cambiarLblTipo("for");
+    public For(Point location) {
+        super("For", location);
+        this.panel.cambiarLblTipo("for {");
+        location.translate(0, 100);
+        this.llaveDeCierre = new CerrarLlave(
+                new Point(location.x, location.y)
+        );
     }
 
     public Variable getCiclosI() {
@@ -24,6 +30,10 @@ public class For extends FlujoUML{
 
     public void setCiclosI(Variable ciclosI) {
         this.ciclosI = ciclosI;
+    }
+
+    public CerrarLlave getLlaveDeCierre() {
+        return llaveDeCierre;
     }
     
 }

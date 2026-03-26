@@ -4,6 +4,9 @@
  */
 package diagramadoruml;
 
+import java.awt.Point;
+import java.util.ArrayList;
+
 /**
  *
  * @author samuelzun
@@ -11,15 +14,12 @@ package diagramadoruml;
 public class Declarar extends FlujoUML{
     
     private Variable variable;
-    private Variable valorCambio;
+    private final ArrayList<Variable> valoresCambio = new ArrayList<>();
+    private String operacion;
+    private String operadorNo;
 
-    public Declarar() {
-    }
-
-    public Declarar(String nombre, Variable variable, Variable valorCambio) {
-        super(nombre);
-        this.variable = variable;
-        this.valorCambio = valorCambio;
+    public Declarar(Point location) {
+        super("Declarar", location);
         this.panel.cambiarLblTipo("declarar");
     }
 
@@ -31,12 +31,26 @@ public class Declarar extends FlujoUML{
         this.variable = variable;
     }
 
-    public Variable getValorCambio() {
-        return valorCambio;
+    public ArrayList<Variable> getValoresCambio() {
+        return valoresCambio;
     }
 
-    public void setValorCambio(Variable valorCambio) {
-        this.valorCambio = valorCambio;
+    public String getOperacion() {
+        return operacion;
     }
+
+    public void setOperacion(String operacion) {
+        this.operacion = operacion;
+    }
+
+    public String getOperadorNo() {
+        return operadorNo;
+    }
+
+    public void setOperadorNo(String operadorNo) {
+        this.operadorNo = operadorNo;
+    }
+
+    
     
 }

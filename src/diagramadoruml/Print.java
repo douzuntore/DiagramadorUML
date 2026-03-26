@@ -4,17 +4,18 @@
  */
 package diagramadoruml;
 
+import java.awt.Point;
+
 /**
  *
  * @author Ryzen Gaming
  */
 public class Print extends FlujoUML{
     
-    private Variable impresion;
+    private Variable impresion; //tipo STRING o no se
 
-    public Print(Variable impresion, String nombre) {
-        super(nombre);
-        this.impresion = impresion;
+    public Print(Point location) {
+        super("Print", location);
         this.panel.cambiarLblTipo("sout");
     }
 

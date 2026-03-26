@@ -4,6 +4,8 @@
  */
 package diagramadoruml;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Ryzen Gaming
@@ -16,9 +18,14 @@ public class Variable {
     public Variable() {
     }
 
-    public Variable(String nombre, Tipo tipo) {
+    public Variable(String nombre, Tipo tipo, ArrayList<Variable> variablesUsados, String operacion, String operadorNo) {
         this.nombre = nombre;
         this.tipo = tipo;
+        for (Variable var: variablesUsados) {
+            this.variablesUsados.add(var);
+        }
+        this.operacion = operacion;
+        this.operadorNo = operadorNo;
     }
 
     public String getNombre() {
@@ -35,6 +42,31 @@ public class Variable {
 
     public void setTipo(Tipo tipo) {
         this.tipo = tipo;
+    }
+
+    public ArrayList<Variable> getVariablesUsados() {
+        return variablesUsados;
+    }
+
+    public String getOperacion() {
+        return operacion;
+    }
+
+    public void setOperacion(String operacion) {
+        this.operacion = operacion;
+    }
+
+    public String getOperadorNo() {
+        return operadorNo;
+    }
+
+    public void setOperadorNo(String operadorNo) {
+        this.operadorNo = operadorNo;
+    }
+
+    @Override
+    public String toString() {
+        return tipo.getNombre()+" "+nombre;
     }
     
 }

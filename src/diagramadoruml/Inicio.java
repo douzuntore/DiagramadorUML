@@ -4,14 +4,16 @@
  */
 package diagramadoruml;
 
+import java.awt.Point;
+
 /**
  *
  * @author samuelzun
  */
 public class Inicio extends FlujoUML{
     
-    public Inicio() {
-        super("Inicio");
+    public Inicio(Point location) {
+        super("Inicio", location);
         this.panel.cambiarLblTipo("inicio");
     }
 

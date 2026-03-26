@@ -16,26 +16,66 @@ import javax.swing.tree.DefaultTreeModel;
  */
 public class Data {
     
-    private static Data data; 
-    
-    private Data() {}
-    
-    public static Data getData() {
-        if (data == null) {
-            data = new Data();
-        }
-        return data;
-    }
-    
-    private static ArrayList<ClaseUML> clases = new ArrayList<>();
-    private static ArrayList<Variable> variables = new ArrayList<>();
+    private final static ArrayList<ClaseUML> clases = new ArrayList<>();
+    private final static ArrayList<Variable> variables = new ArrayList<>();
+    private final static ArrayList<FlujoUML> operaciones = new ArrayList<>();
 
     public static ArrayList<ClaseUML> getClases() {
         return clases;
     }
+
+    public static ArrayList<Variable> getVariables() {
+        return variables;
+    }
+
+    public static ArrayList<FlujoUML> getOperaciones() {
+        return operaciones;
+    }
+    
+    public static void anidarCBoxModel(DefaultComboBoxModel modelo1, DefaultComboBoxModel modeloAnidar) {
+        for (int i = 0; i < modeloAnidar.getSize(); i++) {
+            modelo1.addElement(
+                    modeloAnidar.getElementAt(i)
+            );
+        }
+    }
+    
+    public static DefaultComboBoxModel crearCBoxModelVariablesInt() {
+        return crearCBoxModelVariablesXTipo(Tipo.INT);
+    }
+    
+    public static DefaultComboBoxModel crearCBoxModelVariablesBool() {
+        return crearCBoxModelVariablesXTipo(Tipo.BOOLEAN);
+    }
+    
+    public static DefaultComboBoxModel crearCBoxModelVariablesXTipo(Tipo tipo) {
+        DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+        for (Variable var: Data.getVariables()) {
+            if (var.getTipo() == tipo) {
+                modelo.addElement(var);
+            }
+        }
+        return modelo;
+    }
+    
+    public static DefaultComboBoxModel crearCBoxModelVariables() {
+        DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+        for (Variable var: Data.getVariables()) {
+            modelo.addElement(var);
+        }
+        return modelo;
+    }
+    
+    public static boolean UnaOMasVariableDeTipo(Tipo tipo) {
+        return crearCBoxModelVariablesXTipo(tipo).getSize() >= 1;
+    }
+    
+    public static boolean DosOMasVariableDeTipo(Tipo tipo) {
+        return crearCBoxModelVariablesXTipo(tipo).getSize() >= 2;
+    }
     
     public static ArrayList<ClaseUML> todasLasClases() {
-        return todasLasClases(new ArrayList(), data.getClases());
+        return todasLasClases(new ArrayList(), Data.getClases());
     }
     
     public static ArrayList<ClaseUML> todasLasClases(ArrayList<ClaseUML> clases) {
@@ -53,8 +93,8 @@ public class Data {
     }
     
     public static String clasesACodigo() {
-        System.out.println(clasesACodigo("", data.getClases()));
-        return clasesACodigo("", data.getClases());
+        System.out.println(clasesACodigo("", Data.getClases()));
+        return clasesACodigo("", Data.getClases());
     }
     
     private static String clasesACodigo(String str, ArrayList<ClaseUML> clases) {
@@ -70,7 +110,7 @@ public class Data {
     public static DefaultTreeModel crearTreeModelClases() {
         return crearTreeModelClases(
                 new DefaultMutableTreeNode("Clases"),
-                data.getClases()
+                Data.getClases()
         );
     }
     
@@ -91,7 +131,7 @@ public class Data {
     }
     
     public static DefaultListModel crearListModelClases() {
-        return crearListModelClases(new DefaultListModel(), data.getClases());
+        return crearListModelClases(new DefaultListModel(), Data.getClases());
     }
     
     private static DefaultListModel crearListModelClases(DefaultListModel modelo, ArrayList<ClaseUML> clases) {
@@ -124,7 +164,7 @@ public class Data {
     }
     
     public static DefaultComboBoxModel crearCBoxModelParaClasesPadre() {
-        return crearCBoxModelParaClasesPadre(new DefaultComboBoxModel(), data.getClases());
+        return crearCBoxModelParaClasesPadre(new DefaultComboBoxModel(), Data.getClases());
     }
     
     public static DefaultComboBoxModel crearCBoxModelParaClasesPadre(DefaultComboBoxModel modelo) {

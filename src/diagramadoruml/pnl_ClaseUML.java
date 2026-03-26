@@ -438,7 +438,9 @@ public class pnl_ClaseUML extends JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 19, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -448,7 +450,6 @@ public class pnl_ClaseUML extends JPanel {
 
     private void tree_ClaseMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tree_ClaseMousePressed
         // TODO add your handling code here:
-        esquinaAnterior = evt.getPoint();
         if (evt.getButton() == java.awt.event.MouseEvent.BUTTON3) {
             if (this.tree_Clase.getSelectionPath() == null) {
                 return;
@@ -472,7 +473,7 @@ public class pnl_ClaseUML extends JPanel {
                 () -> {
                     try {
                         Point esquinaAhora = evt.getPoint();
-
+                        
                         Thread.sleep(50);
 
                         int x = (int)(evt.getXOnScreen() - getLocationOnScreen().x + getX() - esquinaAnterior.getX() - (getWidth()/2));
@@ -483,10 +484,15 @@ public class pnl_ClaseUML extends JPanel {
                                 ,
                                 y
                         );
+                        
+                        System.out.println(esquinaAhora);
+                        System.out.println(esquinaAnterior);
+                        System.out.println("");
 
                         esquinaAnterior = esquina;
                         SwingUtilities.invokeLater(
                                 () -> {
+                                    revalidate();
                                     repaint();
                                 }
                         );
@@ -838,7 +844,7 @@ public class pnl_ClaseUML extends JPanel {
     private final ClaseUML clase;
     
     Point esquina = new Point(0, 0);
-    Point esquinaAnterior;
+    Point esquinaAnterior = esquina;
     
     public void paintComponent(Graphics g) {
         this.setLocation(esquina);
@@ -851,5 +857,6 @@ public class pnl_ClaseUML extends JPanel {
 
     public void setEsquina(Point esquina) {
         this.esquina = esquina;
+        this.esquinaAnterior = esquina;
     }
 }

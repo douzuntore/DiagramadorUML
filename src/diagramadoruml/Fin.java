@@ -4,14 +4,16 @@
  */
 package diagramadoruml;
 
+import java.awt.Point;
+
 /**
  *
  * @author samuelzun
  */
 public class Fin extends FlujoUML{
 
-    public Fin() {
-        super("Fin");
+    public Fin(Point location) {
+        super("Fin", location);
         this.panel.cambiarLblTipo("fin");
     }
     

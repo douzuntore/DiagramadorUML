@@ -4,6 +4,9 @@
  */
 package diagramadoruml;
 
+import java.awt.Dimension;
+import java.awt.Point;
+
 /**
  *
  * @author samuelzun
@@ -12,13 +15,17 @@ public abstract class FlujoUML {
     
     protected String nombre;
     protected pnl_FlujoUML panel;
+    private final Dimension panelSize = new Dimension(102, 68);
 
     public FlujoUML() {
     }
 
-    public FlujoUML(String nombre) {
+    public FlujoUML(String nombre, Point location) {
         this.nombre = nombre;
         this.panel = new pnl_FlujoUML(this);
+        this.panel.setLocation(location);
+        this.panel.setEsquina(new Point(location.x, location.y));
+        this.panel.setSize(panelSize);
     }
 
     public FlujoUML(String nombre, pnl_FlujoUML panel) {

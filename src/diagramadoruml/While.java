@@ -4,6 +4,8 @@
  */
 package diagramadoruml;
 
+import java.awt.Point;
+
 /**
  *
  * @author Ryzen Gaming
@@ -11,11 +13,15 @@ package diagramadoruml;
 public class While extends FlujoUML{
     
     private Variable condicion;
-
-    public While(Variable condicion, String nombre) {
-        super(nombre);
-        this.condicion = condicion;
-        this.panel.cambiarLblTipo("if");
+    private CerrarLlave llaveDeCierre;
+    
+    public While(Point location) {
+        super("While", location);
+        this.panel.cambiarLblTipo("while {");
+        location.translate(0, 100);
+        this.llaveDeCierre = new CerrarLlave(
+                new Point(location.x, location.y)
+        );
     }
 
     public Variable getCondicion() {
@@ -24,6 +30,10 @@ public class While extends FlujoUML{
 
     public void setCondicion(Variable condicion) {
         this.condicion = condicion;
+    }
+
+    public CerrarLlave getLlaveDeCierre() {
+        return llaveDeCierre;
     }
     
 }
