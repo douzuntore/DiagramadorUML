@@ -5,12 +5,13 @@
 package diagramadoruml;
 
 import java.awt.Point;
+import java.io.Serializable;
 
 /**
  *
  * @author Ryzen Gaming
  */
-public class Print extends FlujoUML{
+public class Print extends FlujoUML implements Serializable {
     
     private Variable impresion; //tipo STRING o no se
 

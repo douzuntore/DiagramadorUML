@@ -6,16 +6,20 @@ package diagramadoruml;
 
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.event.MouseEvent;
+import java.io.Serializable;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JColorChooser;
 import javax.swing.SwingUtilities;
 
 /**
  *
  * @author Ryzen Gaming
  */
-public class pnl_FlujoUML extends javax.swing.JPanel {
+public class pnl_FlujoUML extends javax.swing.JPanel implements Serializable {
 
     /**
-     * Creates new form pnl_OperacionUML
+     * Creates new form pnl_FlujoUML
      */
     public pnl_FlujoUML(FlujoUML flujo) {
         
@@ -39,8 +43,330 @@ public class pnl_FlujoUML extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        diag_Declarar = new javax.swing.JDialog();
+        jLabel3 = new javax.swing.JLabel();
+        cbox_DeclararVarDeclarada = new javax.swing.JComboBox<>();
+        btn_TerminarDeclaracion = new javax.swing.JToggleButton();
+        pnl_CrearVariableCamposExtra = new javax.swing.JPanel();
+        cbox_DeclararValor1 = new javax.swing.JComboBox<>();
+        cbox_DeclararOperacion = new javax.swing.JComboBox<>();
+        cbox_DeclararValor2 = new javax.swing.JComboBox<>();
+        cbox_DeclararInvertirBool = new javax.swing.JComboBox<>();
+        pop_FlujoUML = new javax.swing.JPopupMenu();
+        popmi_FlujoEditarContenido = new javax.swing.JMenuItem();
+        popmi_FlujoEditarPanel = new javax.swing.JMenuItem();
+        diag_If = new javax.swing.JDialog();
+        jLabel4 = new javax.swing.JLabel();
+        cbox_IfCondicion = new javax.swing.JComboBox<>();
+        btn_TerminarIf = new javax.swing.JToggleButton();
+        diag_For = new javax.swing.JDialog();
+        jLabel5 = new javax.swing.JLabel();
+        cbox_ForCiclos = new javax.swing.JComboBox<>();
+        btn_TerminarFor = new javax.swing.JToggleButton();
+        diag_Print = new javax.swing.JDialog();
+        jLabel6 = new javax.swing.JLabel();
+        cbox_PrintImpresion = new javax.swing.JComboBox<>();
+        btn_TerminarPrint = new javax.swing.JToggleButton();
+        pop_FlujoUMLInicioYFinal = new javax.swing.JPopupMenu();
+        popmi_FlujoEditarPanelInicioYFinal = new javax.swing.JMenuItem();
+        diag_CambiarVisuales = new javax.swing.JDialog();
+        jLabel1 = new javax.swing.JLabel();
+        txt_NombrePanel = new javax.swing.JTextField();
+        btn_NombrarPanel = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        btn_ElegirColorPanel = new javax.swing.JButton();
+        btn_ElegirColorFuente = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        spn_SizeFuentePanel = new javax.swing.JSpinner();
+        btn_CambiarSizeFuente = new javax.swing.JButton();
         lbl_TipoOperacion = new javax.swing.JLabel();
         lbl_NombreOperacion = new javax.swing.JLabel();
+
+        diag_Declarar.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                diag_DeclararWindowClosed(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel3.setText("Variable:");
+
+        cbox_DeclararVarDeclarada.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "int", "long", "float", "double", "char", "String" }));
+        cbox_DeclararVarDeclarada.addActionListener(this::cbox_DeclararVarDeclaradaActionPerformed);
+
+        btn_TerminarDeclaracion.setText("Hacer declaración");
+        btn_TerminarDeclaracion.addActionListener(this::btn_TerminarDeclaracionActionPerformed);
+
+        cbox_DeclararValor1.setVisible(false);
+        cbox_DeclararValor1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbox_DeclararValor1.addActionListener(this::cbox_DeclararValor1ActionPerformed);
+
+        cbox_DeclararOperacion.setVisible(false);
+        cbox_DeclararOperacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbox_DeclararOperacion.addActionListener(this::cbox_DeclararOperacionActionPerformed);
+
+        cbox_DeclararValor2.setVisible(false);
+        cbox_DeclararValor2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbox_DeclararValor2.addActionListener(this::cbox_DeclararValor2ActionPerformed);
+
+        cbox_DeclararInvertirBool.setVisible(false);
+        cbox_DeclararInvertirBool.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "!" }));
+
+        javax.swing.GroupLayout pnl_CrearVariableCamposExtraLayout = new javax.swing.GroupLayout(pnl_CrearVariableCamposExtra);
+        pnl_CrearVariableCamposExtra.setLayout(pnl_CrearVariableCamposExtraLayout);
+        pnl_CrearVariableCamposExtraLayout.setHorizontalGroup(
+            pnl_CrearVariableCamposExtraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_CrearVariableCamposExtraLayout.createSequentialGroup()
+                .addContainerGap(32, Short.MAX_VALUE)
+                .addComponent(cbox_DeclararInvertirBool, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbox_DeclararValor1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbox_DeclararOperacion, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbox_DeclararValor2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30))
+        );
+        pnl_CrearVariableCamposExtraLayout.setVerticalGroup(
+            pnl_CrearVariableCamposExtraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_CrearVariableCamposExtraLayout.createSequentialGroup()
+                .addContainerGap(22, Short.MAX_VALUE)
+                .addGroup(pnl_CrearVariableCamposExtraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbox_DeclararValor1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbox_DeclararValor2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbox_DeclararOperacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbox_DeclararInvertirBool, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(25, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout diag_DeclararLayout = new javax.swing.GroupLayout(diag_Declarar.getContentPane());
+        diag_Declarar.getContentPane().setLayout(diag_DeclararLayout);
+        diag_DeclararLayout.setHorizontalGroup(
+            diag_DeclararLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnl_CrearVariableCamposExtra, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(diag_DeclararLayout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addComponent(jLabel3)
+                .addGap(39, 39, 39)
+                .addComponent(cbox_DeclararVarDeclarada, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, diag_DeclararLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_TerminarDeclaracion)
+                .addGap(138, 138, 138))
+        );
+        diag_DeclararLayout.setVerticalGroup(
+            diag_DeclararLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(diag_DeclararLayout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addGroup(diag_DeclararLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(cbox_DeclararVarDeclarada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(pnl_CrearVariableCamposExtra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btn_TerminarDeclaracion)
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
+
+        popmi_FlujoEditarContenido.setText("Editar contenido");
+        popmi_FlujoEditarContenido.addActionListener(this::popmi_FlujoEditarContenidoActionPerformed);
+        pop_FlujoUML.add(popmi_FlujoEditarContenido);
+
+        popmi_FlujoEditarPanel.setText("Cambiar visuales del panel");
+        pop_FlujoUML.add(popmi_FlujoEditarPanel);
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel4.setText("Condicion:");
+
+        cbox_IfCondicion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "int", "long", "float", "double", "char", "String" }));
+        cbox_IfCondicion.addActionListener(this::cbox_IfCondicionActionPerformed);
+
+        btn_TerminarIf.setText("Hacer if");
+        btn_TerminarIf.addActionListener(this::btn_TerminarIfActionPerformed);
+
+        javax.swing.GroupLayout diag_IfLayout = new javax.swing.GroupLayout(diag_If.getContentPane());
+        diag_If.getContentPane().setLayout(diag_IfLayout);
+        diag_IfLayout.setHorizontalGroup(
+            diag_IfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(diag_IfLayout.createSequentialGroup()
+                .addContainerGap(79, Short.MAX_VALUE)
+                .addGroup(diag_IfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, diag_IfLayout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(18, 18, 18)
+                        .addComponent(cbox_IfCondicion, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(68, 68, 68))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, diag_IfLayout.createSequentialGroup()
+                        .addComponent(btn_TerminarIf)
+                        .addGap(157, 157, 157))))
+        );
+        diag_IfLayout.setVerticalGroup(
+            diag_IfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(diag_IfLayout.createSequentialGroup()
+                .addGap(71, 71, 71)
+                .addGroup(diag_IfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbox_IfCondicion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                .addComponent(btn_TerminarIf)
+                .addGap(17, 17, 17))
+        );
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel5.setText("Ciclos:");
+
+        cbox_ForCiclos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "int", "long", "float", "double", "char", "String" }));
+        cbox_ForCiclos.addActionListener(this::cbox_ForCiclosActionPerformed);
+
+        btn_TerminarFor.setText("Hacer for");
+        btn_TerminarFor.addActionListener(this::btn_TerminarForActionPerformed);
+
+        javax.swing.GroupLayout diag_ForLayout = new javax.swing.GroupLayout(diag_For.getContentPane());
+        diag_For.getContentPane().setLayout(diag_ForLayout);
+        diag_ForLayout.setHorizontalGroup(
+            diag_ForLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(diag_ForLayout.createSequentialGroup()
+                .addContainerGap(114, Short.MAX_VALUE)
+                .addGroup(diag_ForLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, diag_ForLayout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(18, 18, 18)
+                        .addComponent(cbox_ForCiclos, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(68, 68, 68))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, diag_ForLayout.createSequentialGroup()
+                        .addComponent(btn_TerminarFor)
+                        .addGap(157, 157, 157))))
+        );
+        diag_ForLayout.setVerticalGroup(
+            diag_ForLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(diag_ForLayout.createSequentialGroup()
+                .addGap(71, 71, 71)
+                .addGroup(diag_ForLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbox_ForCiclos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                .addComponent(btn_TerminarFor)
+                .addGap(17, 17, 17))
+        );
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel6.setText("Variable:");
+
+        cbox_PrintImpresion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "int", "long", "float", "double", "char", "String" }));
+        cbox_PrintImpresion.addActionListener(this::cbox_PrintImpresionActionPerformed);
+
+        btn_TerminarPrint.setText("Hacer print");
+        btn_TerminarPrint.addActionListener(this::btn_TerminarPrintActionPerformed);
+
+        javax.swing.GroupLayout diag_PrintLayout = new javax.swing.GroupLayout(diag_Print.getContentPane());
+        diag_Print.getContentPane().setLayout(diag_PrintLayout);
+        diag_PrintLayout.setHorizontalGroup(
+            diag_PrintLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(diag_PrintLayout.createSequentialGroup()
+                .addContainerGap(95, Short.MAX_VALUE)
+                .addGroup(diag_PrintLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, diag_PrintLayout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(18, 18, 18)
+                        .addComponent(cbox_PrintImpresion, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(68, 68, 68))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, diag_PrintLayout.createSequentialGroup()
+                        .addComponent(btn_TerminarPrint)
+                        .addGap(157, 157, 157))))
+        );
+        diag_PrintLayout.setVerticalGroup(
+            diag_PrintLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(diag_PrintLayout.createSequentialGroup()
+                .addGap(71, 71, 71)
+                .addGroup(diag_PrintLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbox_PrintImpresion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                .addComponent(btn_TerminarPrint)
+                .addGap(17, 17, 17))
+        );
+
+        popmi_FlujoEditarPanelInicioYFinal.setText("Cambiar visuales del panel");
+        pop_FlujoUMLInicioYFinal.add(popmi_FlujoEditarPanelInicioYFinal);
+
+        jLabel1.setText("Nombre del panel:");
+
+        btn_NombrarPanel.setText("Nombrar");
+
+        jLabel2.setText("Color del panel:");
+
+        jLabel7.setText("Color de la fuente:");
+
+        btn_ElegirColorPanel.setText("Elegir color");
+        btn_ElegirColorPanel.addActionListener(this::btn_ElegirColorPanelActionPerformed);
+
+        btn_ElegirColorFuente.setText("Elegir color");
+
+        jLabel9.setText("Tamaño de la fuente:");
+
+        btn_CambiarSizeFuente.setText("Cambiar tamaño");
+
+        javax.swing.GroupLayout diag_CambiarVisualesLayout = new javax.swing.GroupLayout(diag_CambiarVisuales.getContentPane());
+        diag_CambiarVisuales.getContentPane().setLayout(diag_CambiarVisualesLayout);
+        diag_CambiarVisualesLayout.setHorizontalGroup(
+            diag_CambiarVisualesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(diag_CambiarVisualesLayout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addGroup(diag_CambiarVisualesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel9))
+                .addGroup(diag_CambiarVisualesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(diag_CambiarVisualesLayout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(txt_NombrePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(diag_CambiarVisualesLayout.createSequentialGroup()
+                        .addGap(65, 65, 65)
+                        .addComponent(btn_ElegirColorFuente))
+                    .addGroup(diag_CambiarVisualesLayout.createSequentialGroup()
+                        .addGap(81, 81, 81)
+                        .addComponent(spn_SizeFuentePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(38, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, diag_CambiarVisualesLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(diag_CambiarVisualesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, diag_CambiarVisualesLayout.createSequentialGroup()
+                        .addGroup(diag_CambiarVisualesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btn_ElegirColorPanel)
+                            .addComponent(btn_NombrarPanel))
+                        .addGap(72, 72, 72))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, diag_CambiarVisualesLayout.createSequentialGroup()
+                        .addComponent(btn_CambiarSizeFuente)
+                        .addGap(56, 56, 56))))
+        );
+        diag_CambiarVisualesLayout.setVerticalGroup(
+            diag_CambiarVisualesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(diag_CambiarVisualesLayout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addGroup(diag_CambiarVisualesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txt_NombrePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btn_NombrarPanel)
+                .addGap(36, 36, 36)
+                .addGroup(diag_CambiarVisualesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(btn_ElegirColorPanel))
+                .addGap(62, 62, 62)
+                .addGroup(diag_CambiarVisualesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(btn_ElegirColorFuente))
+                .addGap(18, 18, 18)
+                .addGroup(diag_CambiarVisualesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(spn_SizeFuentePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btn_CambiarSizeFuente)
+                .addContainerGap(39, Short.MAX_VALUE))
+        );
 
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
@@ -50,6 +376,9 @@ public class pnl_FlujoUML extends javax.swing.JPanel {
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 formMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                formMousePressed(evt);
             }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 formMouseReleased(evt);
@@ -67,22 +396,24 @@ public class pnl_FlujoUML extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lbl_NombreOperacion, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
-            .addComponent(lbl_TipoOperacion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lbl_NombreOperacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(47, 47, 47)
+                .addComponent(lbl_TipoOperacion, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(lbl_NombreOperacion)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addComponent(lbl_TipoOperacion))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         // TODO add your handling code here:
-        if (evt.getButton() == java.awt.event.MouseEvent.BUTTON3) {
-            
+        if (evt.getButton() != MouseEvent.BUTTON1) {
+            return;
         }
         esquinaAnterior = evt.getPoint();
         
@@ -107,10 +438,6 @@ public class pnl_FlujoUML extends javax.swing.JPanel {
                                 y
                         );
                         
-                        System.out.println(esquinaAhora);
-                        System.out.println(esquinaAnterior);
-                        System.out.println("");
-
                         esquinaAnterior = esquina;
                         SwingUtilities.invokeLater(
                                 () -> {
@@ -124,7 +451,10 @@ public class pnl_FlujoUML extends javax.swing.JPanel {
                     }
                 }
         );
-        hilo.start();
+        if (evt.getButton() == MouseEvent.BUTTON1) {
+            System.out.println(evt.getButton());
+            hilo.start();
+        }
         
     }//GEN-LAST:event_formMouseDragged
 
@@ -135,10 +465,344 @@ public class pnl_FlujoUML extends javax.swing.JPanel {
         
     }//GEN-LAST:event_formMouseReleased
 
+    private void cbox_DeclararVarDeclaradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbox_DeclararVarDeclaradaActionPerformed
+        // TODO add your handling code here:
+        if (!Data.getVariables().isEmpty()) {
+
+            if (this.cbox_DeclararVarDeclarada.getSelectedItem() instanceof Variable varSeleccionado) {
+                
+                if (Data.UnaOMasVariableDeTipo(varSeleccionado.getTipo())) {
+
+                    DefaultComboBoxModel modelo = (DefaultComboBoxModel) this.cbox_DeclararValor1.getModel();
+                    modelo.removeAllElements();
+                    modelo.addElement("-");
+                    switch (varSeleccionado.getTipo()) {
+                        case Tipo.BOOLEAN -> {
+                            for (Tipo tipo: Tipo.values()) {
+                                if (tipo != Tipo.STRING) {
+                                    Data.anidarCBoxModel(
+                                        modelo,
+                                        Data.crearCBoxModelVariablesXTipo(tipo)
+                                    );
+                                }
+                            }
+                            this.pnl_CrearVariableCamposExtra.setVisible(true);
+                            this.cbox_DeclararValor1.setVisible(true);
+                        }
+                        default -> {
+                            Data.anidarCBoxModel(
+                                modelo,
+                                Data.crearCBoxModelVariablesXTipo(varSeleccionado.getTipo())
+                            );
+                            this.pnl_CrearVariableCamposExtra.setVisible(true);
+                            this.cbox_DeclararValor1.setVisible(true);
+                        }
+                    }
+
+                } else {
+
+                    this.pnl_CrearVariableCamposExtra.setVisible(false);
+                    this.cbox_DeclararValor1.setVisible(false);
+
+                }
+                
+            }
+            
+        } else {
+
+            this.pnl_CrearVariableCamposExtra.setVisible(false);
+
+        }
+
+    }//GEN-LAST:event_cbox_DeclararVarDeclaradaActionPerformed
+
+    private void cbox_DeclararValor1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbox_DeclararValor1ActionPerformed
+        // TODO add your handling code here:
+        if (this.cbox_DeclararValor1.getSelectedItem() instanceof Variable varSeleccionada) {
+
+            Variable varPrincipal = (Variable) this.cbox_DeclararVarDeclarada.getSelectedItem();
+            switch (varPrincipal.getTipo()) {
+                case Tipo.BOOLEAN -> {
+                    if (varSeleccionada.getTipo() != Tipo.BOOLEAN) {
+                        this.cbox_DeclararInvertirBool.setVisible(false);
+                        DefaultComboBoxModel modeloVar2 = (DefaultComboBoxModel) this.cbox_DeclararValor2.getModel();
+                        modeloVar2.removeAllElements();
+                        Data.anidarCBoxModel(
+                            modeloVar2,
+                            Data.crearCBoxModelVariablesXTipo(varSeleccionada.getTipo())
+                        );
+                        this.cbox_DeclararOperacion.setModel(new DefaultComboBoxModel(new String[]{
+                            "",
+                            "==",
+                            "!=",
+                            ">=",
+                            "<=",
+                            ">",
+                            "<"
+                        }));
+                        this.cbox_DeclararOperacion.setVisible(true);
+                    } else {
+                        this.cbox_DeclararInvertirBool.setVisible(true);
+                        this.cbox_DeclararOperacion.setVisible(false);
+                    }
+                }
+                case Tipo.INT, Tipo.BYTE, Tipo.FLOAT, Tipo.SHORT, Tipo.LONG, Tipo.DOUBLE -> {
+                    this.cbox_DeclararInvertirBool.setVisible(false);
+                    DefaultComboBoxModel modeloVar2 = (DefaultComboBoxModel) this.cbox_DeclararValor2.getModel();
+                    modeloVar2.removeAllElements();
+                    Data.anidarCBoxModel(
+                        modeloVar2,
+                        Data.crearCBoxModelVariablesXTipo(varSeleccionada.getTipo())
+                    );
+                    this.cbox_DeclararOperacion.setModel(new DefaultComboBoxModel(new String[]{
+                        "",
+                        "+",
+                        "-",
+                        "*",
+                        "/",
+                        "%"
+                    }));
+                    this.cbox_DeclararOperacion.setVisible(true);
+                }
+                default -> {
+                    this.cbox_DeclararOperacion.setVisible(false);
+                }
+            }
+        }
+
+    }//GEN-LAST:event_cbox_DeclararValor1ActionPerformed
+
+    private void cbox_DeclararOperacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbox_DeclararOperacionActionPerformed
+        // TODO add your handling code here:
+        String operacion = (String) this.cbox_DeclararOperacion.getSelectedItem();
+        if (operacion.equals("")) {
+            this.cbox_DeclararValor2.setVisible(false);
+        }
+        else {
+            this.cbox_DeclararValor2.setVisible(true);
+        }
+
+    }//GEN-LAST:event_cbox_DeclararOperacionActionPerformed
+
+    private void cbox_DeclararValor2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbox_DeclararValor2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbox_DeclararValor2ActionPerformed
+
+    private void popmi_FlujoEditarContenidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popmi_FlujoEditarContenidoActionPerformed
+        // TODO add your handling code here:
+        if (!Data.getVariables().isEmpty() && this.editable) {
+            if (this.flujo instanceof Declarar) {
+                this.diag_Declarar.pack();
+                this.diag_Declarar.setVisible(true);
+            }
+            else if (this.flujo instanceof If || this.flujo instanceof While) {
+                this.diag_If.pack();
+                this.diag_If.setVisible(true);
+            }
+            else if (this.flujo instanceof For) {
+                this.diag_For.pack();
+                this.diag_For.setVisible(true);
+            }
+            else if (this.flujo instanceof Print) {
+                this.diag_Print.pack();
+                this.diag_Print.setVisible(true);
+            }
+        }
+        
+    }//GEN-LAST:event_popmi_FlujoEditarContenidoActionPerformed
+
+    private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
+        // TODO add your handling code here:
+        if (evt.getButton() == MouseEvent.BUTTON3) {
+            refrescarModelosVariable();
+            this.pop_FlujoUML.show(
+                    this,
+                    evt.getX(),
+                    evt.getY()
+            );
+        }
+        
+    }//GEN-LAST:event_formMousePressed
+
+    private void cbox_IfCondicionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbox_IfCondicionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbox_IfCondicionActionPerformed
+
+    private void btn_TerminarIfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TerminarIfActionPerformed
+        // TODO add your handling code here:
+        if (this.flujo instanceof If elementoIf) {
+            elementoIf.setCondicion(
+                    (Variable) this.cbox_IfCondicion.getSelectedItem()
+            );
+        }
+        else if (this.flujo instanceof While elementoWhile) {
+            elementoWhile.setCondicion(
+                    (Variable) this.cbox_IfCondicion.getSelectedItem()
+            );
+        }
+        frm_Main.enviarMensaje(this, "\""+this.flujo.getNombre()+"\" seteado");
+        this.diag_If.dispose();
+        
+    }//GEN-LAST:event_btn_TerminarIfActionPerformed
+
+    private void diag_DeclararWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_diag_DeclararWindowClosed
+        // TODO add your handling code here:
+        this.cbox_DeclararInvertirBool.setVisible(false);
+        this.cbox_DeclararValor1.setVisible(false);
+        this.cbox_DeclararOperacion.setVisible(false);
+        this.cbox_DeclararValor2.setVisible(false);
+        
+    }//GEN-LAST:event_diag_DeclararWindowClosed
+
+    private void btn_TerminarDeclaracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TerminarDeclaracionActionPerformed
+        // TODO add your handling code here:
+        Declarar declaracion = (Declarar) this.flujo;
+        declaracion.setVariable(
+                (Variable) this.cbox_DeclararVarDeclarada.getSelectedItem()
+        );
+        declaracion.getValoresCambio().clear();
+        if (this.cbox_DeclararValor1.getSelectedIndex() != 0) {
+            declaracion.getValoresCambio().add(
+                    (Variable) this.cbox_DeclararValor1.getSelectedItem()
+            );
+        }
+        if (this.cbox_DeclararValor2.isVisible()) {
+            declaracion.getValoresCambio().add(
+                    (Variable) this.cbox_DeclararValor2.getSelectedItem()
+            );
+        }
+        if (this.cbox_DeclararOperacion.isVisible()) {
+            declaracion.setOperacion(
+                    (String) this.cbox_DeclararOperacion.getSelectedItem()
+            );
+        }
+        else {
+            declaracion.setOperacion("");
+        }
+        if (this.cbox_DeclararInvertirBool.isVisible()) {
+            declaracion.setOperadorNo(
+                    (String) this.cbox_DeclararInvertirBool.getSelectedItem()
+            );
+        }
+        else {
+            declaracion.setOperadorNo("");
+        }
+        
+        this.cbox_DeclararInvertirBool.setVisible(false);
+        this.cbox_DeclararValor1.setVisible(false);
+        this.cbox_DeclararOperacion.setVisible(false);
+        this.cbox_DeclararValor2.setVisible(false);
+        frm_Main.enviarMensaje(this, "\""+this.flujo.getNombre()+"\" seteado");
+        this.diag_Declarar.dispose();
+        
+    }//GEN-LAST:event_btn_TerminarDeclaracionActionPerformed
+
+    private void cbox_ForCiclosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbox_ForCiclosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbox_ForCiclosActionPerformed
+
+    private void btn_TerminarForActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TerminarForActionPerformed
+        // TODO add your handling code here:
+        if (this.flujo instanceof For elementoFor) {
+            elementoFor.setCiclosI(
+                    (Variable) this.cbox_ForCiclos.getSelectedItem()
+            );
+        }
+        frm_Main.enviarMensaje(this, "\""+this.flujo.getNombre()+"\" seteado");
+        this.diag_For.dispose();
+        
+    }//GEN-LAST:event_btn_TerminarForActionPerformed
+
+    private void cbox_PrintImpresionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbox_PrintImpresionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbox_PrintImpresionActionPerformed
+
+    private void btn_TerminarPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TerminarPrintActionPerformed
+        // TODO add your handling code here:
+        if (this.flujo instanceof Print elementoPrint) {
+            elementoPrint.setImpresion(
+                    (Variable) this.cbox_PrintImpresion.getSelectedItem()
+            );
+        }
+        frm_Main.enviarMensaje(this, "\""+this.flujo.getNombre()+"\" seteado");
+        this.diag_Print.dispose();
+        
+    }//GEN-LAST:event_btn_TerminarPrintActionPerformed
+
+    private void btn_ElegirColorPanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ElegirColorPanelActionPerformed
+        // TODO add your handling code here:
+        JColorChooser cc = new JColorChooser();
+        //cc.
+        
+    }//GEN-LAST:event_btn_ElegirColorPanelActionPerformed
+
+    public void refrescarModelosVariable() {
+        
+        DefaultComboBoxModel modelo = (DefaultComboBoxModel) this.cbox_DeclararVarDeclarada.getModel();
+        modelo.removeAllElements();
+        Data.anidarCBoxModel(modelo, Data.crearCBoxModelVariables());
+        
+        modelo = (DefaultComboBoxModel) this.cbox_IfCondicion.getModel();
+        modelo.removeAllElements();
+        Data.anidarCBoxModel(modelo, Data.crearCBoxModelVariablesXTipo(Tipo.BOOLEAN));
+        
+        modelo = (DefaultComboBoxModel) this.cbox_ForCiclos.getModel();
+        modelo.removeAllElements();
+        Data.anidarCBoxModel(modelo, Data.crearCBoxModelVariablesXTipo(Tipo.INT));
+        
+        modelo = (DefaultComboBoxModel) this.cbox_PrintImpresion.getModel();
+        modelo.removeAllElements();
+        Data.anidarCBoxModel(modelo, Data.crearCBoxModelVariables());
+        
+    }
+    
+    private void abrirEdicionDePanel() {
+        this.diag_CambiarVisuales.pack();
+        this.diag_CambiarVisuales.setVisible(true);
+        this.txt_NombrePanel.setText(this.lbl_NombreOperacion.getText());
+        this.spn_SizeFuentePanel.setValue(this.lbl_NombreOperacion.getFont().getSize());
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_CambiarSizeFuente;
+    private javax.swing.JButton btn_ElegirColorFuente;
+    private javax.swing.JButton btn_ElegirColorPanel;
+    private javax.swing.JButton btn_NombrarPanel;
+    private javax.swing.JToggleButton btn_TerminarDeclaracion;
+    private javax.swing.JToggleButton btn_TerminarFor;
+    private javax.swing.JToggleButton btn_TerminarIf;
+    private javax.swing.JToggleButton btn_TerminarPrint;
+    private javax.swing.JComboBox<String> cbox_DeclararInvertirBool;
+    private javax.swing.JComboBox<String> cbox_DeclararOperacion;
+    private javax.swing.JComboBox<String> cbox_DeclararValor1;
+    private javax.swing.JComboBox<String> cbox_DeclararValor2;
+    private javax.swing.JComboBox<String> cbox_DeclararVarDeclarada;
+    private javax.swing.JComboBox<String> cbox_ForCiclos;
+    private javax.swing.JComboBox<String> cbox_IfCondicion;
+    private javax.swing.JComboBox<String> cbox_PrintImpresion;
+    private javax.swing.JDialog diag_CambiarVisuales;
+    private javax.swing.JDialog diag_Declarar;
+    private javax.swing.JDialog diag_For;
+    private javax.swing.JDialog diag_If;
+    private javax.swing.JDialog diag_Print;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel lbl_NombreOperacion;
     private javax.swing.JLabel lbl_TipoOperacion;
+    private javax.swing.JPanel pnl_CrearVariableCamposExtra;
+    private javax.swing.JPopupMenu pop_FlujoUML;
+    private javax.swing.JPopupMenu pop_FlujoUMLInicioYFinal;
+    private javax.swing.JMenuItem popmi_FlujoEditarContenido;
+    private javax.swing.JMenuItem popmi_FlujoEditarPanel;
+    private javax.swing.JMenuItem popmi_FlujoEditarPanelInicioYFinal;
+    private javax.swing.JSpinner spn_SizeFuentePanel;
+    private javax.swing.JTextField txt_NombrePanel;
     // End of variables declaration//GEN-END:variables
     
     private FlujoUML flujo;
@@ -166,6 +830,10 @@ public class pnl_FlujoUML extends javax.swing.JPanel {
     public void setEsquina(Point esquina) {
         this.esquina = esquina;
         this.esquinaAnterior = esquina;
+    }
+
+    public FlujoUML getFlujo() {
+        return flujo;
     }
     
 }

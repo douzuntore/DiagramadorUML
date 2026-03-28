@@ -6,14 +6,15 @@ package diagramadoruml;
 
 import java.awt.Dimension;
 import java.awt.Point;
+import java.io.Serializable;
 
 /**
  *
  * @author Ryzen Gaming
  */
-public class CerrarLlave extends FlujoUML{
+public class CerrarLlave extends FlujoUML implements Serializable {
     
-    private final Dimension panelSize = new Dimension(40, 23);
+    private final Dimension panelSize = new Dimension(51, 34);
     
     public CerrarLlave(Point location) {
         super("", location);

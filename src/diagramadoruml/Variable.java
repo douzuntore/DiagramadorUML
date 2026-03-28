@@ -4,13 +4,14 @@
  */
 package diagramadoruml;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author Ryzen Gaming
  */
-public class Variable {
+public class Variable implements Serializable {
     
     private String nombre;
     private Tipo tipo;
@@ -18,14 +19,9 @@ public class Variable {
     public Variable() {
     }
 
-    public Variable(String nombre, Tipo tipo, ArrayList<Variable> variablesUsados, String operacion, String operadorNo) {
+    public Variable(String nombre, Tipo tipo) {
         this.nombre = nombre;
         this.tipo = tipo;
-        for (Variable var: variablesUsados) {
-            this.variablesUsados.add(var);
-        }
-        this.operacion = operacion;
-        this.operadorNo = operadorNo;
     }
 
     public String getNombre() {
@@ -42,26 +38,6 @@ public class Variable {
 
     public void setTipo(Tipo tipo) {
         this.tipo = tipo;
-    }
-
-    public ArrayList<Variable> getVariablesUsados() {
-        return variablesUsados;
-    }
-
-    public String getOperacion() {
-        return operacion;
-    }
-
-    public void setOperacion(String operacion) {
-        this.operacion = operacion;
-    }
-
-    public String getOperadorNo() {
-        return operadorNo;
-    }
-
-    public void setOperadorNo(String operadorNo) {
-        this.operadorNo = operadorNo;
     }
 
     @Override

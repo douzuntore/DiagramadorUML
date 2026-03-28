@@ -538,6 +538,7 @@ public class pnl_ClaseUML extends JPanel {
         if (objetoSeleccionado instanceof ClaseUML clase) {
 
             Data.getClases().remove(clase);
+            frm.eliminarPanelEnDiagramador(clase);
             frm.refrescarModelosClase();
             frm.enviarMensaje(frm, "Clase removida");
 
@@ -630,7 +631,8 @@ public class pnl_ClaseUML extends JPanel {
                 frm.enviarMensaje(frm, "Nombre cambiado.");
             }
 
-        } else if (objetoSeleccionado instanceof Propiedad prop) {
+        }
+        else if (objetoSeleccionado instanceof Propiedad prop) {
 
             if (!this.txt_ClaseCambiarNombre.getText().trim().isEmpty())  {
                 boolean tieneHijos = false;
@@ -662,7 +664,8 @@ public class pnl_ClaseUML extends JPanel {
                 frm.enviarMensaje(frm, "Nombre cambiado.");
             }
 
-        } else if (objetoSeleccionado instanceof Metodo mtd) {
+        }
+        else if (objetoSeleccionado instanceof Metodo mtd) {
             
             if (!this.txt_ClaseCambiarNombre.getText().trim().isEmpty())  {
                 boolean tieneHijos = false;

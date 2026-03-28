@@ -5,13 +5,14 @@
 package diagramadoruml;
 
 import java.awt.Point;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author samuelzun
  */
-public class Declarar extends FlujoUML{
+public class Declarar extends FlujoUML implements Serializable {
     
     private Variable variable;
     private final ArrayList<Variable> valoresCambio = new ArrayList<>();

@@ -5,12 +5,13 @@
 package diagramadoruml;
 
 import java.awt.Point;
+import java.io.Serializable;
 
 /**
  *
  * @author samuelzun
  */
-public class Fin extends FlujoUML{
+public class Fin extends FlujoUML implements Serializable {
 
     public Fin(Point location) {
         super("Fin", location);

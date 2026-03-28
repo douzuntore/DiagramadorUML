@@ -5,12 +5,13 @@
 package diagramadoruml;
 
 import java.awt.Point;
+import java.io.Serializable;
 
 /**
  *
  * @author Ryzen Gaming
  */
-public class If extends FlujoUML{
+public class If extends FlujoUML implements Serializable {
     
     private Variable condicion; //tipo BOOLEAN
     private CerrarLlave llaveDeCierre;

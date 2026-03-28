@@ -6,12 +6,13 @@ package diagramadoruml;
 
 import java.awt.Dimension;
 import java.awt.Point;
+import java.io.Serializable;
 
 /**
  *
  * @author samuelzun
  */
-public abstract class FlujoUML {
+public abstract class FlujoUML implements Serializable {
     
     protected String nombre;
     protected pnl_FlujoUML panel;

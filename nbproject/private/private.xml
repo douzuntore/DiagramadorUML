@@ -3,23 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/NetBeans/projects/DiagramadorUML/src/diagramadoruml/frm_Main.java</file>
-            <file>file:/E:/NetBeans/projects/DiagramadorUML/src/diagramadoruml/ClaseUML.java</file>
-            <file>file:/E:/NetBeans/projects/DiagramadorUML/src/diagramadoruml/Metodo.java</file>
-            <file>file:/E:/NetBeans/projects/DiagramadorUML/src/diagramadoruml/Propiedad.java</file>
-            <file>file:/E:/NetBeans/projects/DiagramadorUML/src/diagramadoruml/pnl_ClaseUML.java</file>
-            <file>file:/E:/NetBeans/projects/DiagramadorUML/src/diagramadoruml/Data.java</file>
-            <file>file:/E:/NetBeans/projects/DiagramadorUML/src/diagramadoruml/pnl_FlujoUML.java</file>
-            <file>file:/E:/NetBeans/projects/DiagramadorUML/src/diagramadoruml/FlujoUML.java</file>
-            <file>file:/E:/NetBeans/projects/DiagramadorUML/src/diagramadoruml/Inicio.java</file>
-            <file>file:/E:/NetBeans/projects/DiagramadorUML/src/diagramadoruml/Fin.java</file>
-            <file>file:/E:/NetBeans/projects/DiagramadorUML/src/diagramadoruml/Declarar.java</file>
-            <file>file:/E:/NetBeans/projects/DiagramadorUML/src/diagramadoruml/Variable.java</file>
-            <file>file:/E:/NetBeans/projects/DiagramadorUML/src/diagramadoruml/For.java</file>
-            <file>file:/E:/NetBeans/projects/DiagramadorUML/src/diagramadoruml/If.java</file>
-            <file>file:/E:/NetBeans/projects/DiagramadorUML/src/diagramadoruml/Tipo.java</file>
-            <file>file:/E:/NetBeans/projects/DiagramadorUML/src/diagramadoruml/Print.java</file>
-            <file>file:/E:/NetBeans/projects/DiagramadorUML/src/diagramadoruml/While.java</file>
+            <file>file:/Users/samuelzun/NetBeansProjects/DiagramadorUML/src/diagramadoruml/Variable.java</file>
+            <file>file:/Users/samuelzun/NetBeansProjects/DiagramadorUML/src/diagramadoruml/frm_Main.java</file>
+            <file>file:/Users/samuelzun/NetBeansProjects/DiagramadorUML/src/diagramadoruml/pnl_FlujoUML.java</file>
+            <file>file:/Users/samuelzun/NetBeansProjects/DiagramadorUML/src/diagramadoruml/pnl_ClaseUML.java</file>
+            <file>file:/Users/samuelzun/NetBeansProjects/DiagramadorUML/src/diagramadoruml/Data.java</file>
         </group>
     </open-files>
 </project-private>

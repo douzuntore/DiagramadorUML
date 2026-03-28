@@ -74,6 +74,48 @@ public class Data {
         return crearCBoxModelVariablesXTipo(tipo).getSize() >= 2;
     }
     
+    public static DefaultListModel crearListModelVariables() {
+        DefaultListModel modelo = new DefaultListModel();
+        for (Variable var: Data.getVariables()) {
+            modelo.addElement(var);
+        }
+        return modelo;
+    }
+    
+    public static ArrayList<Object> guardadoDeFlujos() {
+        ArrayList<Object> objetos = new ArrayList<>();
+        objetos.add(
+                Data.getOperaciones()
+        );
+        objetos.add(    
+                Data.getVariables()
+        );
+        return objetos;
+    }
+    
+    public static void cargadoDeFlujos(ArrayList<Object> objetos) {
+        Data.getOperaciones().clear();
+        Data.getVariables().clear();
+        try {
+            ArrayList<Variable> variables = (ArrayList<Variable>) objetos.get(0);
+            for (Variable var: variables) {
+                Data.getVariables().add(var);
+            }
+        }
+        catch (Exception e) {
+            Data.getVariables().clear();
+        }
+        try {
+            ArrayList<FlujoUML> flujos = (ArrayList<FlujoUML>) objetos.get(1);
+            for (FlujoUML flujo: flujos) {
+                Data.getOperaciones().add(flujo);
+            }
+        }
+        catch (Exception e) {
+            Data.getOperaciones().clear();
+        }
+    }
+    
     public static ArrayList<ClaseUML> todasLasClases() {
         return todasLasClases(new ArrayList(), Data.getClases());
     }

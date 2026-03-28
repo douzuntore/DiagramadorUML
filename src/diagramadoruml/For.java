@@ -5,12 +5,13 @@
 package diagramadoruml;
 
 import java.awt.Point;
+import java.io.Serializable;
 
 /**
  *
  * @author Ryzen Gaming
  */
-public class For extends FlujoUML{
+public class For extends FlujoUML implements Serializable {
     
     private Variable ciclosI; //tiene que ser tipo INT
     private CerrarLlave llaveDeCierre;

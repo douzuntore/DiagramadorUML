@@ -100,19 +100,30 @@ public class frm_Main extends javax.swing.JFrame {
             );
         }
         
+        DefaultComboBoxModel modeloTipo = (DefaultComboBoxModel) this.cbox_CrearVariableTipo.getModel();
+        modeloTipo.removeAllElements();
+        for (Tipo tipo: Tipo.values()) {
+            if (tipo == Tipo.VOID) {
+                continue;
+            }
+            modeloTipo.addElement(tipo);
+        }
+        
         refrescarModelosClase();
         refrescarModelosVariable();
         
-        DefaultComboBoxModel varModeloTipo = (DefaultComboBoxModel) this.cbox_CrearVariableTipo.getModel();
-        varModeloTipo.removeAllElements();
-        for (Tipo tipo: Tipo.values()) {
-            varModeloTipo.addElement(
-                    tipo
-            );
-        }
+//        DefaultComboBoxModel varModeloTipo = (DefaultComboBoxModel) this.cbox_CrearVariableTipo.getModel();
+//        varModeloTipo.removeAllElements();
+//        for (Tipo tipo: Tipo.values()) {
+//            varModeloTipo.addElement(
+//                    tipo
+//            );
+//        }
         
-        this.fch_FileChooser.setFileFilter(new FileNameExtensionFilter("Clases", "cls"));
-        this.fch_FileChooser.setCurrentDirectory(new File("./"));
+        this.fch_ClasesFileChooser.setFileFilter(new FileNameExtensionFilter("Clases", "cls"));
+        this.fch_ClasesFileChooser.setCurrentDirectory(new File("./"));
+        this.fch_FlujoFileChooser.setFileFilter(new FileNameExtensionFilter("Flujo", "flj"));
+        this.fch_FlujoFileChooser.setCurrentDirectory(new File("./"));
         
     }
     
@@ -163,24 +174,19 @@ public class frm_Main extends javax.swing.JFrame {
         jScrollPane7 = new javax.swing.JScrollPane();
         pnl_FlujoDiagrama = new javax.swing.JPanel();
         pnl_FlujoCodigo = new javax.swing.JPanel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        txta_FlujoCodigo = new javax.swing.JTextArea();
         jScrollPane6 = new javax.swing.JScrollPane();
         list_Variables = new javax.swing.JList<>();
         btn_AgregarVariable = new javax.swing.JButton();
+        btn_LimpiarDiagramador = new javax.swing.JButton();
+        btn_BorrarVariableSelec = new javax.swing.JButton();
         mnb_Flujo = new javax.swing.JMenuBar();
         mn_FlujoArchivo = new javax.swing.JMenu();
         mni_FlujoAbrir = new javax.swing.JMenuItem();
         mni_FlujoGuardar = new javax.swing.JMenuItem();
         mn_FlujoExportar = new javax.swing.JMenu();
         mni_FlujoExportarPDF = new javax.swing.JMenuItem();
-        diag_CrearVariable = new javax.swing.JDialog();
-        jLabel3 = new javax.swing.JLabel();
-        cbox_CrearVariableTipo = new javax.swing.JComboBox<>();
-        jToggleButton1 = new javax.swing.JToggleButton();
-        pnl_CrearVariableCamposExtra = new javax.swing.JPanel();
-        cbox_CrearVariableVar1 = new javax.swing.JComboBox<>();
-        cbox_CrearVariableOperacion = new javax.swing.JComboBox<>();
-        cbox_CrearVariableVar2 = new javax.swing.JComboBox<>();
-        cbox_CrearVariableOperadorNo = new javax.swing.JComboBox<>();
         diag_CrearClase = new javax.swing.JDialog();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -232,7 +238,14 @@ public class frm_Main extends javax.swing.JFrame {
         list_HerenciaClaseHija = new javax.swing.JList<>();
         jLabel15 = new javax.swing.JLabel();
         btn_EstablecerHerencia = new javax.swing.JButton();
-        fch_FileChooser = new javax.swing.JFileChooser();
+        fch_ClasesFileChooser = new javax.swing.JFileChooser();
+        diag_CrearVariable = new javax.swing.JDialog();
+        jLabel1 = new javax.swing.JLabel();
+        txt_CrearVariableNombre = new javax.swing.JTextField();
+        cbox_CrearVariableTipo = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        fch_FlujoFileChooser = new javax.swing.JFileChooser();
         mnb_Principal = new javax.swing.JMenuBar();
         mn_PrincipalFunciones = new javax.swing.JMenu();
         mni_PrincipalFlujo = new javax.swing.JMenuItem();
@@ -630,6 +643,12 @@ public class frm_Main extends javax.swing.JFrame {
                     .addGap(0, 25, Short.MAX_VALUE)))
         );
 
+        tab_Flujo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tab_FlujoMouseClicked(evt);
+            }
+        });
+
         pnl_FlujoDiagrama.setBackground(new java.awt.Color(153, 153, 153));
 
         javax.swing.GroupLayout pnl_FlujoDiagramaLayout = new javax.swing.GroupLayout(pnl_FlujoDiagrama);
@@ -647,15 +666,27 @@ public class frm_Main extends javax.swing.JFrame {
 
         tab_Flujo.addTab("Diagrama", jScrollPane7);
 
+        txta_FlujoCodigo.setEditable(false);
+        txta_FlujoCodigo.setColumns(20);
+        txta_FlujoCodigo.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
+        txta_FlujoCodigo.setRows(5);
+        jScrollPane8.setViewportView(txta_FlujoCodigo);
+
         javax.swing.GroupLayout pnl_FlujoCodigoLayout = new javax.swing.GroupLayout(pnl_FlujoCodigo);
         pnl_FlujoCodigo.setLayout(pnl_FlujoCodigoLayout);
         pnl_FlujoCodigoLayout.setHorizontalGroup(
             pnl_FlujoCodigoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 606, Short.MAX_VALUE)
+            .addGroup(pnl_FlujoCodigoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 594, Short.MAX_VALUE)
+                .addContainerGap())
         );
         pnl_FlujoCodigoLayout.setVerticalGroup(
             pnl_FlujoCodigoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 444, Short.MAX_VALUE)
+            .addGroup(pnl_FlujoCodigoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         tab_Flujo.addTab("Codigo", pnl_FlujoCodigo);
@@ -668,6 +699,25 @@ public class frm_Main extends javax.swing.JFrame {
         jScrollPane6.setViewportView(list_Variables);
 
         btn_AgregarVariable.setText("Agregar variable");
+        btn_AgregarVariable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_AgregarVariableActionPerformed(evt);
+            }
+        });
+
+        btn_LimpiarDiagramador.setText("Limpiar diagramador");
+        btn_LimpiarDiagramador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_LimpiarDiagramadorActionPerformed(evt);
+            }
+        });
+
+        btn_BorrarVariableSelec.setText("Borrar variable seleccionada");
+        btn_BorrarVariableSelec.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_BorrarVariableSelecActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnl_FlujoLayout = new javax.swing.GroupLayout(pnl_Flujo);
         pnl_Flujo.setLayout(pnl_FlujoLayout);
@@ -688,58 +738,72 @@ public class frm_Main extends javax.swing.JFrame {
                             .addComponent(pnl_CrearDeclarar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(pnl_FlujoLayout.createSequentialGroup()
                         .addGap(143, 143, 143)
-                        .addComponent(pnl_CrearFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(pnl_CrearFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnl_FlujoLayout.createSequentialGroup()
+                        .addGap(116, 116, 116)
+                        .addComponent(btn_LimpiarDiagramador)))
                 .addGap(95, 95, 95)
                 .addComponent(tab_Flujo, javax.swing.GroupLayout.PREFERRED_SIZE, 606, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(43, 43, 43)
                 .addGroup(pnl_FlujoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnl_FlujoLayout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(17, Short.MAX_VALUE))
-                    .addGroup(pnl_FlujoLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btn_AgregarVariable)
-                        .addGap(84, 84, 84))))
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_BorrarVariableSelec)
+                    .addComponent(btn_AgregarVariable))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
         pnl_FlujoLayout.setVerticalGroup(
             pnl_FlujoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_FlujoLayout.createSequentialGroup()
                 .addGap(113, 113, 113)
                 .addGroup(pnl_FlujoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnl_FlujoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(pnl_FlujoLayout.createSequentialGroup()
+                            .addGroup(pnl_FlujoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(pnl_CrearInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(pnl_CrearDeclarar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGap(38, 38, 38)
+                            .addGroup(pnl_FlujoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(pnl_CrearIf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(pnl_CrearWhile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(39, 39, 39)
+                            .addGroup(pnl_FlujoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(pnl_CrearFor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(pnl_CrearPrint, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGap(36, 36, 36)
+                            .addComponent(pnl_CrearFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn_LimpiarDiagramador))
+                        .addComponent(tab_Flujo, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnl_FlujoLayout.createSequentialGroup()
-                        .addGroup(pnl_FlujoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(pnl_CrearInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(pnl_CrearDeclarar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(38, 38, 38)
-                        .addGroup(pnl_FlujoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(pnl_CrearIf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pnl_CrearWhile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(39, 39, 39)
-                        .addGroup(pnl_FlujoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(pnl_CrearFor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(pnl_CrearPrint, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(36, 36, 36)
-                        .addComponent(pnl_CrearFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnl_FlujoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnl_FlujoLayout.createSequentialGroup()
-                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(btn_AgregarVariable))
-                        .addComponent(tab_Flujo, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(104, Short.MAX_VALUE))
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_AgregarVariable)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_BorrarVariableSelec)))
+                .addContainerGap(71, Short.MAX_VALUE))
         );
 
-        mn_FlujoArchivo.setText("File");
+        mn_FlujoArchivo.setText("Archivo");
 
         mni_FlujoAbrir.setText("Abrir");
+        mni_FlujoAbrir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mni_FlujoAbrirActionPerformed(evt);
+            }
+        });
         mn_FlujoArchivo.add(mni_FlujoAbrir);
 
         mni_FlujoGuardar.setText("Guardar");
+        mni_FlujoGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mni_FlujoGuardarActionPerformed(evt);
+            }
+        });
         mn_FlujoArchivo.add(mni_FlujoGuardar);
 
         mnb_Flujo.add(mn_FlujoArchivo);
 
-        mn_FlujoExportar.setText("Edit");
+        mn_FlujoExportar.setText("Exportar");
 
         mni_FlujoExportarPDF.setText("Exportar como PDF");
         mn_FlujoExportar.add(mni_FlujoExportarPDF);
@@ -757,98 +821,6 @@ public class frm_Main extends javax.swing.JFrame {
         diag_FlujoLayout.setVerticalGroup(
             diag_FlujoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(pnl_Flujo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel3.setText("Variable:");
-
-        cbox_CrearVariableTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "int", "long", "float", "double", "char", "String" }));
-        cbox_CrearVariableTipo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbox_CrearVariableTipoActionPerformed(evt);
-            }
-        });
-
-        jToggleButton1.setText("Crear variable");
-
-        cbox_CrearVariableVar1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cbox_CrearVariableVar1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbox_CrearVariableVar1ActionPerformed(evt);
-            }
-        });
-
-        cbox_CrearVariableOperacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cbox_CrearVariableOperacion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbox_CrearVariableOperacionActionPerformed(evt);
-            }
-        });
-
-        cbox_CrearVariableVar2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cbox_CrearVariableVar2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbox_CrearVariableVar2ActionPerformed(evt);
-            }
-        });
-
-        cbox_CrearVariableOperadorNo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "!" }));
-
-        javax.swing.GroupLayout pnl_CrearVariableCamposExtraLayout = new javax.swing.GroupLayout(pnl_CrearVariableCamposExtra);
-        pnl_CrearVariableCamposExtra.setLayout(pnl_CrearVariableCamposExtraLayout);
-        pnl_CrearVariableCamposExtraLayout.setHorizontalGroup(
-            pnl_CrearVariableCamposExtraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_CrearVariableCamposExtraLayout.createSequentialGroup()
-                .addContainerGap(32, Short.MAX_VALUE)
-                .addComponent(cbox_CrearVariableOperadorNo, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbox_CrearVariableVar1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(cbox_CrearVariableOperacion, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(cbox_CrearVariableVar2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30))
-        );
-        pnl_CrearVariableCamposExtraLayout.setVerticalGroup(
-            pnl_CrearVariableCamposExtraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_CrearVariableCamposExtraLayout.createSequentialGroup()
-                .addContainerGap(86, Short.MAX_VALUE)
-                .addGroup(pnl_CrearVariableCamposExtraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbox_CrearVariableVar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbox_CrearVariableVar2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbox_CrearVariableOperacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbox_CrearVariableOperadorNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(84, 84, 84))
-        );
-
-        javax.swing.GroupLayout diag_CrearVariableLayout = new javax.swing.GroupLayout(diag_CrearVariable.getContentPane());
-        diag_CrearVariable.getContentPane().setLayout(diag_CrearVariableLayout);
-        diag_CrearVariableLayout.setHorizontalGroup(
-            diag_CrearVariableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, diag_CrearVariableLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jToggleButton1)
-                .addGap(105, 105, 105))
-            .addGroup(diag_CrearVariableLayout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(jLabel3)
-                .addGap(39, 39, 39)
-                .addComponent(cbox_CrearVariableTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(pnl_CrearVariableCamposExtra, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        diag_CrearVariableLayout.setVerticalGroup(
-            diag_CrearVariableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(diag_CrearVariableLayout.createSequentialGroup()
-                .addGap(143, 143, 143)
-                .addGroup(diag_CrearVariableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(cbox_CrearVariableTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(pnl_CrearVariableCamposExtra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jToggleButton1)
-                .addGap(29, 29, 29))
         );
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -1231,6 +1203,57 @@ public class frm_Main extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                 .addComponent(btn_EstablecerHerencia)
                 .addGap(36, 36, 36))
+        );
+
+        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        jLabel1.setText("Nombre:");
+
+        cbox_CrearVariableTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel2.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        jLabel2.setText("Tipo:");
+
+        jButton1.setText("Crear variable");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout diag_CrearVariableLayout = new javax.swing.GroupLayout(diag_CrearVariable.getContentPane());
+        diag_CrearVariable.getContentPane().setLayout(diag_CrearVariableLayout);
+        diag_CrearVariableLayout.setHorizontalGroup(
+            diag_CrearVariableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(diag_CrearVariableLayout.createSequentialGroup()
+                .addGroup(diag_CrearVariableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(diag_CrearVariableLayout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addGroup(diag_CrearVariableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addGap(18, 18, 18)
+                        .addGroup(diag_CrearVariableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cbox_CrearVariableTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txt_CrearVariableNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(diag_CrearVariableLayout.createSequentialGroup()
+                        .addGap(68, 68, 68)
+                        .addComponent(jButton1)))
+                .addContainerGap(27, Short.MAX_VALUE))
+        );
+        diag_CrearVariableLayout.setVerticalGroup(
+            diag_CrearVariableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(diag_CrearVariableLayout.createSequentialGroup()
+                .addGap(63, 63, 63)
+                .addGroup(diag_CrearVariableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txt_CrearVariableNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
+                .addGroup(diag_CrearVariableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbox_CrearVariableTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(61, 61, 61))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -1776,9 +1799,9 @@ public class frm_Main extends javax.swing.JFrame {
 
     private void mnb_ClasesAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnb_ClasesAbrirActionPerformed
         // TODO add your handling code here:
-        boolean archivoElegido = this.fch_FileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION;
+        boolean archivoElegido = this.fch_ClasesFileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION;
         if (archivoElegido) {
-            File archivo = this.fch_FileChooser.getSelectedFile();
+            File archivo = this.fch_ClasesFileChooser.getSelectedFile();
             try {
                 FileInputStream fis = new FileInputStream(archivo);
                 ObjectInputStream ois = new ObjectInputStream(fis);
@@ -1803,12 +1826,19 @@ public class frm_Main extends javax.swing.JFrame {
 
     private void mnb_ClasesGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnb_ClasesGuardarActionPerformed
         // TODO add your handling code here:
-        boolean archivoElegido = this.fch_FileChooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION;
+        boolean archivoElegido = this.fch_ClasesFileChooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION;
         
         if (archivoElegido) {
-            File archivo = new File(
-                    this.fch_FileChooser.getSelectedFile().getPath()+".cls"
-            );
+            File archivo;
+            try {
+                archivo = new File(
+                        this.fch_ClasesFileChooser.getSelectedFile().getPath().split(".")[0]+".cls"
+                );
+            } catch (Exception e) {
+                archivo = new File(
+                        this.fch_ClasesFileChooser.getSelectedFile().getPath()+".cls"
+                );
+            }
             try {
                 FileOutputStream fos = new FileOutputStream(archivo);
                 ObjectOutputStream oos = new ObjectOutputStream(fos);
@@ -2016,120 +2046,143 @@ public class frm_Main extends javax.swing.JFrame {
         
     }//GEN-LAST:event_pnl_CrearFinMouseReleased
 
-    private void cbox_CrearVariableTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbox_CrearVariableTipoActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        if (!Data.getVariables().isEmpty()) {
+        String nombre = this.txt_CrearVariableNombre.getText();
+        Tipo tipo = (Tipo) this.cbox_CrearVariableTipo.getSelectedItem();
+        if (!nombre.trim().isEmpty()) {
             
-            Variable varSeleccionado = (Variable) this.cbox_CrearVariableTipo.getSelectedItem();
-            
-            if (Data.UnaOMasVariableDeTipo(varSeleccionado.getTipo())) {
-                
-                DefaultComboBoxModel modelo = (DefaultComboBoxModel) this.cbox_CrearVariableVar1.getModel();
-                modelo.removeAllElements();
-                modelo.addElement("-");
-                switch (varSeleccionado.getTipo()) {
-                    case Tipo.BOOLEAN -> {
-                        for (Tipo tipo: Tipo.values()) {
-                            if (tipo != Tipo.STRING) {
-                                Data.anidarCBoxModel(
-                                        modelo, 
-                                        Data.crearCBoxModelVariablesXTipo(tipo)
-                                );
-                            }
-                        }
-                        this.pnl_CrearVariableCamposExtra.setVisible(true);
-                        this.cbox_CrearVariableVar1.setVisible(true);
-                    }
-                    default -> {
-                        Data.anidarCBoxModel(
-                                modelo, 
-                                Data.crearCBoxModelVariablesXTipo(varSeleccionado.getTipo())
-                        );
-                        this.pnl_CrearVariableCamposExtra.setVisible(true);
-                        this.cbox_CrearVariableVar1.setVisible(true);
-                    }
-                }
-                
-            } else {
-                
-                this.pnl_CrearVariableCamposExtra.setVisible(false);
-                this.cbox_CrearVariableVar1.setVisible(false);
-                
-            }
-        } else {
-            
-            this.pnl_CrearVariableCamposExtra.setVisible(false);
+            Data.getVariables().add(new Variable(
+                    nombre,
+                    tipo
+            ));
+            enviarMensaje(this.diag_Flujo, "Variable creada.");
+            this.diag_CrearVariable.dispose();
+            refrescarModelosVariable();
             
         }
         
-    }//GEN-LAST:event_cbox_CrearVariableTipoActionPerformed
+    }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void cbox_CrearVariableOperacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbox_CrearVariableOperacionActionPerformed
+    private void btn_AgregarVariableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AgregarVariableActionPerformed
         // TODO add your handling code here:
+        mostrarJDialog(this.diag_CrearVariable);
         
+    }//GEN-LAST:event_btn_AgregarVariableActionPerformed
+
+    private void tab_FlujoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tab_FlujoMouseClicked
+        // TODO add your handling code here:
+        this.txta_FlujoCodigo.setText(
+                crearCodigoDeFlujoUML()
+        );
         
-    }//GEN-LAST:event_cbox_CrearVariableOperacionActionPerformed
+    }//GEN-LAST:event_tab_FlujoMouseClicked
 
-    private void cbox_CrearVariableVar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbox_CrearVariableVar2ActionPerformed
+    private void btn_LimpiarDiagramadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LimpiarDiagramadorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cbox_CrearVariableVar2ActionPerformed
+        this.pnl_FlujoDiagrama.removeAll();
+        this.pnl_FlujoDiagrama.revalidate();
+        this.pnl_FlujoDiagrama.repaint();
+        Data.getOperaciones().clear();
+        
+    }//GEN-LAST:event_btn_LimpiarDiagramadorActionPerformed
 
-    private void cbox_CrearVariableVar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbox_CrearVariableVar1ActionPerformed
+    private void btn_BorrarVariableSelecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_BorrarVariableSelecActionPerformed
         // TODO add your handling code here:
-        if (this.cbox_CrearVariableVar1.getSelectedItem() instanceof Variable varSeleccionada) {
-            
-            Variable varPrincipal = (Variable) this.cbox_CrearVariableTipo.getSelectedItem();
-            switch (varPrincipal.getTipo()) {
-                case Tipo.BOOLEAN -> {
-                    if (varSeleccionada.getTipo() != Tipo.BOOLEAN) {
-                        this.cbox_CrearVariableOperadorNo.setVisible(false);
-                        DefaultComboBoxModel modeloVar2 = (DefaultComboBoxModel) this.cbox_CrearVariableVar2.getModel();
-                        modeloVar2.removeAllElements();
-                        Data.anidarCBoxModel(
-                                modeloVar2, 
-                                Data.crearCBoxModelVariablesXTipo(varSeleccionada.getTipo())
+        int varSeleccionado = this.list_Variables.getSelectedIndex();
+        if (varSeleccionado == -1) {
+            return;
+        }
+        Data.getVariables().remove(
+                varSeleccionado
+        );
+        enviarMensaje(this.diag_Flujo, "Variable eliminada");
+        refrescarModelosVariable();
+        
+    }//GEN-LAST:event_btn_BorrarVariableSelecActionPerformed
+
+    private void mni_FlujoAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_FlujoAbrirActionPerformed
+        // TODO add your handling code here:
+        boolean archivoElegido = this.fch_FlujoFileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION;
+        if (archivoElegido) {
+            File archivo = this.fch_FlujoFileChooser.getSelectedFile();
+            try {
+                FileInputStream fis = new FileInputStream(archivo);
+                ObjectInputStream ois = new ObjectInputStream(fis);
+                Data.cargadoDeFlujos(
+                        (ArrayList<Object>) ois.readObject()
+                );
+                for (FlujoUML flujo: Data.getOperaciones()) {
+                    this.pnl_FlujoDiagrama.add(flujo.getPanel());
+                    if (flujo instanceof If flujoIf) {
+                        this.pnl_FlujoDiagrama.add(
+                                flujoIf.getLlaveDeCierre().getPanel()
                         );
-                        this.cbox_CrearVariableOperacion.setModel(new DefaultComboBoxModel(new String[]{
-                                "",
-                                "==",
-                                "!=",
-                                ">=",
-                                "<=",
-                                ">",
-                                "<"
-                        }));
-                    } else {
-                        this.cbox_CrearVariableOperadorNo.setVisible(true);
                     }
-                }
-                case Tipo.INT, Tipo.BYTE, Tipo.FLOAT, Tipo.SHORT, Tipo.LONG, Tipo.DOUBLE -> {
-                    this.cbox_CrearVariableOperadorNo.setVisible(false);
-                        DefaultComboBoxModel modeloVar2 = (DefaultComboBoxModel) this.cbox_CrearVariableVar2.getModel();
-                        modeloVar2.removeAllElements();
-                        Data.anidarCBoxModel(
-                                modeloVar2, 
-                                Data.crearCBoxModelVariablesXTipo(varSeleccionada.getTipo())
+                    else if (flujo instanceof While flujoWhile) {
+                        this.pnl_FlujoDiagrama.add(
+                                flujoWhile.getLlaveDeCierre().getPanel()
                         );
-                        this.cbox_CrearVariableOperacion.setModel(new DefaultComboBoxModel(new String[]{
-                                "",
-                                "+",
-                                "-",
-                                "*",
-                                "/",
-                                "%",
-                        }));
+                    }
+                    else if (flujo instanceof For flujoFor) {
+                        this.pnl_FlujoDiagrama.add(
+                                flujoFor.getLlaveDeCierre().getPanel()
+                        );
+                    }
+                    this.pnl_FlujoDiagrama.revalidate();
+                    this.pnl_FlujoDiagrama.repaint();
                 }
-                default -> {
-                    
-                }
+                ois.close();
+            } catch (IOException ioex) {
+                System.out.println(ioex);
+            } catch (Exception e) {
+                System.out.println(e);
             }
+            mostrarJDialog(this.diag_Flujo);
         }
         
-    }//GEN-LAST:event_cbox_CrearVariableVar1ActionPerformed
+        refrescarModelosClase();
+        
+    }//GEN-LAST:event_mni_FlujoAbrirActionPerformed
+
+    private void mni_FlujoGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_FlujoGuardarActionPerformed
+        // TODO add your handling code here:
+        boolean archivoElegido = this.fch_FlujoFileChooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION;
+        
+        if (archivoElegido) {
+            File archivo;
+            try {
+                archivo = new File(
+                        this.fch_FlujoFileChooser.getSelectedFile().getPath().split(".")[0]+".flj"
+                );
+            } catch (Exception e) {
+                archivo = new File(
+                        this.fch_FlujoFileChooser.getSelectedFile().getPath()+".flj"
+                );
+            }
+            try {
+                FileOutputStream fos = new FileOutputStream(archivo);
+                ObjectOutputStream oos = new ObjectOutputStream(fos);
+                oos.writeObject(Data.guardadoDeFlujos());
+                oos.close();
+            } catch (IOException ioex) {
+                System.out.println(ioex);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+            mostrarJDialog(this.diag_Flujo);
+        }
+        
+    }//GEN-LAST:event_mni_FlujoGuardarActionPerformed
     
     public void refrescarModelosVariable() {
-        DefaultComboBoxModel modelo = new DefaultComboBoxModel();
-        modelo.addElement("-");
+        this.list_Variables.setModel(
+                Data.crearListModelVariables()
+        );
+        for (Component comp: this.pnl_FlujoDiagrama.getComponents()) {
+            pnl_FlujoUML panel = (pnl_FlujoUML) comp;
+            panel.refrescarModelosVariable();
+        }
     }
     
     public void refrescarModelosClase() {
@@ -2219,6 +2272,145 @@ public class frm_Main extends javax.swing.JFrame {
         System.out.println(e.getCause()+" en "+evt.getActionCommand());
     }
     
+    private String crearCodigoDeFlujoUML() {
+        ArrayList<pnl_FlujoUML> flujos = new ArrayList<>();
+        for (Component comp: this.pnl_FlujoDiagrama.getComponents()) {
+            flujos.add(
+                    (pnl_FlujoUML) comp
+            );
+        }
+        for (int i = 0; i < flujos.size(); i++) {
+            for (int j = 0; j < flujos.size()-1; j++) {
+                double posY1 = flujos.get(j).getLocation().getY();
+                double posY2 = flujos.get(j+1).getLocation().getY();
+                if (posY2 < posY1) {
+                    pnl_FlujoUML flujoTemp = flujos.get(j);
+                    flujos.remove(flujos.get(j));
+                    flujos.add(j+1, flujoTemp);
+                }
+            }
+        }
+        for (pnl_FlujoUML flujo: flujos) {
+            System.out.println(flujo.getFlujo().getClass());
+        }
+        String str = "";
+        int cantidadIndentacion = 0;
+        boolean puedeIniciar = false;
+        boolean salioDeFor = false;
+        int contadorDeI = 105;
+        for (pnl_FlujoUML panel: flujos) {
+            if (panel.getFlujo() instanceof Inicio) {
+                puedeIniciar = true;
+                for (Variable varDeclarada: Data.getVariables()) {
+                    str += ""
+                            + varDeclarada.getTipo().getNombre()+" "+varDeclarada.getNombre()+";\n";
+                }
+            }
+            else if (panel.getFlujo() instanceof Fin) {
+                break;
+            }
+            if (puedeIniciar) {
+                for (int i = 0; i < cantidadIndentacion; i++) {
+                        str += "    ";
+                }
+                if (panel.getFlujo() instanceof Declarar declaracion) {
+                    try {
+                        if (declaracion.getValoresCambio().isEmpty()) {
+                            continue;
+                        }
+                        Variable var = declaracion.getVariable();
+                        str += ""
+                                + var.getNombre();
+                        var = declaracion.getValoresCambio().getFirst();
+                        if (declaracion.getOperadorNo() != null) {
+                            str += ""
+                                    + " = "+declaracion.getOperadorNo();
+                        } else {
+                            str += ""
+                                    + " = ";
+                        }
+                        str += ""
+                                + var.getNombre()+" ";
+                        if (declaracion.getOperacion() != null) {
+                            str += ""
+                                    + declaracion.getOperacion()+" ";
+                        }
+                        if (var != declaracion.getValoresCambio().getLast()) {
+                            var = declaracion.getValoresCambio().getLast();
+                            str += ""
+                                    + var.getNombre();
+                        }
+
+                        str += ";\n";
+                    } catch (Exception e) {
+                        System.out.println(e);
+                        return "hubo un error con un Declarar";
+                    }
+                }
+                else if (panel.getFlujo() instanceof CerrarLlave) {
+                    str += ""
+                            + "}\n";
+                    cantidadIndentacion--;
+                    if (cantidadIndentacion < 0) {
+                        cantidadIndentacion = 0;
+                    }
+                    if (salioDeFor) {
+                        contadorDeI--;
+                        salioDeFor = false;
+                    }
+                }
+                else if (panel.getFlujo() instanceof If flujoIf) {
+                    try {
+                        Variable condicion = flujoIf.getCondicion();
+                        str += ""
+                                + "if ("+condicion.getNombre()+") {\n";
+                        cantidadIndentacion++;
+                    } catch (Exception e) {
+                        System.out.println(e);
+                        return "hubo un error con un If";
+                    }
+                }
+                else if (panel.getFlujo() instanceof While flujoWhile) {
+                    try {
+                        Variable condicion = flujoWhile.getCondicion();
+                        str += ""
+                                + "while ("+condicion.getNombre()+") {\n";
+                        cantidadIndentacion++;
+                    } catch (Exception e) {
+                        System.out.println(e);
+                        return "hubo un error con un While";
+                    }
+                }
+                else if (panel.getFlujo() instanceof For flujoFor) {
+                    try {
+                        char iDeFor = (char)contadorDeI;
+                        Variable ciclos = flujoFor.getCiclosI();
+                        str += ""
+                                + "for (int "+iDeFor+" = 0; "+iDeFor+" < "+ciclos.getNombre()+"; "+iDeFor+"++) {\n";
+                        cantidadIndentacion++;
+                        contadorDeI++;
+                        salioDeFor = true;
+                    } catch (Exception e) {
+                        System.out.println(e);
+                        return "hubo un error con un For";
+                    }
+                }
+                else if (panel.getFlujo() instanceof Print flujoPrint) {
+                    try {
+                        Variable variable = flujoPrint.getImpresion();
+                        str += ""
+                                + "System.out.println("+variable.getNombre()+");\n";
+                    } catch (Exception e) {
+                        System.out.println(e);
+                        return "hubo un error con un Print";
+                    }
+                }
+            }
+        }
+        System.out.println(str);
+        return str;
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -2246,6 +2438,7 @@ public class frm_Main extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_AgregarVariable;
+    private javax.swing.JButton btn_BorrarVariableSelec;
     private javax.swing.JToggleButton btn_ClaseCambiarNombre;
     private javax.swing.JButton btn_ClasesHerencia;
     private javax.swing.JToggleButton btn_CrearClase;
@@ -2255,17 +2448,14 @@ public class frm_Main extends javax.swing.JFrame {
     private javax.swing.JToggleButton btn_CrearParam;
     private javax.swing.JToggleButton btn_CrearProp;
     private javax.swing.JButton btn_EstablecerHerencia;
+    private javax.swing.JButton btn_LimpiarDiagramador;
     private javax.swing.JComboBox<String> cbox_CrearClasePadre;
     private javax.swing.JComboBox<String> cbox_CrearMetAcceso;
     private javax.swing.JComboBox<String> cbox_CrearMetTipo;
     private javax.swing.JComboBox<String> cbox_CrearParamTipo;
     private javax.swing.JComboBox<String> cbox_CrearPropAcceso;
     private javax.swing.JComboBox<String> cbox_CrearPropTipo;
-    private javax.swing.JComboBox<String> cbox_CrearVariableOperacion;
-    private javax.swing.JComboBox<String> cbox_CrearVariableOperadorNo;
     private javax.swing.JComboBox<String> cbox_CrearVariableTipo;
-    private javax.swing.JComboBox<String> cbox_CrearVariableVar1;
-    private javax.swing.JComboBox<String> cbox_CrearVariableVar2;
     private javax.swing.JDialog diag_CambiarNombre;
     private javax.swing.JDialog diag_Clases;
     private javax.swing.JDialog diag_CrearClase;
@@ -2275,7 +2465,10 @@ public class frm_Main extends javax.swing.JFrame {
     private javax.swing.JDialog diag_CrearVariable;
     private javax.swing.JDialog diag_Flujo;
     private javax.swing.JDialog diag_Herencia;
-    private javax.swing.JFileChooser fch_FileChooser;
+    private javax.swing.JFileChooser fch_ClasesFileChooser;
+    private javax.swing.JFileChooser fch_FlujoFileChooser;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -2286,10 +2479,10 @@ public class frm_Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -2303,8 +2496,8 @@ public class frm_Main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JPopupMenu.Separator jSeparator1;
-    private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JLabel lbl_Clases;
     private javax.swing.JList<String> list_CrearMetParametros;
     private javax.swing.JList<String> list_HerenciaClaseHija;
@@ -2335,7 +2528,6 @@ public class frm_Main extends javax.swing.JFrame {
     private javax.swing.JPanel pnl_CrearIf;
     private javax.swing.JPanel pnl_CrearInicio;
     private javax.swing.JPanel pnl_CrearPrint;
-    private javax.swing.JPanel pnl_CrearVariableCamposExtra;
     private javax.swing.JPanel pnl_CrearWhile;
     private javax.swing.JPanel pnl_Flujo;
     private javax.swing.JPanel pnl_FlujoCodigo;
@@ -2356,7 +2548,9 @@ public class frm_Main extends javax.swing.JFrame {
     private javax.swing.JTextField txt_CrearMetNombre;
     private javax.swing.JTextField txt_CrearParamNombre;
     private javax.swing.JTextField txt_CrearPropNombre;
+    private javax.swing.JTextField txt_CrearVariableNombre;
     private javax.swing.JTextArea txta_CodigoClases;
+    private javax.swing.JTextArea txta_FlujoCodigo;
     // End of variables declaration//GEN-END:variables
 
 }
